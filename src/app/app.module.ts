@@ -1,18 +1,55 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http"
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { Routes, RouterModule } from '@angular/router';
+import { PropiedadCardComponent } from './property/propiedad-card/propiedad-card.component';
+import { PropiedadListComponent } from './property/propiedad-card/propiedad-list/propiedad-list.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { HousingService } from './servicios/housing.service';
+import { AddPropiedadComponent } from './property/propiedad-card/add-propiedad/add-propiedad.component';
+import { UserLoginComponent } from './user/user-login/user-login.component';
+import { UserRegisterComponent } from './user/user-register/user-register.component';
+import { AlertifyService } from './servicios/alertify.service';
+import { AuthService } from './servicios/auth.service';
+import { UserService } from './servicios/user.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {TabsModule} from 'ngx-bootstrap/tabs';
+import {ButtonsModule} from 'ngx-bootstrap/buttons';
+import { BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import { JwtInterceptor } from './security/jwt.interceptor';
+import { ApiauthService } from './servicios/apiauth.service';
 @NgModule({
   declarations: [
-    AppComponent
-  ],
+    AppComponent,
+    PropiedadCardComponent,
+    PropiedadListComponent,
+      NavBarComponent,
+      AddPropiedadComponent,
+      UserLoginComponent,
+      UserRegisterComponent,
+
+   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot(),
+    TabsModule.forRoot(),
+    ButtonsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+
+
+
   ],
-  providers: [],
+  providers: [HousingService, AlertifyService, AuthService, UserService, ApiauthService,
+  {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

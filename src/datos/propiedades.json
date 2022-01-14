@@ -1,0 +1,36 @@
+[
+  {
+    "Id":1,
+    "SellRent":1,
+    "Name":"Birla House",
+    "PType": "House",
+    "Price": 12000,
+    "Image": "prop-1"
+  },
+  {
+    "Id":2,
+    "SellRent":2,
+    "Name":"Birla House",
+    "PType": "House",
+    "Price": 12000,
+    "Image": "prop-2"
+
+  },
+  {
+    "Id":3,
+    "SellRent":1,
+    "Name":"Birla House",
+    "PType": "House",
+    "Price": 12000,
+    "Image": "prop-3"
+  },
+  {
+    "Id":4,
+    "SellRent":2,
+    "Name":"Birla House",
+    "PType": "House",
+    "Price": 12000,
+    "Image": "prop-4"
+  }
+
+  ]
