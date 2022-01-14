@@ -29,7 +29,7 @@ getAllPropiedades(SellRent: number): Observable<Ipropiedadbase[]>{
   return  this.http.get('http://localhost:5186/api/PropiedadCard/publicaciones').pipe(
     map((data:any)=>{
       const propiedadesArray: Array<Ipropiedadbase>=[];
-      console.log(data);
+
 
 
       for(let dato of data.data){
@@ -37,7 +37,7 @@ getAllPropiedades(SellRent: number): Observable<Ipropiedadbase[]>{
         propiedadesArray.push(data.data);
 
       }
-      console.log(propiedadesArray);
+      
       return propiedadesArray;
     })
   );
