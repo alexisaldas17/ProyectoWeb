@@ -26,7 +26,7 @@ constructor(private http: HttpClient) { }
 
 }*/
 getAllPropiedades(SellRent: number): Observable<any>{
-  return  this.http.get('http://localhost:5186/api/PropiedadCard/publicaciones').pipe(
+  return  this.http.get('http://wsproyectoweb.azurewebsites.net/api/PropiedadCard/publicaciones').pipe(
     map((objeto:any)=>{
     const propiedadesArray: Array<any>=[];
       for(let dato of objeto.data){

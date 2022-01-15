@@ -111,30 +111,27 @@ export class AddPropiedadComponent implements OnInit {
         PType: [null, Validators.required],
         FType: [null, Validators.required],
         Name: [null, Validators.required],
-        City: [null, Validators.required]
+
       }),
 
       PriceInfo: this.fb.group({
         Price: [null, Validators.required],
         BuiltArea: [null, Validators.required],
-        CarpetArea: [null],
         Security: [null],
         Maintenance: [null],
       }),
 
       AddressInfo: this.fb.group({
-        FloorNo: [null],
-        TotalFloor: [null],
+        City: [null, Validators.required],
         Address: [null, Validators.required],
-        LandMark: [null],
-      }),
+        }),
 
       OtherInfo: this.fb.group({
         RTM: [null, Validators.required],
-        PossessionOn: [null],
-        AOP: [null],
-        Gated: [null],
-        MainEntrance: [null],
+        FechaDisp:[null],
+        FloorNo: [null],
+        TotalFloor: [null],
+        Años:[null, Validators.required],
         Description: [null]
       })
       });
@@ -257,16 +254,10 @@ mappropiedad(): void {
   this.propiedad.Security = this.Security.value;
   this.propiedad.Maintenance = this.Maintenance.value;
   this.propiedad.BuiltArea = this.BuiltArea.value;
-  this.propiedad.CarpetArea = this.CarpetArea.value;
   this.propiedad.FloorNo = this.FloorNo.value;
   this.propiedad.TotalFloor = this.TotalFloor.value;
   this.propiedad.Address = this.Address.value;
-  this.propiedad.Address2 = this.LandMark.value;
   this.propiedad.RTM = this.RTM.value;
-  this.propiedad.AOP = this.AOP.value;
-  this.propiedad.Gated = this.Gated.value;
-  this.propiedad.MainEntrance = this.MainEntrance.value;
-  this.propiedad.Possession = this.PossessionOn.value;
   this.propiedad.Description = this.Description.value;
   this.propiedad.PostedOn = new Date().toString();
 }

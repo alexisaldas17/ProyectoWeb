@@ -30,13 +30,12 @@
                   <p>Cantidad</p>
                   <div class="btn-group" btnRadioGroup
                   formControlName="BHK"
-                  [(ngModel)]="propiedadView.BHK"
                   >
 
                     <label
                     *ngFor="let bhk of ['1','2','3','4']"
                      class="btn btn-outline-primary mr-2"
-                    [btnRadio]="bhk" tabindex="0" role="button" name="SellRent" >{{bhk}}
+                    [btnRadio]="bhk" tabindex="0" role="button" name="bhk" >{{bhk}}
                     </label>
 
                   </div>
@@ -45,15 +44,13 @@
                 <div class="form-group col-12">
                   <p>Tipo de Propiedad </p>
                   <div class="btn-group" btnRadioGroup
-                  addPropiedadForm="PType"
-                  formControlName="PType"
-                  [(ngModel)]="propiedadView.PType"
-                  >
+                   formControlName="PType"
+                   >
 
                     <label
                     *ngFor="let ptype of propiedadTypes"
                      class="btn btn-outline-primary mr-2"
-                    [btnRadio]="ptype" tabindex="0" role="button" name="SellRent" >{{ptype}}
+                    [btnRadio]="ptype" tabindex="0" role="button" name="" >{{ptype}}
                     </label>
 
                   </div>
@@ -64,14 +61,12 @@
 
                   <div class="btn-group" btnRadioGroup
                   formControlName="FType"
-                  [(ngModel)]="propiedadView.FType"
-
-                  name="FType">
+                   name="FType">
 
                     <label
                     *ngFor="let ftype of furnishTypes"
                      class="btn btn-outline-primary mr-2"
-                    [btnRadio]="ftype" tabindex="0" role="button" name="SellRent" >{{ftype}}
+                    [btnRadio]="ftype" tabindex="0" role="button" name="" >{{ftype}}
                     </label>
 
                   </div>
@@ -111,8 +106,8 @@
               <tab heading="Precio y Área" formGroupName="PriceInfo">
 
                  <div class="form-group col-12">
-                  <label *ngIf="SellRent.value==1">Precio (USD)</label>
-                  <label *ngIf="SellRent.value==2">Arriendo (USD)</label>
+                  <label *ngIf="SellRent.value==1">Precio Venta(USD)</label>
+                  <label *ngIf="SellRent.value==2">Precio Arriendo (USD)</label>
                   <input type="text" class="form-control"
                     formControlName="Price"
                     [(ngModel)]="propiedadView.Price"
@@ -126,12 +121,12 @@
 
                 <div class="form-group col-12">
                   <label>Security (USD)</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="Security">
                 </div>
 
                 <div class="form-group col-12">
                   <label>Maintenance (USD)</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="Maintenance">
                 </div>
 
                 <div class="form-group col-12">
@@ -139,11 +134,6 @@
                   <input type="text" class="form-control"
                   [(ngModel)]="propiedadView.BuiltArea"
                   formControlName="BuiltArea">
-                </div>
-
-                <div class="form-group col-12">
-                  <label>Carpet Area(m2)</label>
-                  <input type="text" class="form-control">
                 </div>
 
                 <div class="form-group col-12">
@@ -159,8 +149,8 @@
 
                 <div class="form-group col-12">
                   <label for="ciudad">Ciudad</label>
-                  <select name="" id="" >
-                    <option value="" formControlName="City" *ngFor="let item of ciudades">
+                  <select name="" id="" formControlName="City" >
+                    <option  *ngFor="let item of ciudades"  value="item.nombre" >
                       {{item.nombre}}
 
                     </option>
@@ -171,7 +161,7 @@
 
               <div class="form-group col-12">
                 <label>Direccion</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" formControlName="Address">
               </div>
 
                 <div class="form-group col-12">
@@ -189,16 +179,16 @@
 
                 <div class="form-group col-12">
                   <label>Listo para moverse</label><br/>
-                  <input type="radio" id='Yes' value='1' name="RTM">
+                  <input type="radio" id='Yes' value='1' formControlName="RTM">
                   <label class="m-2">Yes</label>
 
-                  <input type="radio" id="No" value='2' name="RTM">
+                  <input type="radio" id="No" value='2' formControlName="RTM">
                   <label class="m-2">No</label>
                 </div>
 
                 <div class="form-group col-3">
                   <label>Posesión/Disponible Desde</label>
-                  <input type="text"
+                  <input type="text" formControlName="FechaDisp"
                   placeholder="Seleccione Fecha"
                   class="form-control"
                   bsDatepicker
@@ -207,22 +197,22 @@
 
                 <div class="form-group col-12">
                   <label>Piso N°</label>
-                  <input type="number" class="form-control">
+                  <input type="number" class="form-control" formControlName="FloorNo">
                 </div>
 
                 <div class="form-group col-12">
                   <label>Total Pisos</label>
-                  <input type="number" class="form-control">
+                  <input type="number" class="form-control" formControlName="TotalFloor">
                 </div>
 
                 <div class="form-group col-12">
                   <label>Años/Propiedad</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="Años" required>
                 </div>
 
                 <div class="form-group col-12">
                   <label>Descripción</label>
-                  <textarea type="text" class="form-control" rows="6"></textarea>
+                  <textarea type="text" class="form-control" rows="6" formControlName="Description" required></textarea>
                 </div>
 
                 <div class="form-group col-12">
