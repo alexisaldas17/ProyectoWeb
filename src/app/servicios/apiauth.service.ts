@@ -14,7 +14,7 @@ const httpOptions={
   providedIn: 'root'
 })
 export class ApiauthService {
-url:string ='http://localhost:5186/api/User/login';
+url:string ='http://wsproyectoweb.azurewebsites.net/api/User/login';
 
 private usuarioSubject!: BehaviorSubject<any>;
 public usuario!: Observable<any>;

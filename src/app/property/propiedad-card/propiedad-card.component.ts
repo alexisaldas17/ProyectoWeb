@@ -7,7 +7,7 @@ import { Ipropiedadbase } from 'src/app/model/ipropiedadbase';
   styleUrls: ['./propiedad-card.component.scss']
 })
 export class PropiedadCardComponent implements OnInit {
-  @Input() propiedad! : Ipropiedadbase;
+  @Input() propiedad! : any;
   @Input() hiddeIcons!: any;
   constructor() { }
 

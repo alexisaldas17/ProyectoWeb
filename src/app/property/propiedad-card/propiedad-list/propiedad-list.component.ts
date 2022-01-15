@@ -24,10 +24,11 @@ export class PropiedadListComponent implements OnInit {
 
     }
    this.housingService.getAllPropiedades(this.SellRent).subscribe(data=>{
-     this.propiedades = data;
-      console.log(this.propiedades +"propiedades");
+    this.propiedades = data;
+     console.log(this.propiedades);
+
    }, error=> {
-     console.log("http error:");
+     console.log("http error: " );
     console.log(error);
    }
     );

@@ -20,6 +20,7 @@ export class AddPropiedadComponent implements OnInit {
   addPropiedadForm!: FormGroup;
   nextClicked!: boolean;
   propiedad = new Propiedad();
+  ciudades:Array<any>=[]
   propiedadView:Ipropiedadbase={
     Id:0,
     Name:'',
@@ -42,6 +43,11 @@ export class AddPropiedadComponent implements OnInit {
 
   ngOnInit() {
     this.CreateaddPropiedadForm();
+    this.housingService.getCiudades().subscribe(data=>{
+      this.ciudades = data;
+       console.log(this.ciudades);
+    }
+    );
   }
 
   onBack(){
