@@ -1,8 +1,9 @@
 
     <div class="card">
       <div class="card-img-wrapper">
-        <img *ngIf="propiedad.Image" class="card-img-top" src="../../../assets/{{propiedad.Image}}.png" alt="">
-        <img *ngIf="!propiedad.Image" class="card-img-top" src="../../../assets/casa.png" alt="">
+        <img *ngIf="propiedad.imagenUrl" class="card-img-top" src="{{propiedad.imagenUrl}}" alt="">
+
+        <img *ngIf="!propiedad.imagenUrl" class="card-img-top" src="../../../assets/casa.png" alt="">
 
         <ul *ngIf="!hiddeIcons" class="list-inline text-center member-icons animate">
 
