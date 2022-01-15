@@ -17,7 +17,7 @@
       </div>
 
       <div class="card-body p-1">
-        <h1 class="mb-0"> {{propiedad.bhk}} BHK {{propiedad.pType}} </h1>
+        <h1 class="mb-0"> {{propiedad.nombre}}</h1>
 
         en {{propiedad.ciudad}}
         <span *ngIf="!propiedad.nombre">,
@@ -25,13 +25,18 @@
         </span>
 
 
-        <h6  class="mt-2">{{propiedad.fType}}
+       <!-- <h6  class="mt-2">{{propiedad.fType}}
         <span *ngIf="propiedad.fType !== 'Unfurnished'">Amoblado</span> | Ready to Move</h6>
 
-        <hr class="mt-0 mb-2">
+        <hr class="mt-0 mb-2">-->
 
         <h6 class="mb-0">Precio: <span class="font-highlight">{{propiedad.precio}} USD.</span> |
-          Area:  <span class="font-highlight">{{propiedad.areaM2}} m2 </span> </h6>
+          Area:  <span class="font-highlight">{{propiedad.areaM2}} m2 </span> </h6> <br>
+          <h6 class="mb-0">Descripción:<span><br>
+            {{propiedad.descripcion}}
+
+          </span></h6>
+
       </div>
     </div>
 

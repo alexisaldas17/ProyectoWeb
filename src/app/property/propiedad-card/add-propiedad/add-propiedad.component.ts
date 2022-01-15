@@ -107,9 +107,7 @@ export class AddPropiedadComponent implements OnInit {
     this.addPropiedadForm = this.fb.group({
       BasicInfo: this.fb.group({
         SellRent: ['1' , Validators.required],
-        BHK: [null, Validators.required],
         PType: [null, Validators.required],
-        FType: [null, Validators.required],
         Name: [null, Validators.required],
 
       }),
@@ -117,9 +115,7 @@ export class AddPropiedadComponent implements OnInit {
       PriceInfo: this.fb.group({
         Price: [null, Validators.required],
         BuiltArea: [null, Validators.required],
-        Security: [null],
-        Maintenance: [null],
-      }),
+         }),
 
       AddressInfo: this.fb.group({
         City: [null, Validators.required],
@@ -127,10 +123,6 @@ export class AddPropiedadComponent implements OnInit {
         }),
 
       OtherInfo: this.fb.group({
-        RTM: [null, Validators.required],
-        FechaDisp:[null],
-        FloorNo: [null],
-        TotalFloor: [null],
         Años:[null, Validators.required],
         Description: [null]
       })
@@ -160,19 +152,9 @@ export class AddPropiedadComponent implements OnInit {
   get SellRent() {
     return this.BasicInfo.controls.SellRent as FormControl;
   }
-
-  get BHK() {
-    return this.BasicInfo.controls.BHK as FormControl;
-  }
-
-  get PType() {
+   get PType() {
     return this.BasicInfo.controls.PType as FormControl;
   }
-
-  get FType() {
-    return this.BasicInfo.controls.FType as FormControl;
-  }
-
   get Name() {
     return this.BasicInfo.controls.Name as FormControl;
   }
@@ -189,52 +171,8 @@ export class AddPropiedadComponent implements OnInit {
     return this.PriceInfo.controls.BuiltArea as FormControl;
   }
 
-  get CarpetArea() {
-    return this.PriceInfo.controls.CarpetArea as FormControl;
-  }
-
-  get Security() {
-    return this.PriceInfo.controls.Security as FormControl;
-  }
-
-  get Maintenance() {
-    return this.PriceInfo.controls.Maintenance as FormControl;
-  }
-
-  get FloorNo() {
-    return this.AddressInfo.controls.FloorNo as FormControl;
-  }
-
-  get TotalFloor() {
-    return this.AddressInfo.controls.TotalFloor as FormControl;
-  }
-
   get Address() {
     return this.AddressInfo.controls.Address as FormControl;
-  }
-
-  get LandMark() {
-    return this.AddressInfo.controls.LandMark as FormControl;
-  }
-
-  get RTM() {
-    return this.OtherInfo.controls.RTM as FormControl;
-  }
-
-  get PossessionOn() {
-    return this.OtherInfo.controls.PossessionOn as FormControl;
-  }
-
-  get AOP() {
-    return this.OtherInfo.controls.AOP as FormControl;
-  }
-
-  get Gated() {
-    return this.OtherInfo.controls.Gated as FormControl;
-  }
-
-  get MainEntrance() {
-    return this.OtherInfo.controls.MainEntrance as FormControl;
   }
 
   get Description() {
@@ -245,19 +183,12 @@ export class AddPropiedadComponent implements OnInit {
 //#endregion
 mappropiedad(): void {
   this.propiedad.SellRent = +this.SellRent.value;
-  this.propiedad.BHK = this.BHK.value;
   this.propiedad.PType = this.PType.value;
   this.propiedad.Name = this.Name.value;
   this.propiedad.City = this.City.value;
-  this.propiedad.FType = this.FType.value;
-  this.propiedad.Price = this.Price.value;
-  this.propiedad.Security = this.Security.value;
-  this.propiedad.Maintenance = this.Maintenance.value;
+   this.propiedad.Price = this.Price.value;
   this.propiedad.BuiltArea = this.BuiltArea.value;
-  this.propiedad.FloorNo = this.FloorNo.value;
-  this.propiedad.TotalFloor = this.TotalFloor.value;
   this.propiedad.Address = this.Address.value;
-  this.propiedad.RTM = this.RTM.value;
   this.propiedad.Description = this.Description.value;
   this.propiedad.PostedOn = new Date().toString();
 }

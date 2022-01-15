@@ -26,7 +26,7 @@
                   </div>
                 </div>
 
-                <div class="form-group col-12">
+              <!--  <div class="form-group col-12">
                   <p>Cantidad</p>
                   <div class="btn-group" btnRadioGroup
                   formControlName="BHK"
@@ -39,7 +39,7 @@
                     </label>
 
                   </div>
-                </div>
+                </div>-->
 
                 <div class="form-group col-12">
                   <p>Tipo de Propiedad </p>
@@ -56,7 +56,9 @@
                   </div>
                 </div>
 
-                <div class="form-group col-12">
+        <!--
+
+              <div class="form-group col-12">
                   <p>Amoblado </p>
 
                   <div class="btn-group" btnRadioGroup
@@ -75,6 +77,7 @@
                     Seleccione una opcion.
                   </span>
                 </div>
+                -->
 
                 <div class="form-group col-12">
                   <label for="nombre">Nombre</label>
@@ -93,9 +96,7 @@
                 <input type="text" class="form-control" ngModel name="Type">
                 </div>-->
 
-
-
-                <div class="form-group col-12">
+               <div class="form-group col-12">
 
                 <button type="button"
                 (click)="selectTab(1,BasicInfo.valid)"
@@ -122,8 +123,9 @@
                   <ng-template #ShowRent>arriendo</ng-template>
                 </div>
 
-                <div class="form-group col-12">
-                  <label>Seguridad (USD)</label>
+            <!--  <div class="form-group col-12">
+
+              <label>Seguridad (USD)</label>
                   <input type="text" class="form-control" formControlName="Security">
                 </div>
 
@@ -131,6 +133,7 @@
                   <label>Mantenimiento (USD)</label>
                   <input type="text" class="form-control" formControlName="Maintenance">
                 </div>
+            -->
 
                 <div class="form-group col-12">
                   <label>Area (m2)</label>
@@ -143,7 +146,7 @@
                   <button type="button" class="btn btn-primary btn-block"
                   (click)="selectTab(2, true)">Siguiente</button>
 
-                  <button type="button" class="btn btn-primary btn-block"
+                  <button type="button" class="btn btn-secondary btn-block"
                   (click)="selectTab(0, true)">Atrás</button>
                 </div>
 
@@ -152,7 +155,7 @@
 
                 <div class="form-group col-12">
                   <label for="ciudad">Ciudad</label>
-                  <select name="" id="" formControlName="City" >
+                  <select name="" id="" formControlName="City" class="form-control" >
                     <option  *ngFor="let item of ciudades"  value="item.nombre" >
                       {{item.nombre}}
 
@@ -171,7 +174,7 @@
                   <button type="button" class="btn btn-primary btn-block"
                   (click)="selectTab(3, true)">Siguiente</button>
 
-                  <button type="button" class="btn btn-primary btn-block"
+                  <button type="button" class="btn btn-secondary btn-block"
                   (click)="selectTab(1, true)">Atrás</button>
                 </div>
 
@@ -179,7 +182,7 @@
               </tab>
               <tab heading="Otros Detalles" formGroupName="OtherInfo">
 
-
+<!--
                 <div class="form-group col-12">
                   <label>Listo para moverse</label><br/>
                   <input type="radio" id='Yes' value='1' formControlName="RTM">
@@ -191,8 +194,9 @@
                     Obligatorio: Seleccione una de las opciones.
                   </div>
                 </div>
+-->
 
-                <div class="form-group col-12"  *ngIf="RTM.value==2">
+                <!--<div class="form-group col-12"  *ngIf="RTM.value==2">
                   <label>Posesión/Disponible Desde</label>
                   <input type="text" formControlName="FechaDisp"
                   placeholder="Seleccione Fecha"
@@ -200,7 +204,6 @@
                   bsDatepicker
                   [bsConfig]="{containerClass:'theme-dark-blue', dateInputFormat:'DD/MM/YYYY'}">
                 </div>
-
                 <div class="form-group col-12">
                   <label>Piso N°</label>
                   <input type="number" class="form-control" formControlName="FloorNo">
@@ -210,6 +213,7 @@
                   <label>Total Pisos</label>
                   <input type="number" class="form-control" formControlName="TotalFloor">
                 </div>
+                -->
 
                 <div class="form-group col-12">
                   <label>Años/Propiedad</label>
@@ -225,7 +229,7 @@
                     <button type="button" class="btn btn-primary btn-block"
                     (click)="selectTab(4, true)">Siguiente</button>
 
-                    <button type="button" class="btn btn-primary btn-block"
+                    <button type="button" class="btn btn-secondary btn-block"
                     (click)="selectTab(2, true)">Atrás</button>
                  </div>
 
@@ -235,15 +239,15 @@
 
                 <div class="form-group col-12">
                   <div class="photo-control">
-                      <button class="mt-5" type="button">Upload</button> <br>
-                      This is under construction
+                      <button class="mt-5" type="button">Cargar Fotos</button>
+
                   </div>
                 </div>
                 <div class="form-group col-12">
-                  <button type="button"  (click)="selectTab(3, true)" class="btn btn-primary mr-2">Atrás</button>
+                  <button type="button"  (click)="selectTab(3, true)" class="btn btn-secondary mr-2">Atrás</button>
 
-                  <button type="submit"  class="btn btn-primary mr-2">Guardar</button>
-                  <button type="reset"   class="btn btn-primary mr-2">Cancelar</button>
+                  <button type="submit"  class="btn btn-success mr-2">Guardar</button>
+                  <button type="reset"   class="btn btn-danger mr-2">Cancelar</button>
                 </div>
 
 
