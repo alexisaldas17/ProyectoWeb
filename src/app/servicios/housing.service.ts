@@ -26,15 +26,8 @@ export class HousingService {
   
   }*/
   getAllPropiedades(SellRent:number = 0):Observable<any> {
-    let lista:Observable<any> = this.http.get('http://wsproyectoweb.azurewebsites.net/api/PropiedadCard/publicaciones')
-    .pipe(map((o:any) => 
-    {
-      const propiedades: Array<any> = [];
-      for (let propiedad of o.data) {
-        propiedades.push(propiedad);
-      }
-      return propiedades;
-    }));
+    let lista:Observable<any> = this.http.get('http://wsproyectoweb.azurewebsites.net/api/PropiedadCard/publicaciones');
+    lista = this.jsonLista(lista);
     
     if (SellRent != 0){
        lista = lista.pipe(map((o:any) => 
@@ -48,6 +41,16 @@ export class HousingService {
        }))
     }
     return lista;
+  }
+
+  jsonLista(o:Observable<JSON>):Observable<any>{
+    return o.pipe(map((o:any)=>{
+      const lista:Array<any> = [];
+      for (let item of o.data) {
+         lista.push(item);
+      }
+      return lista;
+    }));
   }
 
   addProperty(property: Propiedad) {
