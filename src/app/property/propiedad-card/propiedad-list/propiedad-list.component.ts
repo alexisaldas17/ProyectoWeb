@@ -13,28 +13,28 @@ import { HousingService } from 'src/app/servicios/housing.service';
 export class PropiedadListComponent implements OnInit {
 
   propiedades!: Array<Ipropiedadbase>;
-  SellRent=1;
+  SellRent = 1;
 
   constructor(private housingService: HousingService,
-              private route: ActivatedRoute) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    if(this.route.snapshot.url.toString()){
-      this.SellRent =2;
+    if (this.route.snapshot.url.toString()) {
+      this.SellRent = 2;
 
     }
-   this.housingService.getAllPropiedades(this.SellRent).subscribe(data=>{
-    this.propiedades = data;
-     console.log(this.propiedades);
+    this.housingService.getAllPropiedades(this.SellRent).subscribe(data => {
+      this.propiedades = data;
+      console.log(this.propiedades);
 
-   }, error=> {
-     console.log("http error: " );
-    console.log(error);
-   }
+    }, error => {
+      console.log("http error: ");
+      console.log(error);
+    }
     );
-   }
-
-
   }
+
+
+}
 
 

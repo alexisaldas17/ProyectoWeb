@@ -263,6 +263,14 @@
                 </div>
               </tab>
               <tab heading="Editar" formGroupName="Editar">
+                <div class="row">
+                  <div *ngFor="let propiedad of propiedades" class="shadow-lg col-sm-4 mt-5">
+                    <app-propiedad-card [propiedad]="propiedad">
+                
+                    </app-propiedad-card>
+                  </div>
+                </div>
+                
               </tab>
             </tabset>
           </div>

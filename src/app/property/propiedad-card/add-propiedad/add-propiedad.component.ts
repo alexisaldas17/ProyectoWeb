@@ -23,6 +23,7 @@ export class AddPropiedadComponent implements OnInit {
   propiedad = new Propiedad();
   ciudades:Array<any>=[]
   tpropiedad:Array<any>=[]
+  propiedades!: Array<Ipropiedadbase>;
   propiedadView:Ipropiedadbase={
     Id:0,
     Name:'',
@@ -133,7 +134,17 @@ export class AddPropiedadComponent implements OnInit {
         Description: [null]
       })
       });
+
+    this.housingService.getAllPropiedades().subscribe(data => {
+      this.propiedades = data;
+      console.log(this.propiedades);
+
+    }, error => {
+      console.log("http error: "+error);
+    }
+    );
   }
+  
 
  //#region <Getter Methods>
   // #region <FormGroups>
