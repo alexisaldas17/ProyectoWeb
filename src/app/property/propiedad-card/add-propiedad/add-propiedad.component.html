@@ -118,8 +118,8 @@
                  <div class="form-group col-12">
                   <label *ngIf="SellRent.value==1">Precio Venta(USD)</label>
                   <label *ngIf="SellRent.value==2">Precio Arriendo (USD)</label>
-                  <input type="text" class="form-control"
-                    formControlName="Price"
+                  <input type="number" class="form-control"
+                    formControlName="Price" pattern="^\d*(\.\d{0,2})?$"
                     [(ngModel)]="propiedadView.Price"
                     >
                 </div>
@@ -223,7 +223,7 @@
 
                 <div class="form-group col-12">
                   <label>Años/Propiedad</label>
-                  <input type="text" class="form-control" formControlName="Años" required>
+                  <input type="number" class="form-control" formControlName="Años" required>
                 </div>
 
                 <div class="form-group col-12">
