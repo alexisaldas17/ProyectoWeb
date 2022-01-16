@@ -15,6 +15,7 @@ import { HousingService } from 'src/app/servicios/housing.service';
 export class AddPropiedadComponent implements OnInit {
  // @ViewChild('Form') addPropiedadForm!: NgForm;
   @ViewChild('formTabs') formTabs!: TabsetComponent;
+  @ViewChild('tipTabs') tipoTavs!: TabsetComponent;
   propiedadTypes: Array<string> =["Edificio","Terreno","Departamento"];
   furnishTypes: Array<string> =["Fully","Semi","Desamoblada"];
   addPropiedadForm!: FormGroup;

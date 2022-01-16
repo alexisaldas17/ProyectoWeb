@@ -9,7 +9,7 @@
         <a class="nav-link active text-light" aria-current="page" routerLinkActive="active" routerLink="/">Home</a>
         <a  *ngIf="usuario" class="nav-link text-light" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" routerLink="/">Comprar</a>
         <a  *ngIf="usuario" class="nav-link text-light" routerLinkActive="active" routerLink="/rent-propiedad">Rentar</a>
-        <a  *ngIf="usuario" class="nav-link text-light" routerLinkActive="active" routerLink="/add-propiedades">Nueva Propiedad</a>
+        <a  *ngIf="usuario" class="nav-link text-light" routerLinkActive="active" routerLink="/add-propiedades">Propiedades</a>
         <a *ngIf="!usuario" class="nav-link text-light" routerLinkActive="active" routerLink="/login">Login</a>
         <a *ngIf="!usuario" class="nav-link text-light" routerLinkActive="active" routerLink="/register">Sing in</a>
        <!-- <a *ngIf="loggedin()" (click)="onLogout()" class="nav-link text-light" routerLinkActive="active" routerLink="/logout">Logout</a>-->
