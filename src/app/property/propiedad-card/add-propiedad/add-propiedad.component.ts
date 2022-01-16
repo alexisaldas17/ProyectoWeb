@@ -144,7 +144,17 @@ export class AddPropiedadComponent implements OnInit {
         Description: [null]
       })
       });
+
+    this.housingService.getAllPropiedades().subscribe(data => {
+      this.propiedad = data;
+      console.log(this.propiedad);
+
+    }, error => {
+      console.log("http error: "+error);
+    }
+    );
   }
+
 
  //#region <Getter Methods>
   // #region <FormGroups>
