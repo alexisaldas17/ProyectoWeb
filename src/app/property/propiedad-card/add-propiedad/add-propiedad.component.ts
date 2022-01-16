@@ -22,6 +22,7 @@ export class AddPropiedadComponent implements OnInit {
   nextClicked!: boolean;
   propiedad = new Propiedad();
   ciudades:Array<any>=[]
+  tpropiedad:Array<any>=[]
   propiedadView:Ipropiedadbase={
     Id:0,
     Name:'',
@@ -47,8 +48,12 @@ export class AddPropiedadComponent implements OnInit {
     this.housingService.getCiudades().subscribe(data=>{
       this.ciudades = data;
        console.log(this.ciudades);
-    }
-    );
+    });
+    this.housingService.getTipoPropiedades().subscribe(data=>{
+      this.tpropiedad = data;
+       console.log(this.tpropiedad);
+    });
+
   }
 
   onBack(){

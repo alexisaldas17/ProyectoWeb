@@ -54,4 +54,17 @@ getCiudades(){
     })
   );
 }
+
+getTipoPropiedades(){
+  return this.http.get('http://wsproyectoweb.azurewebsites.net/api/Propiedad/tipo').pipe(
+    map((tprop:any)=>{
+      const tpropArray: Array<any>=[];
+      for(let tp of tprop.data){
+
+        tpropArray.push(tp);
+      }
+      return tpropArray;
+    })
+  );
+}
 }
