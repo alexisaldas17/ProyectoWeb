@@ -67,4 +67,18 @@ getTipoPropiedades(){
     })
   );
 }
+
+getPublicacionesUsuario(userId: any){
+  console.log(userId +"userid")
+  return this.http.get('http://wsproyectoweb.azurewebsites.net/api/Propiedad/usuario/'+userId).pipe(
+    map((publicaciones:any)=>{
+      const publicacionesArray: Array<any>=[];
+      for(let tp of publicaciones.data){
+
+        publicacionesArray.push(tp);
+      }
+      return publicacionesArray;
+    })
+  );
+}
 }

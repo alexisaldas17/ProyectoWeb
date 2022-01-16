@@ -19,6 +19,7 @@ url:string ='http://wsproyectoweb.azurewebsites.net/api/User/login';
 private usuarioSubject!: BehaviorSubject<any>;
 public usuario!: Observable<any>;
 public get UsuarioData():User{
+  
   return this.usuarioSubject.value;
 }
 constructor(private http: HttpClient) {

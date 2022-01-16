@@ -7,11 +7,11 @@
 
         <ul *ngIf="!hiddeIcons" class="list-inline text-center member-icons animate">
 
-          <li class="list-inline-item ">
-            <button class="btn btn-primary" routerLink="/propiedad-detail/{{propiedad.id}}"><i class="fas fa-eye"></i></button>
+          <li *ngIf="eyeIcon" class="list-inline-item ">
+            <button class="btn btn-primary" routerLink="/propiedad-detail/{{propiedad.idPropiedad}}"><i class="fas fa-eye"></i></button>
           </li>
-          <li class="list-inline-item ">
-            <button class="btn btn-primary">C</button>
+       <li *ngIf="editIcon" class="list-inline-item ">
+        <button class="btn btn-primary" routerLink="/propiedad-detail/{{propiedad.idPropiedad}}"><i class="fas fa-edit"></i></button>
           </li>
         </ul>
       </div>

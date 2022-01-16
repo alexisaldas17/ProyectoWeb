@@ -9,6 +9,8 @@ import { Ipropiedadbase } from 'src/app/model/ipropiedadbase';
 export class PropiedadCardComponent implements OnInit {
   @Input() propiedad! : any;
   @Input() hiddeIcons!: any;
+  @Input() editIcon!: any;
+  @Input() eyeIcon!: any;
   constructor() { }
 
   ngOnInit() {

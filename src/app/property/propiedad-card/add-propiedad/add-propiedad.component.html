@@ -14,6 +14,8 @@
                 <div class="tab-panel ">
                   <tabset class="member-tabset" #formTabs>
 
+                    <!--INFORMACION BASICA-->
+
                     <tab heading="Información Básica" id="tab1" formGroupName="BasicInfo">
                       <div class="form-group col-12">
                         <div class="btn-group" btnRadioGroup formControlName="SellRent" required>
@@ -114,6 +116,7 @@
                       </div>
 
                     </tab>
+                     <!--PRECIO Y AREA-->
                     <tab heading="Precio y Área" formGroupName="PriceInfo">
 
                  <div class="form-group col-12">
@@ -144,7 +147,7 @@
 
                       <div class="form-group col-12">
                         <label>Area (m2)</label>
-                        <input type="text" class="form-control" [(ngModel)]="propiedadView.BuiltArea"
+                        <input type="number" class="form-control" [(ngModel)]="propiedadView.BuiltArea"
                           formControlName="BuiltArea">
                       </div>
 
@@ -157,6 +160,7 @@
                       </div>
 
                     </tab>
+                     <!--ADDRESS-INFO-->
                     <tab heading="Direccion" formGroupName="AddressInfo">
 
                       <div class="form-group col-12">
@@ -263,6 +267,14 @@
                 </div>
               </tab>
               <tab heading="Editar" formGroupName="Editar">
+                <div class="row">
+                  <div *ngFor="let propiedad of publicacionesUsuario" class="shadow-lg col-sm-4 mt-5">
+                    <app-propiedad-card [propiedad]="propiedad" >
+
+                    </app-propiedad-card>
+                  </div>
+                </div>
+
               </tab>
             </tabset>
           </div>
@@ -278,7 +290,7 @@
     </div>
     <div>
       <div class="shadow-lg p-3 bg-white">
-        <app-propiedad-card hiddeIcons="true" [propiedad]="propiedadView">
+        <app-propiedad-card  editIcon="true"  [propiedad]="propiedadView">
         </app-propiedad-card>
       </div>
 

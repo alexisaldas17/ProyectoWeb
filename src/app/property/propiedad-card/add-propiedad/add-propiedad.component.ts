@@ -6,6 +6,7 @@ import { ignoreElements } from 'rxjs/operators';
 import { Ipropiedadbase } from 'src/app/model/ipropiedadbase';
 import { Propiedad } from 'src/app/model/propiedad';
 import { AlertifyService } from 'src/app/servicios/alertify.service';
+import { ApiauthService } from 'src/app/servicios/apiauth.service';
 import { HousingService } from 'src/app/servicios/housing.service';
 @Component({
   selector: 'app-add-propiedad',
@@ -23,6 +24,7 @@ export class AddPropiedadComponent implements OnInit {
   propiedad = new Propiedad();
   ciudades:Array<any>=[]
   tpropiedad:Array<any>=[]
+  publicacionesUsuario:Array<any>=[]
   propiedadView:Ipropiedadbase={
     Id:0,
     Name:'',
@@ -40,7 +42,8 @@ export class AddPropiedadComponent implements OnInit {
   constructor(private router: Router,
               private fb: FormBuilder,
               private housingService: HousingService,
-              private alertify: AlertifyService )
+              private alertify: AlertifyService,
+              public auth: ApiauthService )
               { }
 
   ngOnInit() {
@@ -53,9 +56,17 @@ export class AddPropiedadComponent implements OnInit {
       this.tpropiedad = data;
        console.log(this.tpropiedad);
     });
+    console.log(this.auth.UsuarioData.id + "Id usuario");
+    this.getPublicacionesUsuario();
 
   }
 
+  getPublicacionesUsuario(){
+    this.housingService.getPublicacionesUsuario(this.auth.UsuarioData.id).subscribe(data=>{
+      this.publicacionesUsuario = data;
+
+    });
+  }
   onBack(){
     this.router.navigate(['/']);
   }
