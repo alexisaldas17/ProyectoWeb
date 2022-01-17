@@ -17,6 +17,7 @@ export class AddPropiedadComponent implements OnInit {
  // @ViewChild('Form') addPropiedadForm!: NgForm;
   @ViewChild('formTabs') formTabs!: TabsetComponent;
   @ViewChild('tipTabs') tipoTavs!: TabsetComponent;
+  showOrHiddden: boolean = true;
   propiedadTypes: Array<string> =["Edificio","Terreno","Departamento"];
   furnishTypes: Array<string> =["Fully","Semi","Desamoblada"];
   addPropiedadForm!: FormGroup;
@@ -27,16 +28,14 @@ export class AddPropiedadComponent implements OnInit {
   publicacionesUsuario:Array<any>=[]
   propiedadView:Ipropiedadbase={
     Id:0,
-    Name:'',
+    Name:'Juan',
     Price:0,
     SellRent:0,
     PType: '',
-    FType: '',
-    BHK: 0,
     BuiltArea: 0,
     City: '',
-    RTM: 0,
-
+    ImageUrl:'',
+    Description:''
   };
 
   constructor(private router: Router,
@@ -145,14 +144,7 @@ export class AddPropiedadComponent implements OnInit {
       })
       });
 
-    this.housingService.getAllPropiedades().subscribe(data => {
-      this.propiedad = data;
-      console.log(this.propiedad);
-
-    }, error => {
-      console.log("http error: "+error);
-    }
-    );
+   
   }
 
 

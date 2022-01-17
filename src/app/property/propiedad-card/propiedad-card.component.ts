@@ -11,6 +11,7 @@ export class PropiedadCardComponent implements OnInit {
   @Input() hiddeIcons!: any;
   @Input() editIcon!: any;
   @Input() eyeIcon!: any;
+  @Input() showOrHiddden!: any;
   constructor() { }
 
   ngOnInit() {

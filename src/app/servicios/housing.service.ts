@@ -10,20 +10,21 @@ import { Propiedad } from '../model/propiedad';
 })
 export class HousingService {
 
-  constructor(private http: HttpClient) { }
+   constructor(private http: HttpClient) { }
 
-/*getAllPropiedades(SellRent: number): Observable<any>{
+getAllPropiedades(SellRent: number): Observable<any[]>{
   return  this.http.get('http://wsproyectoweb.azurewebsites.net/api/PropiedadCard/publicaciones').pipe(
     map((objeto:any)=>{
-    const propiedadesArray: Array<any>=[];
+    const propiedadesArray: any[]=[];
       for(let dato of objeto.data){
         if( dato.sellRent === SellRent)
         propiedadesArray.push(dato);
       }
+      console.log(propiedadesArray);
       return propiedadesArray;
     })
   );
-}*/
+}
 
 addProperty(property: Propiedad) {
   localStorage.setItem('newProp', JSON.stringify(property));
@@ -69,14 +70,14 @@ getPublicacionesUsuario(userId: any){
   );
 }
 
-getAllPropiedades(SellRent:number = 0):Observable<any> {
+/*getAllPropiedades(SellRent:number = 0):Observable<Ipropiedadbase> {
   let lista:Observable<any> = this.http.get('http://wsproyectoweb.azurewebsites.net/api/PropiedadCard/publicaciones');
   lista = this.jsonLista(lista);
 
   if (SellRent != 0){
      lista = lista.pipe(map((o:any) =>
      {
-       const propiedades: Array<any> = [];
+       const propiedades: Array<Ipropiedadbase> = [];
        for (let propiedad of o) {
          if( propiedad.sellRent === SellRent)
           propiedades.push(propiedad);
@@ -85,7 +86,26 @@ getAllPropiedades(SellRent:number = 0):Observable<any> {
      }))
   }
   return lista;
-}
+}*/
+
+/*getAllPropiedades(SellRent:number) {
+  return this.http.get('http://wsproyectoweb.azurewebsites.net/api/PropiedadCard/publicaciones').toPromise(
+
+  ).then((data:any)=>{
+   this.listaPropiedades=[];
+    for (let propiedad of data.data) {
+
+
+      if( propiedad.sellRent === SellRent)
+      this.listaPropiedades.push();
+
+    }
+
+    console.log(this.listaPropiedades);
+    return this.listaPropiedades;
+  });
+
+}*/
 
 jsonLista(o:Observable<JSON>):Observable<any>{
   return o.pipe(map((o:any)=>{

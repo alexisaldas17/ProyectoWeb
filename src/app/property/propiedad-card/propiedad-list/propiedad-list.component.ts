@@ -12,10 +12,10 @@ import { HousingService } from 'src/app/servicios/housing.service';
 })
 export class PropiedadListComponent implements OnInit {
 
-  propiedades!: Array<Ipropiedadbase>;
+  propiedades!: Ipropiedadbase[];
   SellRent = 1;
 
-  constructor(private housingService: HousingService,
+  constructor(public housingService: HousingService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -24,6 +24,7 @@ export class PropiedadListComponent implements OnInit {
 
     }
     this.housingService.getAllPropiedades(this.SellRent).subscribe(data => {
+
       this.propiedades = data;
       console.log(this.propiedades);
 

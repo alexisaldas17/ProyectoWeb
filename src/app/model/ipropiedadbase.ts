@@ -3,13 +3,11 @@ export interface Ipropiedadbase {
     SellRent: number,
     Name: string;
     PType: string;
-    FType: string;
     Price: number;
-    BHK: number;
-    BuiltArea: number;
+    BuiltArea: any;
     City: string;
-    RTM: number;
-    Image?: string;
+    ImageUrl: any;
+    Description: string;
 
 
 }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, JsonpClientBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Login } from '../model/login';
 import { Response } from '../model/response';
@@ -15,13 +15,15 @@ const httpOptions={
 })
 export class ApiauthService {
 url:string ='http://wsproyectoweb.azurewebsites.net/api/User/login';
+authChange = new Subject<boolean>();
 
 private usuarioSubject!: BehaviorSubject<any>;
 public usuario!: Observable<any>;
 public get UsuarioData():User{
-  
+
   return this.usuarioSubject.value;
 }
+
 constructor(private http: HttpClient) {
   this.usuarioSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('Usuario')!));
   this.usuario= this.usuarioSubject.asObservable();
@@ -35,6 +37,7 @@ login(login: Login):Observable<any>{
 
         const user: any = res.data;
         localStorage.setItem('Usuario', JSON.stringify(user));
+        this.authChange.next(true);
         this.usuarioSubject.next(user);
       }
      return res;
@@ -46,5 +49,8 @@ login(login: Login):Observable<any>{
 logout(){
   localStorage.removeItem('Usuario');
   this.usuarioSubject.next(null);
+}
+register(user: User) {
+  return this.http.post('http://wsproyectoweb.azurewebsites.net/api/Registro', user);
 }
 }

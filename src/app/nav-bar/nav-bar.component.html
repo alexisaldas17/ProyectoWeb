@@ -7,16 +7,16 @@
     <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
       <div class="navbar-nav text-light mx-auto ">
         <a class="nav-link active text-light" aria-current="page" routerLinkActive="active" routerLink="/">Home</a>
-        <a  *ngIf="usuario" class="nav-link text-light" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" routerLink="/">Comprar</a>
+        <a  *ngIf="usuario" class="nav-link text-light" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" routerLink="/sell-propiedad">Comprar</a>
         <a  *ngIf="usuario" class="nav-link text-light" routerLinkActive="active" routerLink="/rent-propiedad">Rentar</a>
         <a  *ngIf="usuario" class="nav-link text-light" routerLinkActive="active" routerLink="/add-propiedades">Propiedades</a>
         <a *ngIf="!usuario" class="nav-link text-light" routerLinkActive="active" routerLink="/login">Login</a>
         <a *ngIf="!usuario" class="nav-link text-light" routerLinkActive="active" routerLink="/register">Sing in</a>
        <!-- <a *ngIf="loggedin()" (click)="onLogout()" class="nav-link text-light" routerLinkActive="active" routerLink="/logout">Logout</a>-->
-       <div class="btn-group " *ngIf="usuario" dropdown  >
+       <div *ngIf="usuario" class="btn-group "  dropdown  >
         <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle  "
                 aria-controls="dropdown-basic">
-          Bienvenido {{userName}} <span class="caret"></span>
+          Bienvenido {{apiService.UsuarioData.nombre}} <span class="caret"></span>
         </button>
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
             role="menu" aria-labelledby="button-basic">

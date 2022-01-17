@@ -4,7 +4,7 @@ import { Alert } from 'react-bootstrap';
 import { User } from '../model/user';
 import { AlertifyService } from '../servicios/alertify.service';
 import { ApiauthService } from '../servicios/apiauth.service';
-
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -13,24 +13,34 @@ import { ApiauthService } from '../servicios/apiauth.service';
 export class NavBarComponent implements OnInit {
   loggedinUser!: any;
   usuario!: User;
-  userName!: any;
+  //userName!: any;
+  //isAuth = false;
+   authSubscription!: Subscription;
+
+
   constructor(private alertify: AlertifyService,
-    private apiService: ApiauthService,
+    public apiService: ApiauthService,
     private router: Router) {
-      this.apiService.usuario.subscribe(res=>{
-        this.usuario=res;
-        this.userName = res.nombre;
-        console.log("Cambio el objeto: "+ res);
-      });
-     }
+      this.usuario = this.apiService.UsuarioData;
+    }
+
 
   ngOnInit() {
+    //this.changeAuth();
+
   }
 
-  loggedin(){
+  /*private changeAuth(): void {
+    this.authSubscription = this.apiService.authChange
+      .subscribe(authStatus => {
+        this.isAuth = authStatus;
+      });
+  }*/
+
+  /*loggedin(){
     this.loggedinUser = localStorage.getItem('token');
     return this.loggedinUser;
-  }
+  }*/
   onLogout(){
     this.apiService.logout();
     this.alertify.success("Has salido de la aplicacion");

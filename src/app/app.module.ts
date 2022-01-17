@@ -22,8 +22,9 @@ import {ButtonsModule} from 'ngx-bootstrap/buttons';
 import { BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { JwtInterceptor } from './security/jwt.interceptor';
 import { ApiauthService } from './servicios/apiauth.service';
+import { HomeComponent } from './home/home.component';
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     PropiedadCardComponent,
     PropiedadListComponent,
@@ -31,7 +32,7 @@ import { ApiauthService } from './servicios/apiauth.service';
       AddPropiedadComponent,
       UserLoginComponent,
       UserRegisterComponent,
-
+      HomeComponent
    ],
   imports: [
     BrowserModule,

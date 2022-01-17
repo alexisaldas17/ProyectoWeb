@@ -1,15 +1,17 @@
 <div class="row mb-5 ">
   <div class="col-8 shadow-lg p-0 bg-white">
-    <div class="card col-12 mt-5">
-      <div class="card-header">
-        <h3>Añadir Propiedad</h3>
-      </div>
+
+
       <div class="card-body">
         <form (ngSubmit)='onSubmit()' [formGroup]="addPropiedadForm">
 
           <div class="tab-panel">
             <tabset class="member-tabset" #tipoTabs>
               <tab heading="Crear" id="tabCrear">
+
+                <div class="card-header">
+                  <h3>Añadir Propiedad</h3>
+                </div>
 
                 <div class="tab-panel ">
                   <tabset class="member-tabset" #formTabs>
@@ -49,8 +51,10 @@
 
                 <div class="form-group col-12">
                   <p>Tipo de Propiedad </p>
-                  <select name="" id="" formControlName="PType" class="form-control" >
-                    <option  *ngFor="let item of tpropiedad"  value="item.nombre" >
+                  <select name="" id="" formControlName="PType" class="form-control"  >
+                    <option  *ngFor="let item of tpropiedad"  value="item.nombre"
+
+                    >
                       {{item.nombre}}
 
                     </option>
@@ -266,10 +270,13 @@
                   </tabset>
                 </div>
               </tab>
-              <tab heading="Editar" formGroupName="Editar">
+              <tab heading="Editar" >
+                <div class="card-header">
+                  <h3>Editar Propiedad</h3>
+                </div>
                 <div class="row">
                   <div *ngFor="let propiedad of publicacionesUsuario" class="shadow-lg col-sm-4 mt-5">
-                    <app-propiedad-card [propiedad]="propiedad" >
+                    <app-propiedad-card editIcon="true" [propiedad]="propiedad" >
 
                     </app-propiedad-card>
                   </div>
@@ -282,15 +289,17 @@
 
         </form>
       </div>
-    </div>
+
   </div>
+
+
   <div class="col-4 mt-5">
     <div class="card-header">
       <h3>Vista Previa</h3>
     </div>
     <div>
       <div class="shadow-lg p-3 bg-white">
-        <app-propiedad-card  editIcon="true"  [propiedad]="propiedadView">
+        <app-propiedad-card    [propiedad]="propiedadView">
         </app-propiedad-card>
       </div>
 

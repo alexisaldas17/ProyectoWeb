@@ -5,9 +5,12 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as alertify from 'alertifyjs';
+import { first } from 'rxjs/operators';
 import { User } from 'src/app/model/user';
 import { AlertifyService } from 'src/app/servicios/alertify.service';
+import { ApiauthService } from 'src/app/servicios/apiauth.service';
 import { UserService } from 'src/app/servicios/user.service';
 
 @Component({
@@ -19,47 +22,53 @@ export class UserRegisterComponent implements OnInit {
   registerationForm!: FormGroup;
   user!: User;
   userSubmitted!: boolean;
-
+  loading = false;
+  submitted = false;
   constructor(private fg: FormBuilder,
+              private router: Router,
               private alertify: AlertifyService,
-              private userService: UserService) {}
+              private userService: UserService,
+              private route: ActivatedRoute,
+              private apiAuthService: ApiauthService) {}
 
   ngOnInit() {
-    /* this.registerationForm = new FormGroup({
-      userName: new FormControl(),
-      email: new FormControl(null,[Validators.required, Validators.email]),
-      password:new FormControl(null,[Validators.required, Validators.minLength(8)]),
-      confirmPass: new FormControl(null,[Validators.required]),
-    }, /*this.passwordMatchingValidator);*/
     this.crearFormRegistro();
   }
-  /*passwordMatchingValidator(fg: FormGroup): Validators{
-    return fg.get('password').value === fg.get('confirmPass').value ? null : {notmatched: true};
-  }*/
   onSubmit() {
-    this.userSubmitted=true;
-    if(this.registerationForm.valid){
-      //this.user = Object.assign(this.user, this.registerationForm.value);
+    this.submitted = true;
 
-      this.userService.addUser(this.userData());
-      this.registerationForm.reset();
-      this.userSubmitted = false;
-      this.alertify.success('Gracias, has sido registrado correctamente');
+    // reset alerts on submit
+    this.alertify.clear();
+
+    // stop here if form is invalid
+    if (this.registerationForm.invalid) {
+        return;
     }
 
-  }
-  crearFormRegistro() {
-    this.registerationForm = this.fg.group({
-      userName: [null, Validators.required],
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(8),
-      ]),
-      confirmPass: new FormControl(null, [Validators.required]),
+    this.loading = true;
+    this.apiAuthService.register(this.userData())
+        .pipe(first())
+        .subscribe(
+           (data:any)  => {
+                this.alertify.success('Registration successful');
+                this.router.navigate(['/login'], { relativeTo: this.route });
+                this.registerationForm.reset();
+            },
+          (            error: string) => {
+                this.alertify.error(error);
+                this.loading = false;
+            });
+    }
+
+
+    crearFormRegistro() {
+      this.registerationForm = this.fg.group({
+        userName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
-  addUser(user: any) {
+  /*addUser(user: any) {
     let users:any=[];
     if (localStorage.getItem('Users')) {
       users =  localStorage.getItem('Users');
@@ -68,14 +77,13 @@ export class UserRegisterComponent implements OnInit {
       users = [user];
     }
     localStorage.setItem('Users', JSON.stringify(user));
-  }
+  }*/
 
   userData(): User{
     return this.user ={
-      
-      userName: this.userName.value,
+      nombre: this.userName.value,
       email: this.email.value,
-      password: this.password.value
+      contraseña: this.password.value
     }
   }
   get userName() {
@@ -87,8 +95,8 @@ export class UserRegisterComponent implements OnInit {
   get password() {
     return this.registerationForm.get('password') as FormControl;
   }
-  get confirmPass() {
-    return this.registerationForm.get('confirmPass') as FormControl;
-  }
+
+    // convenience getter for easy access to form fields
+    get f() { return this.registerationForm.controls; }
 }
 
