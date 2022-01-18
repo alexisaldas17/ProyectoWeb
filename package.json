@@ -22,6 +22,7 @@
     "alertifyjs": "^1.13.1",
     "firebase": "^9.6.3",
     "ngx-bootstrap": "^7.1.2",
+    "react-bootstrap": "^2.1.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
