@@ -7,6 +7,7 @@ import {
   FormControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AnyRecord } from 'dns';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { Observable } from 'rxjs';
 import { Fotos } from 'src/app/model/fotos';
@@ -27,7 +28,9 @@ export class AddPropiedadComponent implements OnInit {
   @ViewChild('tipTabs') tipoTavs!: TabsetComponent;
   //#region <DECLARACION VARIABLES>
 
-  ptselected!: string;
+  ptselected!: any;
+  op!: string;
+
   showOrHiddden: boolean = true;
   addPropiedadForm!: FormGroup;
   nextClicked!: boolean;
@@ -51,7 +54,10 @@ export class AddPropiedadComponent implements OnInit {
     ImageUrl: '',
     Description: '',
   };
-
+ capturar(){
+   this.ptselected = this.op;
+   console.log(this.op);
+ }
   //#endregion
 
   constructor(
@@ -61,7 +67,7 @@ export class AddPropiedadComponent implements OnInit {
     private alertify: AlertifyService,
     public auth: ApiauthService,
     private imageService: UploadphotosService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.CreateaddPropiedadForm();
@@ -72,7 +78,7 @@ export class AddPropiedadComponent implements OnInit {
       this.tpropiedad = data;
     });
     this.getPublicacionesUsuario();
-
+    console.log(this.ptselected)
     //this.fileInfos = this.imageService.getFiles();
 
   }
@@ -177,6 +183,8 @@ export class AddPropiedadComponent implements OnInit {
     this.nextClicked = true;
     if (this.allTabsValid()) {
       this.mappropiedad();
+      console.log(this.propiedad);
+      return;
       this.housingService.addProperty(this.propiedad);
       this.alertify.success('Felicidades, ha sido publicada tu propiedad');
       console.log(this.addPropiedadForm);
@@ -274,9 +282,6 @@ export class AddPropiedadComponent implements OnInit {
     return this.BasicInfo.controls.Name as FormControl;
   }
 
-  get City() {
-    return this.BasicInfo.controls.City as FormControl;
-  }
 
   get Price() {
     return this.PriceInfo.controls.Price as FormControl;
@@ -290,6 +295,13 @@ export class AddPropiedadComponent implements OnInit {
     return this.AddressInfo.controls.Address as FormControl;
   }
 
+  get City() {
+    return this.AddressInfo.controls.City as FormControl;
+  }
+  get Años() {
+    return this.OtherInfo.controls.Años as FormControl;
+  }
+
   get Description() {
     return this.OtherInfo.controls.Description as FormControl;
   }
@@ -297,15 +309,17 @@ export class AddPropiedadComponent implements OnInit {
   //#endregion
   //#endregion
   mappropiedad(): void {
-    this.propiedad.SellRent = +this.SellRent.value;
+    //console.log(this.addPropiedadForm.value)
+    this.propiedad.SellRent = this.SellRent.value;
     this.propiedad.PType = this.PType.value;
     this.propiedad.Name = this.Name.value;
     this.propiedad.City = this.City.value;
     this.propiedad.Price = this.Price.value;
     this.propiedad.BuiltArea = this.BuiltArea.value;
     this.propiedad.Address = this.Address.value;
+    this.propiedad.Años = this.Años.value;
     this.propiedad.Description = this.Description.value;
-   // this.propiedad.Fotos = [{IsPrimary:true, ImageUrl:"foto1"},{IsPrimary: false, ImageUrl:"foto2",Id:1}];
+   this.propiedad.Fotos = [{IsPrimary:true, ImageUrl:"foto1"},{IsPrimary: false, ImageUrl:"foto2"}];
     this.propiedad.PostedOn = new Date().toString();
   }
 }
