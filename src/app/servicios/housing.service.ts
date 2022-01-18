@@ -20,8 +20,7 @@ getAllPropiedades(SellRent: number): Observable<any[]>{
         if( dato.sellRent === SellRent)
         propiedadesArray.push(dato);
       }
-      console.log(propiedadesArray);
-      return propiedadesArray;
+           return propiedadesArray;
     })
   );
 }

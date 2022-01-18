@@ -1,6 +1,9 @@
+import { Fotos } from "./fotos";
+import { Ifotos } from "./ifotos";
 import { Ipropiedadbase } from "./ipropiedadbase";
 
 export class Propiedad implements Ipropiedadbase{
+  ImageUrl: any;
 
   Id!: number;
   SellRent!: number;
@@ -11,7 +14,7 @@ export class Propiedad implements Ipropiedadbase{
   Address!: string;
   City!: string;
   Maintenance?: number;
-  ImageUrl!: string;
+  Fotos!: Ifotos[];
   Description!: string;
   PostedOn!: string;
   PostedBy!: number;

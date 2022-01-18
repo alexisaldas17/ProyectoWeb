@@ -34,4 +34,13 @@ warning(mensaje: string){
     alert.id = alert.id || this.defaultId;
     this.subject.next(alert);
 }
+confirm(mensaje: string){
+  return alertify.confirm(mensaje,
+  function(){
+    alertify.success('Ok');
+  },
+  function(){
+    alertify.error('Cancel');
+  });
+}
 }

@@ -23,8 +23,18 @@ import { BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { JwtInterceptor } from './security/jwt.interceptor';
 import { ApiauthService } from './servicios/apiauth.service';
 import { HomeComponent } from './home/home.component';
+import { UploadphotosService } from './servicios/uploadphotos.service';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from '../environments/environment';
+import { CommonModule } from '@angular/common';
+import { UploadFormComponent } from './photos/upload-form/upload-form.component';
+import { UploadDetailComponent } from './photos/upload-detail/upload-detail.component';
+import { UploadListComponent } from './photos/upload-list/upload-list.component';
 @NgModule({
-  declarations: [	
+  declarations: [
+
     AppComponent,
     PropiedadCardComponent,
     PropiedadListComponent,
@@ -32,10 +42,14 @@ import { HomeComponent } from './home/home.component';
       AddPropiedadComponent,
       UserLoginComponent,
       UserRegisterComponent,
-      HomeComponent
+      HomeComponent,
+      UploadFormComponent,
+      UploadDetailComponent,
+      UploadListComponent
    ],
   imports: [
     BrowserModule,
+
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -45,11 +59,15 @@ import { HomeComponent } from './home/home.component';
     TabsModule.forRoot(),
     ButtonsModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
+
 
 
 
   ],
-  providers: [HousingService, AlertifyService, AuthService, UserService, ApiauthService,
+  providers: [HousingService, AlertifyService, AuthService, UserService, ApiauthService, UploadphotosService,
   {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
