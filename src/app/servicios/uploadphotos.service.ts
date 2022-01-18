@@ -77,7 +77,7 @@ getFiles(numberItems:any): AngularFireList<Fileupload> {
 deleteFile(fileUpload: Fileupload): void {
   this.deleteFileDatabase(fileUpload.key)
     .then(() => {
-      this.deleteFileStorage(fileUpload.name);
+      this.deleteFileStorage(fileUpload);
     })
     .catch(error => console.log(error));
 }
@@ -86,8 +86,11 @@ private deleteFileDatabase(key: string): Promise<void> {
   return this.db.list(this.basePath).remove(key);
 }
 
-public deleteFileStorage(name: string): void {
+public deleteFileStorage(foto: Fileupload): void {
   const storageRef = this.storage.ref(this.basePath);
-  storageRef.child(name).delete();
+  storageRef.child(foto.name).delete();
+  const index = this.fotosLista.indexOf(foto,0);
+  console.log(index);
+  this.fotosLista.splice(index,1);
 }
 }
