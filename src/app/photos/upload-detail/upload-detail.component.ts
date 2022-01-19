@@ -17,19 +17,9 @@ export class UploadDetailComponent implements OnInit {
   ngOnInit() {
   }
   deleteFileUpload(fileUpload:any): void {
-    alertify.confirm('¿Desea eliminar imagen?', 'Esta seguro?',
-    () =>{
-      console.log("OK")
 
        this.uploadService.deleteFileStorage(fileUpload);
-      }
-    , function(){  console.log("cancel")
 
-    return;
-  })
-
-    console.log(fileUpload.name)
-
-  }
+   }
 
 }

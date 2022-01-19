@@ -180,45 +180,50 @@
 
 
                           <app-upload-list></app-upload-list>
-                          <!--**************************CARGA DE IMASGEN**********************-->
+                          <!--*************************************************************-->
                         </div>
 
                       </div>
+
                       <div class="form-group col-12">
                         <button type="button" (click)="selectTab(3, true)" class="btn btn-secondary mr-2">Atrás</button>
 
                         <button type="submit" (click)="onSubmit()" class="btn btn-success mr-2">Guardar</button>
                         <button type="reset" class="btn btn-danger mr-2">Cancelar</button>
                       </div>
-
-
                     </tab>
                   </tabset>
                 </div>
               </tab>
-              <tab heading="Editar">
+
+              <!--***************TAB EDITAR ***************-->
+              <tab #editar heading="Editar">
                 <div class="card-header">
                   <h3>Editar Propiedad</h3>
                 </div>
-                <div class="row">
+                <div class="row ">
+                  <span  *ngIf="publicacionesUsuario.length==0"  class="mt-5 ml-lg-5">
+                    <div class="h3 ">
+                      <small class="text-muted">No tiene ninguna propiedad publicada!</small>
+                    </div>
+                  </span>
+
                   <div *ngFor="let propiedad of publicacionesUsuario" class="shadow-lg col-sm-4 mt-5">
+
                     <app-propiedad-card editIcon="true" [propiedad]="propiedad">
 
                     </app-propiedad-card>
+
                   </div>
                 </div>
-
               </tab>
             </tabset>
           </div>
-
-
         </form>
       </div>
-
     </div>
 
-
+<!--************VISTA PREVIA**************-->
     <div class="col-3 mt-5">
       <div class="card-header">
         <h3>Vista Previa</h3>
@@ -228,12 +233,8 @@
           <app-propiedad-card [propiedad]="propiedad">
           </app-propiedad-card>
         </div>
-
-
-
       </div>
-
     </div>
-
+<!--****************************************-->
   </div>
 </div>

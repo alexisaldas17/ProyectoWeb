@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClient, HttpClientModule, HttpHeaders } from "@angular/common/http";
 import { filter, map } from "rxjs/operators";
 
 import { Observable } from 'rxjs';
 import { Ipropiedadbase } from '../model/ipropiedadbase';
 import { Propiedad } from '../model/propiedad';
+
+const httpOptions={
+  headers: new HttpHeaders({
+    'Contend-Type': 'application/json',
+   /* 'Access-Control-Allow-Origin':'*',*/
+  })
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +20,7 @@ export class HousingService {
    constructor(private http: HttpClient) { }
 
 getAllPropiedades(SellRent: number): Observable<any[]>{
-  return  this.http.get('http://wsproyectoweb.azurewebsites.net/api/PropiedadCard/publicaciones').pipe(
+  return  this.http.get('http://wsproyectoweb.azurewebsites.net/api/PropiedadCard/publicaciones', httpOptions).pipe(
     map((objeto:any)=>{
     const propiedadesArray: any[]=[];
       for(let dato of objeto.data){
@@ -26,7 +33,10 @@ getAllPropiedades(SellRent: number): Observable<any[]>{
 }
 
 addProperty(property: Propiedad) {
-  localStorage.setItem('newProp', JSON.stringify(property));
+  //let  propiedad=JSON.stringify(property);
+  //console.log(propiedad);
+  return this.http.post('http://wsproyectoweb.azurewebsites.net/api/Propiedad/add', property, httpOptions );
+  //localStorage.setItem('newProp', JSON.stringify(property));
 }
 
 getCiudades(){

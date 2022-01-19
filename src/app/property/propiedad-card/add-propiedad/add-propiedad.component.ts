@@ -1,5 +1,5 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -166,9 +166,19 @@ export class AddPropiedadComponent implements OnInit {
     if (this.allTabsValid()) {
       this.mappropiedad();
       console.log(this.propiedad);
-      return;
-      this.housingService.addProperty(this.propiedad);
-      this.alertify.success('Felicidades, ha sido publicada tu propiedad');
+
+      this.housingService.addProperty(this.propiedad).subscribe((data:any)=>{
+          if(data.exito ===1){
+            this.alertify.success('Felicidades, ha sido publicada tu propiedad');
+          }
+      }, error=>{
+        console.error(error)
+      }
+
+
+
+      );
+
       console.log(this.addPropiedadForm);
 
       if (this.SellRent.value === '2') {
@@ -292,16 +302,17 @@ export class AddPropiedadComponent implements OnInit {
   //#endregion
   mappropiedad(): void {
     //console.log(this.addPropiedadForm.value)
-    this.propiedad.SellRent = this.SellRent.value;
-    this.propiedad.PType = this.PType.value;
+    this.propiedad.sellRent = this.SellRent.value;
+    this.propiedad.pType = this.PType.value;
     this.propiedad.nombre = this.PType.value;
     this.propiedad.ciudad = this.City.value;
     this.propiedad.precio = this.Price.value;
     this.propiedad.areaM2 = this.BuiltArea.value;
-    this.propiedad.Direccion = this.Address.value;
-    this.propiedad.Años = this.Años.value;
+    this.propiedad.direccion = this.Address.value;
+    this.propiedad.años = this.Años.value;
     this.propiedad.descripcion = this.Description.value;
-   this.propiedad.Fotos = [{IsPrimary:true, ImageUrl:"foto1"},{IsPrimary: false, ImageUrl:"foto2"}];
-    this.propiedad.PostedOn = new Date().toString();
+   this.propiedad.fotos = [{isPrimary:true, imagenUrl:"https://www.bbva.com/wp-content/uploads/2021/04/casas-ecolo%CC%81gicas_apertura-hogar-sostenibilidad-certificado--1024x629.jpg"},{isPrimary: false, imagenUrl:"https://www.bbva.com/wp-content/uploads/2021/04/casas-ecolo%CC%81gicas_apertura-hogar-sostenibilidad-certificado--1024x629.jpg"}];
+    this.propiedad.postedOn = new Date().toISOString();
+    this.propiedad.userId = this.auth.UsuarioData.id;
   }
 }

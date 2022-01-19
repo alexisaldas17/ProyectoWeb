@@ -11,12 +11,12 @@ export class Propiedad implements IpropiedadCard{
   areaM2!: number;
   descripcion!: string;
   imagenUrl: any;
-
-  SellRent!: number;
-  PType!: string;
-  Direccion!: string;
-  Fotos!: Ifotos[];
-  Años!: number;
-  PostedOn!: string;
-  PostedBy!: number;
+  sellRent!: number;
+  pType!: string;
+  direccion!: string;
+  fotos!: Ifotos[];
+  años!: number;
+  userId!: number | undefined;
+  postedOn!: string;
+  postedBy!: number;
 }

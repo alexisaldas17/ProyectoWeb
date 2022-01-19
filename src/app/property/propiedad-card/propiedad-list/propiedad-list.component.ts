@@ -1,4 +1,5 @@
 
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Ipropiedadbase } from 'src/app/model/ipropiedadbase';
@@ -19,10 +20,18 @@ export class PropiedadListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    if (this.route.snapshot.url.toString()) {
-      this.SellRent = 2;
+    if (this.route.snapshot.url.toString()=='sell-propiedad') {
 
+      this.SellRent = 1;
+
+
+    }else{
+      this.SellRent =2;
     }
+    this.getPropiedades();
+
+  }
+  getPropiedades(){
     this.housingService.getAllPropiedades(this.SellRent).subscribe(data => {
 
       this.propiedades = data;
