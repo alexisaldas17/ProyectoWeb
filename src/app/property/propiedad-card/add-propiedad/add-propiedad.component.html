@@ -37,8 +37,8 @@
 
                       <div class="form-group col-12">
                         <p>Tipo de Propiedad </p>
-                        <select  class="form-control" formControlName="PType">
-                          <option *ngFor="let item of tpropiedad" [value]="item.nombre">
+                        <select   [(ngModel)]="propiedad.nombre" class="form-control" formControlName="PType">
+                          <option  *ngFor="let item of tpropiedad" [value]="item.nombre">
                             {{item.nombre}}
 
                           </option>
@@ -49,6 +49,7 @@
                       <div class="form-group col-12">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control" formControlName="Name" required minlength="5"
+
                          >
                         <span *ngIf="Name.invalid && Name.touched" class="error-block">
                           Obligatorio: Ingresar un nombre
@@ -74,7 +75,7 @@
                         <label *ngIf="SellRent.value==1">Precio Venta(USD)</label>
                         <label *ngIf="SellRent.value==2">Precio Arriendo (USD)</label>
                         <input type="number" class="form-control" formControlName="Price" pattern="^\d*(\.\d{0,2})?$"
-                          [(ngModel)]="propiedadView.Price">
+                          [(ngModel)]="propiedad.precio">
                       </div>
                       <div *ngIf="Price.invalid && (nextClicked || Price.touched)" class="error-block">
                         Obligatorio: Ingrese precio.
@@ -96,7 +97,7 @@
 
                       <div class="form-group col-12">
                         <label>Area (m2)</label>
-                        <input type="number" class="form-control" [(ngModel)]="propiedadView.BuiltArea"
+                        <input type="number" class="form-control" [(ngModel)]="propiedad.areaM2"
                           formControlName="BuiltArea">
                       </div>
 
@@ -116,7 +117,7 @@
 
                       <div class="form-group col-12">
                         <label for="ciudad">Ciudad</label>
-                        <select name="" id="" formControlName="City" class="form-control">
+                        <select [(ngModel)]="propiedad.ciudad" name="" id="" formControlName="City" class="form-control">
                           <option *ngFor="let item of ciudades" [value]="item.nombre">
                             {{item.nombre}}
 
@@ -143,7 +144,7 @@
                     </tab>
                     <tab heading="Otros Detalles" formGroupName="OtherInfo">
 
- 
+
                       <div class="form-group col-12">
                         <label>Años/Propiedad</label>
                         <input type="text" class="form-control" formControlName="Años" required>
@@ -151,7 +152,7 @@
 
                       <div class="form-group col-12">
                         <label>Descripción</label>
-                        <textarea type="text" class="form-control" rows="6" formControlName="Description"
+                        <textarea [(ngModel)]="propiedad.descripcion" type="text" class="form-control" rows="6" formControlName="Description"
                           required></textarea>
                       </div>
 
@@ -224,7 +225,7 @@
       </div>
       <div>
         <div class="shadow-lg p-3 bg-white">
-          <app-propiedad-card [propiedad]="propiedadView">
+          <app-propiedad-card [propiedad]="propiedad">
           </app-propiedad-card>
         </div>
 

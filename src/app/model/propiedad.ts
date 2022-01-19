@@ -1,20 +1,21 @@
 import { Fotos } from "./fotos";
 import { Ifotos } from "./ifotos";
+import { IpropiedadCard } from "./ipropiedad-card";
 import { Ipropiedadbase } from "./ipropiedadbase";
 
-export class Propiedad implements Ipropiedadbase{
-  ImageUrl: any;
+export class Propiedad implements IpropiedadCard{
+  idPropiedad!: number;
+  nombre!: string;
+  ciudad!: string;
+  precio!: number;
+  areaM2!: number;
+  descripcion!: string;
+  imagenUrl: any;
 
-  Id!: number;
   SellRent!: number;
-  Name!: string;
   PType!: string;
-  Price!: number;
-  BuiltArea!: number;
-  Address!: string;
-  City!: string;
+  Direccion!: string;
   Fotos!: Ifotos[];
-  Description!: string;
   Años!: number;
   PostedOn!: string;
   PostedBy!: number;

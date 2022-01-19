@@ -28,9 +28,6 @@ export class AddPropiedadComponent implements OnInit {
   @ViewChild('tipTabs') tipoTavs!: TabsetComponent;
   //#region <DECLARACION VARIABLES>
 
-  ptselected!: any;
-  op!: string;
-
   showOrHiddden: boolean = true;
   addPropiedadForm!: FormGroup;
   nextClicked!: boolean;
@@ -43,21 +40,7 @@ export class AddPropiedadComponent implements OnInit {
   progressInfos: any = [];
   message = '';
   fileInfos!: Observable<any>;
-  propiedadView: Ipropiedadbase = {
-    Id: 0,
-    Name: '',
-    Price: 0,
-    SellRent: 0,
-    PType: '',
-    BuiltArea: 0,
-    City: '',
-    ImageUrl: '',
-    Description: '',
-  };
- capturar(){
-   this.ptselected = this.op;
-   console.log(this.op);
- }
+
   //#endregion
 
   constructor(
@@ -78,7 +61,6 @@ export class AddPropiedadComponent implements OnInit {
       this.tpropiedad = data;
     });
     this.getPublicacionesUsuario();
-    console.log(this.ptselected)
     //this.fileInfos = this.imageService.getFiles();
 
   }
@@ -312,13 +294,13 @@ export class AddPropiedadComponent implements OnInit {
     //console.log(this.addPropiedadForm.value)
     this.propiedad.SellRent = this.SellRent.value;
     this.propiedad.PType = this.PType.value;
-    this.propiedad.Name = this.Name.value;
-    this.propiedad.City = this.City.value;
-    this.propiedad.Price = this.Price.value;
-    this.propiedad.BuiltArea = this.BuiltArea.value;
-    this.propiedad.Address = this.Address.value;
+    this.propiedad.nombre = this.PType.value;
+    this.propiedad.ciudad = this.City.value;
+    this.propiedad.precio = this.Price.value;
+    this.propiedad.areaM2 = this.BuiltArea.value;
+    this.propiedad.Direccion = this.Address.value;
     this.propiedad.Años = this.Años.value;
-    this.propiedad.Description = this.Description.value;
+    this.propiedad.descripcion = this.Description.value;
    this.propiedad.Fotos = [{IsPrimary:true, ImageUrl:"foto1"},{IsPrimary: false, ImageUrl:"foto2"}];
     this.propiedad.PostedOn = new Date().toString();
   }

@@ -6,7 +6,7 @@ export interface Ipropiedadbase {
     Price: number;
     BuiltArea: any;
     City: string;
-    ImageUrl: any;
+    imagenUrl: any;
     Description: string;
 
 
