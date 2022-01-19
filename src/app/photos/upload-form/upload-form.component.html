@@ -16,8 +16,8 @@
   Upload
 </button>
 
-<div *ngIf="currentFileUpload" class="progress mt-2">
-  <div
+<div *ngIf="currentFileUpload && error==''" class="progress mt-2">
+  <div *ngIf="percentage!=-1"
     class="progress-bar progress-bar-info"
     role="progressbar"
     attr.aria-valuenow="{{ percentage }}"
@@ -28,3 +28,6 @@
     {{ percentage }}%
   </div>
 </div>
+  <div *ngIf="error!=''" class="error-block">
+    {{error}}
+  </div>
