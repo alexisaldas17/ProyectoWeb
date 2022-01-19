@@ -13,9 +13,9 @@ export class Propiedad implements Ipropiedadbase{
   BuiltArea!: number;
   Address!: string;
   City!: string;
-  Maintenance?: number;
   Fotos!: Ifotos[];
   Description!: string;
+  Años!: number;
   PostedOn!: string;
   PostedBy!: number;
 }

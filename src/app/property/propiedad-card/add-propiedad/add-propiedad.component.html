@@ -17,7 +17,7 @@
                 <div class="tab-panel ">
                   <tabset class="member-tabset" #formTabs>
 
-                    <!--INFORMACION BASICA-->
+                    <!--*******************INFORMACION BASICA*****************-->
 
                     <tab heading="Información Básica" id="tab1" formGroupName="BasicInfo">
                       <div class="form-group col-12">
@@ -35,68 +35,16 @@
                         </div>
                       </div>
 
-                      {{SellRent.value}}
-                      {{propiedad.PType }}
-                      {{Name.value}}
-
-                      <!--  <div class="form-group col-12">
-                    <p>Cantidad</p>
-                    <div class="btn-group" btnRadioGroup
-                    formControlName="BHK"
-                    >
-
-                      <label
-                      *ngFor="let bhk of ['1','2','3','4']"
-                       class="btn btn-outline-primary mr-2"
-                      [btnRadio]="bhk" tabindex="0" role="button" name="bhk" >{{bhk}}
-                      </label>
-
-                    </div>
-                  </div>-->
-
                       <div class="form-group col-12">
                         <p>Tipo de Propiedad </p>
-                        <select  name="" id="" formControlName="PType" class="form-control">
-                          <option *ngFor="let item of tpropiedad" value="item.nombre">
+                        <select  class="form-control" formControlName="PType">
+                          <option *ngFor="let item of tpropiedad" [value]="item.nombre">
                             {{item.nombre}}
 
                           </option>
                         </select>
-                        <!-- <div class="btn-group" btnRadioGroup
-                     formControlName="PType"
-                     >
-
-                      <label
-                      *ngFor="let ptype of propiedadTypes"
-                       class="btn btn-outline-primary mr-2"
-                      [btnRadio]="ptype" tabindex="0" role="button" name="" >{{ptype}}
-                      </label>-->
 
                       </div>
-
-
-                      <!--
-
-                <div class="form-group col-12">
-                    <p>Amoblado </p>
-
-                    <div class="btn-group" btnRadioGroup
-                    formControlName="FType"
-                     name="FType">
-
-                      <label
-                      *ngFor="let ftype of furnishTypes"
-                       class="btn btn-outline-primary mr-2"
-                      [btnRadio]="ftype" tabindex="0" role="button" name="" >{{ftype}}
-                      </label>
-
-                    </div>
-
-                    <span *ngIf="FType.invalid" class="error-block" >
-                      Seleccione una opcion.
-                    </span>
-                  </div>
-                  -->
 
                       <div class="form-group col-12">
                         <label for="nombre">Nombre</label>
@@ -108,12 +56,6 @@
                         </span>
 
                       </div>
-
-                      <!-- <div class="form-group col-12">
-                    <label for="tipo">Tipo</label>
-                  <input type="text" class="form-control" ngModel name="Type">
-                  </div>-->
-
                       <div class="form-group col-12">
 
                         <button type="button" (click)="selectTab(1,BasicInfo.valid)" class="btn btn-primary mr-2">
@@ -123,7 +65,9 @@
                       </div>
 
                     </tab>
-                    <!--PRECIO Y AREA-->
+
+                    <!--*********************PRECIO Y AREA**************************-->
+
                     <tab heading="Precio y Área" formGroupName="PriceInfo">
 
                       <div class="form-group col-12">
@@ -165,13 +109,15 @@
                       </div>
 
                     </tab>
-                    <!--ADDRESS-INFO-->
+
+
+                    <!--**************ADDRESS-INFO*****************-->
                     <tab heading="Direccion" formGroupName="AddressInfo">
 
                       <div class="form-group col-12">
                         <label for="ciudad">Ciudad</label>
                         <select name="" id="" formControlName="City" class="form-control">
-                          <option *ngFor="let item of ciudades" value="item.nombre">
+                          <option *ngFor="let item of ciudades" [value]="item.nombre">
                             {{item.nombre}}
 
                           </option>
@@ -197,39 +143,7 @@
                     </tab>
                     <tab heading="Otros Detalles" formGroupName="OtherInfo">
 
-                      <!--
-                  <div class="form-group col-12">
-                    <label>Listo para moverse</label><br/>
-                    <input type="radio" id='Yes' value='1' formControlName="RTM">
-                    <label class="m-2">Yes</label>
-
-                    <input type="radio" id="No" value='2' formControlName="RTM">
-                    <label class="m-2">No</label>
-                    <div class="error-block" *ngIf="RTM.valid && nextClicked">
-                      Obligatorio: Seleccione una de las opciones.
-                    </div>
-                  </div>
-  -->
-
-                      <!--<div class="form-group col-12"  *ngIf="RTM.value==2">
-                    <label>Posesión/Disponible Desde</label>
-                    <input type="text" formControlName="FechaDisp"
-                    placeholder="Seleccione Fecha"
-                    class="form-control"
-                    bsDatepicker
-                    [bsConfig]="{containerClass:'theme-dark-blue', dateInputFormat:'DD/MM/YYYY'}">
-                  </div>
-                  <div class="form-group col-12">
-                    <label>Piso N°</label>
-                    <input type="number" class="form-control" formControlName="FloorNo">
-                  </div>
-
-                  <div class="form-group col-12">
-                    <label>Total Pisos</label>
-                    <input type="number" class="form-control" formControlName="TotalFloor">
-                  </div>
-                  -->
-
+ 
                       <div class="form-group col-12">
                         <label>Años/Propiedad</label>
                         <input type="text" class="form-control" formControlName="Años" required>
