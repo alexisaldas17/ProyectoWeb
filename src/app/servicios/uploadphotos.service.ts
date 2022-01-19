@@ -2,6 +2,7 @@ import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { error } from 'console';
 
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -46,21 +47,27 @@ upload(file: File): Observable<HttpEvent<any>> {
 
 //---------------------------------------------------------------------------
 pushFileToStorage(fileUpload: Fileupload): Observable<number> {
-  const filePath = `${this.basePath}/${fileUpload.file.name}`;
-  const storageRef = this.storage.ref(filePath);
-  const uploadTask:any = this.storage.upload(filePath, fileUpload.file);
+  console.log(this.fotosLista.length);
+  if(this.fotosLista.length<5){
+    const filePath = `${this.basePath}/${fileUpload.file.name}`;
+    const storageRef = this.storage.ref(filePath);
+    const uploadTask:any = this.storage.upload(filePath, fileUpload.file);
 
-  uploadTask.snapshotChanges().pipe(
-    finalize(() => {
-      storageRef.getDownloadURL().subscribe(downloadURL => {
-        fileUpload.url = downloadURL;
-        fileUpload.name = fileUpload.file.name;
-        this.saveFileData(fileUpload);
-      });
-    })
-  ).subscribe();
+    uploadTask.snapshotChanges().pipe(
+      finalize(() => {
+        storageRef.getDownloadURL().subscribe(downloadURL => {
+          fileUpload.url = downloadURL;
+          fileUpload.name = fileUpload.file.name;
+          this.saveFileData(fileUpload);
+        });
+      })
+   ).subscribe();
 
-  return uploadTask.percentageChanges();
+   return uploadTask.percentageChanges();
+
+  }else{
+    throw new Error("Aviso: Solo se puede cargar 5 fotos");
+  }
 }
 
 private saveFileData(fileUpload: Fileupload): void {
