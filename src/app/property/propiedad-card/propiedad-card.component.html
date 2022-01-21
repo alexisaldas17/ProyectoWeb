@@ -1,7 +1,7 @@
 
     <div class="card">
       <div class="card-img-wrapper">
-        <img *ngIf="propiedad.imagenUrl" class="card-img-top" src="{{propiedad.imagenUrl}}" alt="">
+        <img *ngIf="propiedad.imagenUrl" class="card-img-top" src="{{propiedad.imagenUrl}}" alt="Recurso no fue encontrado...">
 
         <img *ngIf="!propiedad.imagenUrl" class="card-img-top" src="../../../assets/casa.png" alt="">
 
@@ -11,7 +11,7 @@
             <button class="btn btn-primary" routerLink="/propiedad-detail/{{propiedad.idPropiedad}}"><i class="fas fa-eye"></i></button>
           </li>
        <li *ngIf="editIcon" class="list-inline-item ">
-        <button class="btn btn-primary" routerLink="/propiedad-detail/{{propiedad.idPropiedad}}"><i class="fas fa-edit"></i></button>
+        <button class="btn btn-primary" routerLink="/edit-propiedad/{{propiedad.idPropiedad}}"><i class="fas fa-edit"></i></button>
           </li>
         </ul>
       </div>
@@ -26,10 +26,7 @@
 
         <h6 class="mb-0">Precio: <span class="font-highlight">{{propiedad.precio}} USD.</span> |
           Area:  <span class="font-highlight">{{propiedad.areaM2}} m2 </span> </h6> <br>
-          <h6 class="mb-0">Descripción:<span><br>
-            {{propiedad.descripcion}}
 
-          </span></h6>
 
       </div>
     </div>

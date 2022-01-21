@@ -1,33 +1,108 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top  ">
+<header class="topbar">
+  <nav class="navbar top-navbar navbar-expand-md navbar-dark bg-dark">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">
+        <b>
+          <img src="../../assets/logo.png" width="50px" alt="logoRenacer"> </b>
+        <!--End Logo icon -->
+        <!-- Logo text --><span>
+          <!-- dark Logo text -->
+          <label class="navbar-brand text-light">Renacer</label>
+        </span>
+      </a>
+    </div>
+
+    <div class="navbar-collapse">
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"> <a class="nav-link active text-light" aria-current="page" routerLinkActive="active"
+            routerLink="/">Home</a>
+        </li>
+
+        <li class="nav-item"> <a *ngIf="!usuario || usuario" class="nav-link text-light"
+            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" routerLink="/sell-propiedad">Comprar</a>
+        </li>
+
+        <li class="nav-item"> <a *ngIf="!usuario || usuario" class="nav-link text-light" routerLinkActive="active"
+            routerLink="/rent-propiedad">Rentar</a> </li>
+
+
+
+        <li class="nav-item"> <a *ngIf="usuario " class="nav-link text-light" routerLinkActive="active"
+            routerLink="/add-propiedades">Propiedades</a> </li>
+        <li class="nav-item"> <a *ngIf="!usuario" class="nav-link text-light" routerLinkActive="active"
+            routerLink="/login">Login</a>
+        </li>
+
+        <li class="nav-item"> <a *ngIf="!usuario" class="nav-link text-light" routerLinkActive="active"
+            routerLink="/register">Sing in</a>
+        </li>
+
+
+
+        <li class="nav-item hidden-sm-down"></li>
+      </ul>
+
+      <div *ngIf="usuario" class="btn-group clearfix" dropdown>
+        <button id="button-basic " dropdownToggle type="button"
+          class="btn btn-primary btn-bottom-right dropdown-toggle  " aria-controls="dropdown-basic"><i
+            class="fas fa-circle" style="color: rgb(99, 226, 99);"></i>
+          Bienvenid@ {{apiService.UsuarioData.nombre}} <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <li role="menuitem"><a class="dropdown-item" href="#"><i class="fas fa-user mr-3" routerLink="/perfil/1"></i>Perfil</a></li>
+          <li role="menuitem"><a class="dropdown-item" href="#"><i class="fas fa-user-edit mr-3"></i>Editar Datos</a>
+          </li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem"><a (click)="onLogout()" class="dropdown-item" href="#"><i
+                class="fas fa-sign-out-alt mr-3"></i>Salir</a>
+          </li>
+        </ul>
+      </div>
+
+
+    </div>
+  </nav>
+</header>
+
+<!--<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top  ">
   <div class="container-fluid  ">
     <img src="../../assets/logo.png" width="50px" alt="logoRenacer">
     <a class="navbar-brand text-light" href="/">Renacer</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
       <div class="navbar-nav text-light  ">
         <a class="nav-link active text-light" aria-current="page" routerLinkActive="active" routerLink="/">Home</a>
-        <a  *ngIf="usuario" class="nav-link text-light" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" routerLink="/sell-propiedad">Comprar</a>
-        <a  *ngIf="usuario" class="nav-link text-light" routerLinkActive="active" routerLink="/rent-propiedad">Rentar</a>
-        <a  *ngIf="usuario" class="nav-link text-light" routerLinkActive="active" routerLink="/add-propiedades">Propiedades</a>
+        <a *ngIf="!usuario || usuario" class="nav-link text-light" [routerLinkActiveOptions]="{exact:true}"
+          routerLinkActive="active" routerLink="/sell-propiedad">Comprar</a>
+        <a *ngIf="!usuario || usuario" class="nav-link text-light" routerLinkActive="active"
+          routerLink="/rent-propiedad">Rentar</a>
+        <a *ngIf="usuario " class="nav-link text-light" routerLinkActive="active"
+          routerLink="/add-propiedades">Propiedades</a>
         <a *ngIf="!usuario" class="nav-link text-light" routerLinkActive="active" routerLink="/login">Login</a>
         <a *ngIf="!usuario" class="nav-link text-light" routerLinkActive="active" routerLink="/register">Sing in</a>
-       <!-- <a *ngIf="loggedin()" (click)="onLogout()" class="nav-link text-light" routerLinkActive="active" routerLink="/logout">Logout</a>-->
-       <div *ngIf="usuario" class="btn-group"  dropdown   >
-        <button id="button-basic " dropdownToggle type="button" class="btn btn-primary dropdown-toggle  "
-                aria-controls="dropdown-basic"><i class="fas fa-circle" style="color: rgb(99, 226, 99);"></i>
-          Bienvenid@ {{apiService.UsuarioData.nombre}} <span class="caret"></span>
-        </button>
-        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-            role="menu" aria-labelledby="button-basic">
-          <li role="menuitem"><a class="dropdown-item" href="#"><i class="fas fa-user mr-3"></i>Perfil</a></li>
-          <li role="menuitem"><a class="dropdown-item" href="#"><i class="fas fa-user-edit mr-3"></i>Editar Datos</a></li>
-          <li class="divider dropdown-divider"></li>
-          <li role="menuitem"><a (click)="onLogout()" class="dropdown-item" href="#"><i class="fas fa-sign-out-alt mr-3"></i>Salir</a>
-          </li>
-        </ul>
-      </div>
+        <!-- <a *ngIf="loggedin()" (click)="onLogout()" class="nav-link text-light" routerLinkActive="active" routerLink="/logout">Logout</a>-->
+
+<!--    <div *ngIf="usuario" class="btn-group clearfix" dropdown>
+          <button id="button-basic " dropdownToggle type="button"
+            class="btn btn-primary btn-bottom-right dropdown-toggle  " aria-controls="dropdown-basic"><i
+              class="fas fa-circle" style="color: rgb(99, 226, 99);"></i>
+            Bienvenid@ {{apiService.UsuarioData.nombre}} <span class="caret"></span>
+          </button>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem"><a class="dropdown-item" href="#"><i class="fas fa-user mr-3"></i>Perfil</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="#"><i class="fas fa-user-edit mr-3"></i>Editar Datos</a>
+            </li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a (click)="onLogout()" class="dropdown-item" href="#"><i
+                  class="fas fa-sign-out-alt mr-3"></i>Salir</a>
+            </li>
+          </ul>
+        </div>
 
 
 
@@ -39,3 +114,4 @@
     </div>
   </div>
 </nav>
+-->

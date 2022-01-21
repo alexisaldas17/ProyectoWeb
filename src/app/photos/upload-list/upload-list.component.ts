@@ -3,6 +3,7 @@ import { UploadphotosService } from '../../servicios/uploadphotos.service';
 import { finalize, tap, map,switchMap } from 'rxjs/operators';
 
 import { Fileupload } from 'src/app/model/fileupload';
+import { AddPropiedadComponent } from 'src/app/property/add-propiedad/add-propiedad.component';
 
 @Component({
   selector: 'app-upload-list',
@@ -11,18 +12,30 @@ import { Fileupload } from 'src/app/model/fileupload';
 })
 export class UploadListComponent implements OnInit {
   fileUploads!: Fileupload[] ;
-  constructor(public uploadService: UploadphotosService) { }
+  constructor(public uploadService: UploadphotosService, private addPropiedad: AddPropiedadComponent) { }
 
   ngOnInit():void {
-   /* this.uploadService.getFiles(6).snapshotChanges().pipe(
-      map(changes =>
-        // store the key
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    ).subscribe(fileUploads => {
-      this.fileUploads = fileUploads as Fileupload[];
-    });*/
+    }
+
+  isChecked!:any;
+  onCheck!:boolean;
+  isCheckedName!:any;
+  public shown=false;
+
+  public checklist: any= this.uploadService.fotosLista;
+
+
+  isAllSelected(item:any) {
+    this.checklist.forEach((val:any) => {
+      if (val.name == item.name){
+       val.isPrimary = !val.isPrimary;
+       this.addPropiedad.propiedad.imagenUrl=item.url;
+      }
+      else {
+        val.isPrimary = false;
+      }
+    });
+    this.uploadService.fotosLista = this.checklist;
   }
 
-  
 }

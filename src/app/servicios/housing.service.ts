@@ -35,7 +35,11 @@ getAllPropiedades(SellRent: number): Observable<any[]>{
 addProperty(property: Propiedad) {
   //let  propiedad=JSON.stringify(property);
   //console.log(propiedad);
-  return this.http.post('http://wsproyectoweb.azurewebsites.net/api/Propiedad/add', property, httpOptions );
+  return this.http.post('http://wsproyectoweb.azurewebsites.net/api/Propiedad/', property, httpOptions ).subscribe(
+   response=> {
+      alert(response);
+    }
+  );
   //localStorage.setItem('newProp', JSON.stringify(property));
 }
 
@@ -124,6 +128,10 @@ jsonLista(o:Observable<JSON>):Observable<any>{
     }
     return lista;
   }));
+}
+
+getPropiedadById(id: number):Observable<any>{
+  return this.http.get('http://wsproyectoweb.azurewebsites.net/api/Propiedad/get/'+id,httpOptions);
 }
 
 }

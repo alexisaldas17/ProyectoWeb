@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Login } from '../model/login';
 import { Response } from '../model/response';
 import { User } from '../model/user';
+import { AlertifyService } from './alertify.service';
 const httpOptions={
   headers: new HttpHeaders({
     'Contend-Type': 'application/json'
@@ -24,7 +25,8 @@ public get UsuarioData():User{
   return this.usuarioSubject.value;
 }
 
-constructor(private http: HttpClient) {
+constructor(private http: HttpClient,
+            private alertify: AlertifyService) {
   this.usuarioSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('Usuario')!));
   this.usuario= this.usuarioSubject.asObservable();
 }

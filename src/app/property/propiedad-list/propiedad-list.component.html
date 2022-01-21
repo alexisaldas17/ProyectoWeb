@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <div class="row">
+    <form  class="form-inline mt-5">
+      <label for="">Filtrar<i class="fas fa-filter"></i></label>
+        <div class="col">
+          <select name="ciudad" id="ciudad" class="form-control">
+            <option value="">--Seleccione Ciudad--</option>
+            <option *ngFor="let ciudad of ciudadesArray" [value]="ciudad.nombre">{{ciudad.nombre}}</option>
+          </select>
+         </div>
+
+         <div class="col">
+          <select name="tpropiedad" id="tpropiedad" class="form-control">
+            <option value="">--Seleccione Tipo Propiedad--</option>
+            <option *ngFor="let tpropiedad of tpropiedadArray" [value]="tpropiedad.nombre">{{tpropiedad.nombre}}</option>
+          </select>
+         </div>
+ 
+
+        <div class="col">
+          <i class="far fa-calendar"></i>
+          <input  class="form-control " type="text" placeholder="Seleccione Fecha" bsDatepicker [bsConfig]="{containerClass: 'theme-dark-blue', dateInputFormat: 'YYYY-MM-DD'}">
+        </div>
+
+    </form>
+
+    <div *ngFor="let propiedad of propiedades" class="shadow-lg col-sm-4 mt-5">
+          <app-propiedad-card [propiedad]="propiedad" eyeIcon="true" >
+
+      </app-propiedad-card>
+    </div>
+  </div>
+
+</div>

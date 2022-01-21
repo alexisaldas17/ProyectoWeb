@@ -7,6 +7,7 @@ import { error } from 'console';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Fileupload } from '../model/fileupload';
+import { AlertifyService } from './alertify.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,9 @@ export class UploadphotosService {
   fotosLista: Fileupload[]=[] ;
 constructor(private http: HttpClient,
             private db: AngularFireDatabase,
-            private storage: AngularFireStorage) { }
+            private storage: AngularFireStorage,
+            private alertify: AlertifyService
+            ) { }
 
 public uploadImage(image: File): Observable<any> {
   console.log(image)
@@ -66,7 +69,8 @@ pushFileToStorage(fileUpload: Fileupload): Observable<number> {
    return uploadTask.percentageChanges();
 
   }else{
-    throw new Error("Aviso: Solo se puede cargar 5 fotos");
+   //this.alertify.warning(Error.toString());
+   throw new Error("Aviso: Solo se puede cargar 5 fotos");
   }
 }
 
@@ -85,7 +89,7 @@ deleteFile(fileUpload: Fileupload): void {
   this.deleteFileDatabase(fileUpload.key)
     .then(() => {
       this.deleteFileStorage(fileUpload);
-    })
+      })
     .catch(error => console.log(error));
 }
 

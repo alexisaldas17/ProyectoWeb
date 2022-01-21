@@ -4,7 +4,7 @@
 
 
       <div class="card-body">
-        <form (ngSubmit)='onSubmit()' [formGroup]="addPropiedadForm">
+        <form [formGroup]="addPropiedadForm">
 
           <div class="tab-panel">
             <tabset class="member-tabset" #tipoTabs>
@@ -38,6 +38,7 @@
                       <div class="form-group col-12">
                         <p>Tipo de Propiedad </p>
                         <select   [(ngModel)]="propiedad.nombre" class="form-control" formControlName="PType">
+                        <option value="">--Seleccione Propiedad--</option>
                           <option  *ngFor="let item of tpropiedad" [value]="item.nombre">
                             {{item.nombre}}
 
@@ -118,6 +119,7 @@
                       <div class="form-group col-12">
                         <label for="ciudad">Ciudad</label>
                         <select [(ngModel)]="propiedad.ciudad" name="" id="" formControlName="City" class="form-control">
+                         <option value="">--Seleccione Ciudad--</option>
                           <option *ngFor="let item of ciudades" [value]="item.nombre">
                             {{item.nombre}}
 
@@ -147,7 +149,7 @@
 
                       <div class="form-group col-12">
                         <label>Años/Propiedad</label>
-                        <input type="text" class="form-control" formControlName="Años" required>
+                        <input type="number" class="form-control" formControlName="Años" required>
                       </div>
 
                       <div class="form-group col-12">
@@ -166,12 +168,12 @@
 
 
                     </tab>
-                    <tab heading="Cargar Fotos">
+                    <tab heading="Cargar Fotos" >
 
 
                       <!--**************************CARGA DE IMASGEN**********************-->
                       <div class="form-group col-12 ">
-                        <div class="photo-control">
+                        <div class="card">
 
                           <label class="image-upload-container btn btn-bwm mt-5">
                             <app-upload-form ></app-upload-form>
@@ -188,7 +190,7 @@
                       <div class="form-group col-12">
                         <button type="button" (click)="selectTab(3, true)" class="btn btn-secondary mr-2">Atrás</button>
 
-                        <button type="submit" (click)="onSubmit()" class="btn btn-success mr-2">Guardar</button>
+                        <button [disabled]="addPropiedadForm.invalid" type="submit" (click)="onSubmit()" class="btn btn-success mr-2">Guardar</button>
                         <button type="reset" class="btn btn-danger mr-2">Cancelar</button>
                       </div>
                     </tab>

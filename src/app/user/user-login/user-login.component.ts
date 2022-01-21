@@ -40,13 +40,22 @@ export class UserLoginComponent implements OnInit {
   }
 
   ngOnInit() {}
- 
+
   onLogin() {
-    this.auth.login(this.loginForm.value).subscribe((response) => {
+    this.auth.login(this.loginForm.value).subscribe((response:any) => {
       if (response.exito === 1) {
-        this.router.navigate(['/add-propiedades']);
+
+        this.router.navigate(['add-propiedades']).then(() => {
+          window.location.reload();
+
+      });
+
+       /* this.router.navigate(['/add-propiedades']).then(()=>{
+          this.alertify.success("Bienvenido");
+        }*/
+
+
       }
-      window.location.reload();
-    });
+    },error=> alert(error.error.mensaje));
   }
 }

@@ -11,6 +11,7 @@ import { AnyRecord } from 'dns';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { Observable } from 'rxjs';
 import { Fotos } from 'src/app/model/fotos';
+import { Ifotos } from 'src/app/model/ifotos';
 import { Ipropiedadbase } from 'src/app/model/ipropiedadbase';
 import { Propiedad } from 'src/app/model/propiedad';
 import { AlertifyService } from 'src/app/servicios/alertify.service';
@@ -31,7 +32,7 @@ export class AddPropiedadComponent implements OnInit {
   showOrHiddden: boolean = true;
   addPropiedadForm!: FormGroup;
   nextClicked!: boolean;
-  propiedad:Propiedad = new Propiedad();
+  propiedad: Propiedad = new Propiedad();
   ciudades: Array<any> = [];
   tpropiedad: Array<any> = [];
   publicacionesUsuario: Array<any> = [];
@@ -49,10 +50,12 @@ export class AddPropiedadComponent implements OnInit {
     private housingService: HousingService,
     private alertify: AlertifyService,
     public auth: ApiauthService,
-    private imageService: UploadphotosService
-  ) { }
+    private imageService: UploadphotosService,
+
+  ) {}
 
   ngOnInit() {
+
     this.CreateaddPropiedadForm();
     this.housingService.getCiudades().subscribe((data) => {
       this.ciudades = data;
@@ -60,9 +63,9 @@ export class AddPropiedadComponent implements OnInit {
     this.housingService.getTipoPropiedades().subscribe((data) => {
       this.tpropiedad = data;
     });
+
     this.getPublicacionesUsuario();
     //this.fileInfos = this.imageService.getFiles();
-
   }
 
   //#region <CARGA DE FOTOS>
@@ -163,35 +166,26 @@ export class AddPropiedadComponent implements OnInit {
 
   onSubmit() {
     this.nextClicked = true;
-    if (this.allTabsValid()) {
-      this.mappropiedad();
-      console.log(this.propiedad);
-
-      this.housingService.addProperty(this.propiedad).subscribe((data:any)=>{
-          if(data.exito ===1){
-            this.alertify.success('Felicidades, ha sido publicada tu propiedad');
-          }
-      }, error=>{
-        console.error(error)
-      }
-
-
-
-      );
-
-      console.log(this.addPropiedadForm);
-
+    this.mappropiedad();
+    this.housingService.addProperty(this.propiedad);
       if (this.SellRent.value === '2') {
-        this.router.navigate(['/rent-propiedad']);
+        this.router.navigate(['/rent-propiedad']).then(() => {
+          window.location.reload();;
+
+
+      });
       } else {
-        this.router.navigate(['/']);
-      }
-    } else {
-      this.alertify.error(
-        'Por favor revise el formulario y llene todos los campos'
-      );
+        this.router.navigate(['/sell-propiedad']).then(() => {
+          window.location.reload();
+      })
     }
+      this.alertify.success('Felicidades, ha sido publicada tu propiedad');
+      this.imageService.fotosLista=[];
+      this.propiedad=new Propiedad();
+     this.addPropiedadForm.reset();
+
   }
+
   allTabsValid(): boolean {
     if (this.BasicInfo.invalid) {
       this.formTabs.tabs[0].active = true;
@@ -267,13 +261,11 @@ export class AddPropiedadComponent implements OnInit {
     return this.BasicInfo.controls.SellRent as FormControl;
   }
   get PType() {
-
     return this.BasicInfo.controls.PType as FormControl;
   }
   get Name() {
     return this.BasicInfo.controls.Name as FormControl;
   }
-
 
   get Price() {
     return this.PriceInfo.controls.Price as FormControl;
@@ -311,8 +303,12 @@ export class AddPropiedadComponent implements OnInit {
     this.propiedad.direccion = this.Address.value;
     this.propiedad.años = this.Años.value;
     this.propiedad.descripcion = this.Description.value;
-   this.propiedad.fotos = [{isPrimary:true, imagenUrl:"https://www.bbva.com/wp-content/uploads/2021/04/casas-ecolo%CC%81gicas_apertura-hogar-sostenibilidad-certificado--1024x629.jpg"},{isPrimary: false, imagenUrl:"https://www.bbva.com/wp-content/uploads/2021/04/casas-ecolo%CC%81gicas_apertura-hogar-sostenibilidad-certificado--1024x629.jpg"}];
-    this.propiedad.postedOn = new Date().toISOString();
+
+    const fotos: Ifotos[] = [];
+    this.imageService.fotosLista.forEach((foto) => {
+      fotos.push({ isPrimary: foto.isPrimary, imagenUrl: foto.url });
+    });
+    this.propiedad.fotos = fotos;
     this.propiedad.userId = this.auth.UsuarioData.id;
   }
 }

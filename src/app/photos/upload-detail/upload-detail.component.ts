@@ -18,7 +18,7 @@ export class UploadDetailComponent implements OnInit {
   }
   deleteFileUpload(fileUpload:any): void {
 
-       this.uploadService.deleteFileStorage(fileUpload);
+       this.uploadService.deleteFile(fileUpload);
 
    }
 

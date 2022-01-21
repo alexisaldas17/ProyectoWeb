@@ -2,10 +2,21 @@
   <div class="card-header text-light">Imagenes Cargadas</div>
 
   <div class="card-body ">
+    <span *ngIf="uploadService.fotosLista.length==0">
+    No hay fotos cargadas.. Carge al menos 1 imagen.
+    </span>
+    <table class="table">
+      <tr *ngFor="let file of uploadService.fotosLista">
+        <app-upload-detail [fileUpload]="file">
 
-    <tr *ngFor="let file of uploadService.fotosLista">
-      <app-upload-detail [fileUpload]="file"></app-upload-detail>
-    </tr>
+        </app-upload-detail>
+        <th>esPrincipal?</th>
+        <td><input type="checkbox"  name="check" class="radio"
+         [checked]="file.isPrimary"
+           (change)="isAllSelected(file)"></td>
+      </tr>
+    </table>
+
 
 
   </div>

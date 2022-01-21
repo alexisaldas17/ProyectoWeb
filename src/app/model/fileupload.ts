@@ -1,11 +1,13 @@
 
 export class Fileupload {
-  key!: string  ;
+  key!: any  ;
+  isPrimary?: boolean;
   name!: string ;
   url!: string ;
   file: File;
 
   constructor(file: File) {
     this.file = file;
+    this.isPrimary = false;
   }
 }

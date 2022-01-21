@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Ipropiedadbase } from 'src/app/model/ipropiedadbase';
+import { UploadphotosService } from 'src/app/servicios/uploadphotos.service';
 
 @Component({
   selector: 'app-propiedad-card',
@@ -12,9 +12,11 @@ export class PropiedadCardComponent implements OnInit {
   @Input() editIcon!: any;
   @Input() eyeIcon!: any;
   @Input() showOrHiddden!: any;
-  constructor() { }
+  constructor(private imageService:UploadphotosService ) { }
 
   ngOnInit() {
+   
   }
+
 
 }

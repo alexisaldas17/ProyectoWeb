@@ -1,33 +1,35 @@
-<label>
-  <input
-    type="file"
-    accept=".png, .jpg, .jpeg"
-    multiple
-    class="text-nowrap text-truncate"
-    (change)="selectFile($event)"
-  />
-</label>
+<div class="card">
+  <label>
+    <input
+      type="file"
+      accept=".png, .jpg, .jpeg"
+      class="text-nowrap text-truncate"
+      (change)="selectFile($event)"
+    />
+  </label>
 
-<button
-  class="btn btn-success btn-sm"
-  [disabled]="!selectedFiles"
-  (click)="upload()"
->
-  Upload
-</button>
-
-<div *ngIf="currentFileUpload && error==''" class="progress mt-2">
-  <div *ngIf="percentage!=-1"
-    class="progress-bar progress-bar-info"
-    role="progressbar"
-    attr.aria-valuenow="{{ percentage }}"
-    aria-valuemin="0"
-    aria-valuemax="100"
-    [ngStyle]="{ width: percentage + '%' }"
+  <button
+    class="btn btn-success btn-sm"
+    [disabled]="!selectedFiles"
+    (click)="upload()"
   >
-    {{ percentage }}%
+    Upload
+  </button>
+
+  <div *ngIf="currentFileUpload && error==''" class="progress mt-2">
+    <div *ngIf="percentage!=-1"
+      class="progress-bar progress-bar-info"
+      role="progressbar"
+      attr.aria-valuenow="{{ percentage }}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      [ngStyle]="{ width: percentage + '%' }"
+    >
+      {{ percentage }}%
+    </div>
   </div>
+    <div *ngIf="error!=''" class="error-block">
+      {{error}}
+    </div>
 </div>
-  <div *ngIf="error!=''" class="error-block">
-    {{error}}
-  </div>
+

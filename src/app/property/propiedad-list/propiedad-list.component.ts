@@ -18,7 +18,8 @@ export class PropiedadListComponent implements OnInit {
 
   constructor(public housingService: HousingService,
     private route: ActivatedRoute) { }
-
+    ciudadesArray: Array<any>=[];
+    tpropiedadArray:Array<any>=[]
   ngOnInit() {
     if (this.route.snapshot.url.toString()=='sell-propiedad') {
 
@@ -29,6 +30,8 @@ export class PropiedadListComponent implements OnInit {
       this.SellRent =2;
     }
     this.getPropiedades();
+    this.getCiudades();
+    this.getTPropiedades();
 
   }
   getPropiedades(){
@@ -42,6 +45,19 @@ export class PropiedadListComponent implements OnInit {
       console.log(error);
     }
     );
+  }
+
+  getCiudades(){
+
+     this.housingService.getCiudades().subscribe(ciudad=>{
+       this.ciudadesArray=ciudad;
+     });
+
+  }
+  getTPropiedades(){
+    this.housingService.getTipoPropiedades().subscribe(tprop => {
+        this.tpropiedadArray=tprop;
+    });
   }
 
 

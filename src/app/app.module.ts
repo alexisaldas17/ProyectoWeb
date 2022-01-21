@@ -6,10 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 import { PropiedadCardComponent } from './property/propiedad-card/propiedad-card.component';
-import { PropiedadListComponent } from './property/propiedad-card/propiedad-list/propiedad-list.component';
+import { PropiedadListComponent } from './property/propiedad-list/propiedad-list.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HousingService } from './servicios/housing.service';
-import { AddPropiedadComponent } from './property/propiedad-card/add-propiedad/add-propiedad.component';
+import { AddPropiedadComponent } from './property/add-propiedad/add-propiedad.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { UserRegisterComponent } from './user/user-register/user-register.component';
 import { AlertifyService } from './servicios/alertify.service';
@@ -32,6 +32,9 @@ import { CommonModule } from '@angular/common';
 import { UploadFormComponent } from './photos/upload-form/upload-form.component';
 import { UploadDetailComponent } from './photos/upload-detail/upload-detail.component';
 import { UploadListComponent } from './photos/upload-list/upload-list.component';
+import { EditPropiedadDetailComponent } from './property/edit-propiedad-detail/edit-propiedad-detail.component';
+import { PropiedadDetailComponent } from './property/propiedad-detail/propiedad-detail.component';
+import { UserPerfilComponent } from './user/user-perfil/user-perfil.component';
 @NgModule({
   declarations: [
 
@@ -42,10 +45,13 @@ import { UploadListComponent } from './photos/upload-list/upload-list.component'
       AddPropiedadComponent,
       UserLoginComponent,
       UserRegisterComponent,
+      UserPerfilComponent,
       HomeComponent,
       UploadFormComponent,
       UploadDetailComponent,
-      UploadListComponent
+      UploadListComponent,
+      EditPropiedadDetailComponent,
+      PropiedadDetailComponent,
    ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 export interface Ifotos {
   //Id?: number;
-  isPrimary: boolean;
+  isPrimary?: boolean;
   imagenUrl:string;
 }
