@@ -1,1 +1,88 @@
-<button>holaaaaaaa</button>
+<div class="card">
+  <div class="card-header">
+    <div class="card-title text-center text-light">
+      <h3>Editar Propiedad</h3>
+    </div>
+  </div>
+  <tabset class="member-tabset" #tipoTabs>
+    <tab heading="Informacion Básica" id="tabBasicInfo">
+      <div class="container pt-4">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <div class="card text-center">
+              <div class="card-body">
+                <div class="form-group">
+                  <input type="text" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="">Tipo de Propiedad</label>
+                  <select name="" id="" class="form-control">
+                    <option value="SeleccioneOpcion">
+                      --Seleccione Ciudad--
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="">Nombre</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </tab>
+    <!--******************TAB PRECIO Y AREA**************-->
+    <tab heading="Precio y Área" id="Precio y Área">
+
+      <div class="container pt-4">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <div class="card text-center">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="">Precio</label>
+                  <input type="number" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="">Area(m2)</label>
+                  <input type="number" class="form-control">
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </tab>
+    <tab heading="Dirección" id="Dirección">
+
+      <div class="container pt-4">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <div class="card text-center">
+              <div class="card-body">
+                <div class="form-group">
+                  <app-map></app-map>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </tab>
+    <tab heading="Otros Detalles" id="Otros Detalles">
+    </tab>
+    <tab heading="Fotos" id="Fotos">
+    </tab>
+  </tabset>
+
+
+</div>

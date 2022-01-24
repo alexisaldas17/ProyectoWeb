@@ -11,8 +11,12 @@
             <button class="btn btn-primary" routerLink="/propiedad-detail/{{propiedad.idPropiedad}}"><i class="fas fa-eye"></i></button>
           </li>
        <li *ngIf="editIcon" class="list-inline-item ">
-        <button class="btn btn-primary" routerLink="/edit-propiedad/{{propiedad.idPropiedad}}"><i class="fas fa-edit"></i></button>
+        <button class="btn btn-info" routerLink="/edit-propiedad/{{propiedad.idPropiedad}}"><i class="fas fa-edit"></i></button>
           </li>
+
+          <li *ngIf="deleteIcon" class="list-inline-item ">
+            <button class="btn btn-danger"  (click)="eliminarPropiedad(propiedad.idPropiedad)"><i class="fas fa-trash" ></i></button>
+              </li>
         </ul>
       </div>
 

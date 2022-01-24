@@ -134,4 +134,8 @@ getPropiedadById(id: number):Observable<any>{
   return this.http.get('http://wsproyectoweb.azurewebsites.net/api/Propiedad/get/'+id,httpOptions);
 }
 
+deletePropiedad(id:number){
+return this.http.delete('http://wsproyectoweb.azurewebsites.net/api/Propiedad/delete/'+id, httpOptions);
+}
+
 }
