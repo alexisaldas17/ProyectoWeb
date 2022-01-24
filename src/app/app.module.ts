@@ -35,6 +35,7 @@ import { UploadListComponent } from './photos/upload-list/upload-list.component'
 import { EditPropiedadDetailComponent } from './property/edit-propiedad-detail/edit-propiedad-detail.component';
 import { PropiedadDetailComponent } from './property/propiedad-detail/propiedad-detail.component';
 import { UserPerfilComponent } from './user/user-perfil/user-perfil.component';
+import { MapComponent } from './map/map.component';
 @NgModule({
   declarations: [
 
@@ -52,10 +53,10 @@ import { UserPerfilComponent } from './user/user-perfil/user-perfil.component';
       UploadListComponent,
       EditPropiedadDetailComponent,
       PropiedadDetailComponent,
+      MapComponent,
    ],
   imports: [
     BrowserModule,
-
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -68,10 +69,6 @@ import { UserPerfilComponent } from './user/user-perfil/user-perfil.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireStorageModule
-
-
-
-
   ],
   providers: [HousingService, AlertifyService, AuthService, UserService, ApiauthService, UploadphotosService,
   {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
