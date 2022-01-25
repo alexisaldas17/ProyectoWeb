@@ -2,7 +2,9 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { type } from 'os';
 import { Ipropiedadbase } from 'src/app/model/ipropiedadbase';
+import { Propiedad } from 'src/app/model/propiedad';
 import { HousingService } from 'src/app/servicios/housing.service';
 
 
@@ -14,7 +16,11 @@ import { HousingService } from 'src/app/servicios/housing.service';
 export class PropiedadListComponent implements OnInit {
 
   propiedades!: Ipropiedadbase[];
+  propiedadesBase!: Ipropiedadbase[];
   SellRent = 1;
+  sCiudad!: string;
+  sPropiedad!:string;
+  sFecha!:string;
 
   constructor(public housingService: HousingService,
     private route: ActivatedRoute) { }
@@ -38,7 +44,8 @@ export class PropiedadListComponent implements OnInit {
     this.housingService.getAllPropiedades(this.SellRent).subscribe(data => {
 
       this.propiedades = data;
-      console.log(this.propiedades);
+      this.propiedadesBase = this.propiedades;
+      console.log(data);
 
     }, error => {
       console.log("http error: ");
@@ -60,6 +67,44 @@ export class PropiedadListComponent implements OnInit {
     });
   }
 
+  selectCiudadHandler (event: any) {
+    //update the ui
+    this.sCiudad = event.target.value;
+    this.filtrar();
+  }
+
+  selectPropiedadHandler (event: any) {
+    //update the ui
+    this.sPropiedad = event.target.value;
+    console.log(this.sPropiedad);
+    this.filtrar();
+  }
+
+  selectFechaHandler (event: any) {
+    //update the ui
+    this.sFecha = event.target.value;
+    console.log(this.sFecha);
+    this.filtrar();
+  }
+
+  filtrar(){
+    this.propiedades = this.propiedadesBase;
+    if(this.sCiudad!=""){
+      console.log(this.sCiudad!="");
+      this.propiedades = this.propiedades.filter(
+        propiedad => {
+          console.log(propiedad.ciudad);
+          return propiedad.ciudad==this.sCiudad;
+        }
+        );
+    }
+    if(this.sPropiedad!=""){
+      this.propiedades = this.propiedades.filter(propiedad => propiedad.PType==this.sPropiedad);
+    }
+    /*if(this.sFecha!=""){
+      this.propiedades = this.propiedades.filter(propiedad => propiedad.PType==this.sFecha);
+    }*/
+  }
 
 }
 

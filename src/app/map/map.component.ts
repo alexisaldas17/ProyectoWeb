@@ -4,10 +4,11 @@ import * as L from 'leaflet';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  styleUrls: ['./map.component.scss', '../../../node_modules/leaflet/dist/leaflet.css']
 })
 
 export class MapComponent implements AfterViewInit {
+  public map!: L.Map;
   private initMap(): void {
     map = L.map('map').setView([15.413083, -66.2136067], 3);
     icono = L.icon({
@@ -18,8 +19,6 @@ export class MapComponent implements AfterViewInit {
   });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      minZoom: 3,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
@@ -38,9 +37,11 @@ export class MapComponent implements AfterViewInit {
     });
 
     map.on('click', onMapClick);
+    map.on('viewreset',onMapReady);
   }
 
-  constructor() { }
+  constructor() {
+  }
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -65,4 +66,10 @@ function onMapClick(e:any) {
   longitud = e.latlng.lng;
 
   crearMarcador(latitud,longitud);
+}
+
+function onMapReady(): void {
+  setTimeout(() => {
+    map.invalidateSize();
+  });
 }

@@ -3,21 +3,21 @@
     <form  class="form-inline mt-2">
       <label for="">Filtrar<i class="fas fa-filter"></i></label>
         <div class="col">
-          <select name="ciudad" id="ciudad" class="form-control">
+          <select name="ciudad" id="ciudad" class="form-control" (change)="selectCiudadHandler($event)">
             <option value="">--Seleccione Ciudad--</option>
             <option *ngFor="let ciudad of ciudadesArray" [value]="ciudad.nombre">{{ciudad.nombre}}</option>
           </select>
          </div>
 
          <div class="col">
-          <select name="tpropiedad" id="tpropiedad" class="form-control">
+          <select name="tpropiedad" id="tpropiedad" class="form-control" (change)="selectPropiedadHandler($event)">
             <option value="">--Seleccione Tipo Propiedad--</option>
             <option *ngFor="let tpropiedad of tpropiedadArray" [value]="tpropiedad.nombre">{{tpropiedad.nombre}}</option>
           </select>
          </div>
 
        <div class="col">
-          <input readonly  class="form-control " type="text" placeholder="Seleccione Fecha" bsDatepicker [bsConfig]="{containerClass: 'theme-dark-blue', dateInputFormat: 'YYYY-MM-DD'}">
+          <input readonly class="form-control " type="text" placeholder="Seleccione Fecha" bsDatepicker [bsConfig]="{containerClass: 'theme-dark-blue', dateInputFormat: 'YYYY-MM-DD'}" (ngModelChange)="selectFechaHandler($event)">
         </div>
     </form>
 
