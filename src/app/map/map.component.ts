@@ -11,9 +11,8 @@ export class MapComponent implements AfterViewInit {
   private initMap(): void {
     map = L.map('map').setView([15.413083, -66.2136067], 3);
     icono = L.icon({
-      iconUrl: '../../assets/images/casaIcono.png'  ,
+      iconUrl: '../../assets/casaIcono.png'  ,
       shadowUrl: undefined,
-  
       iconSize:     [40, 40],
       iconAnchor:   [19, 25]
   });
@@ -34,10 +33,10 @@ export class MapComponent implements AfterViewInit {
       longitud = pos.coords.longitude;
 
       crearMarcador(latitud, longitud);
-      
+
       map.setView([latitud, longitud], 18);
     });
-    
+
     map.on('click', onMapClick);
   }
 
