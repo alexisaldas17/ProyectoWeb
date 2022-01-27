@@ -29,7 +29,7 @@ export class PropiedadDetailComponent implements OnInit {
   getPropiedadById(id:number){
  this.housingService.getPropiedadById(id).subscribe((propiedad:any)=>{
    this.propiedad = propiedad.data;
+   console.log(propiedad);
  });
-   console.log(this.propiedad);
   }
 }

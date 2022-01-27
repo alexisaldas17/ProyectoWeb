@@ -1,15 +1,34 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
+import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder";
+import * as ELG from "esri-leaflet";
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  styleUrls: ['./map.component.scss', '../../../node_modules/leaflet/dist/leaflet.css']
 })
 
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements OnInit, AfterViewInit {
+  public map!: L.Map;
+   apiKey = "AAPK70f50c797140442e8126ccb384972f3bd9V02QNQcE2flAOmmvEzWyloqDI-lB3lP2oHdX51lkTAkq1zAkJW1JE_WlqhuMHN";
+  marker:any;
+  public basemapEnum = "ArcGIS:Navigation";
+  constructor() {
+  }
+  ngOnInit(): void {
+    this.initMap()
+  }
+
+
   private initMap(): void {
     map = L.map('map').setView([15.413083, -66.2136067], 3);
+
+   // const searchControl = new ELG.Geosearch();
+//const searchControl = L.esri.Geocoding.geosearch().addTo(map);
+
+
     icono = L.icon({
       iconUrl: '../../assets/casaIcono.png'  ,
       shadowUrl: undefined,
@@ -18,8 +37,6 @@ export class MapComponent implements AfterViewInit {
   });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      minZoom: 3,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
@@ -38,12 +55,11 @@ export class MapComponent implements AfterViewInit {
     });
 
     map.on('click', onMapClick);
+    map.on('viewreset',onMapReady);
   }
 
-  constructor() { }
-
   ngAfterViewInit(): void {
-    this.initMap();
+   // this.initMap();
   }
 
 }
@@ -65,4 +81,10 @@ function onMapClick(e:any) {
   longitud = e.latlng.lng;
 
   crearMarcador(latitud,longitud);
+}
+
+function onMapReady(): void {
+  setTimeout(() => {
+    map.invalidateSize();
+  });
 }
