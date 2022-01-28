@@ -5,6 +5,7 @@ import { filter, map } from "rxjs/operators";
 import { Observable } from 'rxjs';
 import { Ipropiedadbase } from '../model/ipropiedadbase';
 import { Propiedad } from '../model/propiedad';
+import { Console } from 'console';
 
 const httpOptions={
   headers: new HttpHeaders({
@@ -120,7 +121,7 @@ getPublicacionesUsuario(userId: any){
 
 }*/
 
-jsonLista(o:Observable<JSON>):Observable<any>{
+jsonLista(o:Observable<Object>):Observable<any>{
   return o.pipe(map((o:any)=>{
     const lista:Array<any> = [];
     for (let item of o.data) {
@@ -131,7 +132,7 @@ jsonLista(o:Observable<JSON>):Observable<any>{
 }
 
 getPropiedadById(id: number):Observable<any>{
-  return this.http.get('http://wsproyectoweb.azurewebsites.net/api/Propiedad/get/'+id,httpOptions);
+  return this.http.get('http://wsproyectoweb.azurewebsites.net/api/Propiedad/get/'+id,httpOptions);;
 }
 
 deletePropiedad(id:number){

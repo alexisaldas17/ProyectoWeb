@@ -19,7 +19,8 @@ export class Propiedad implements IpropiedadCard{
   userId!: number | undefined;
   postedOn!: string;
   postedBy!: number;
-
+  latitud!:number;
+  longitud!:number;
   /**
    *
    */

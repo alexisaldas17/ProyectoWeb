@@ -36,6 +36,7 @@ import { EditPropiedadDetailComponent } from './property/edit-propiedad-detail/e
 import { PropiedadDetailComponent } from './property/propiedad-detail/propiedad-detail.component';
 import { UserPerfilComponent } from './user/user-perfil/user-perfil.component';
 import { MapComponent } from './map/map.component';
+import { MapDetalleComponent } from './map/map-detalle/map-detalle.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { MapComponent } from './map/map.component';
       EditPropiedadDetailComponent,
       PropiedadDetailComponent,
       MapComponent,
-
+      MapDetalleComponent,
 
 
    ],

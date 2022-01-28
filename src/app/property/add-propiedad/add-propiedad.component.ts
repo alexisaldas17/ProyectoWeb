@@ -174,6 +174,7 @@ export class AddPropiedadComponent implements OnInit {
       alert("Debe cargar al menos una Imagen");
     }else{
       this.mappropiedad();
+      console.log(this.propiedad);
       this.housingService.addProperty(this.propiedad);
         if (this.SellRent.value === '2') {
           this.router.navigate(['/rent-propiedad']).then(() => {
@@ -313,7 +314,9 @@ export class AddPropiedadComponent implements OnInit {
     this.propiedad.direccion = this.Address.value;
     this.propiedad.años = this.Años.value;
     this.propiedad.descripcion = this.Description.value;
-
+    const ubicacion = this.map.devolverUbicación();
+    this.propiedad.latitud= ubicacion[0];
+    this.propiedad.longitud= ubicacion[1];
     const fotos: Ifotos[] = [];
     this.imageService.fotosLista.forEach((foto) => {
       fotos.push({ isPrimary: foto.isPrimary, imagenUrl: foto.url });

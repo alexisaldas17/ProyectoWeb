@@ -91,6 +91,10 @@
 
                 <h5 class="card-title">Ciudad</h5>
                 <p class="card-text">{{propiedad.ciudad}}</p>
+
+                <div id="map">
+                  <app-map-detalle [propiedad]="propiedad"></app-map-detalle>
+                </div>
               </div>
             </div>
           </div>
