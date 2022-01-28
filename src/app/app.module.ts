@@ -36,6 +36,7 @@ import { EditPropiedadDetailComponent } from './property/edit-propiedad-detail/e
 import { PropiedadDetailComponent } from './property/propiedad-detail/propiedad-detail.component';
 import { UserPerfilComponent } from './user/user-perfil/user-perfil.component';
 import { MapComponent } from './map/map.component';
+
 @NgModule({
   declarations: [
 
@@ -54,6 +55,9 @@ import { MapComponent } from './map/map.component';
       EditPropiedadDetailComponent,
       PropiedadDetailComponent,
       MapComponent,
+
+
+
    ],
   imports: [
     BrowserModule,
@@ -68,7 +72,8 @@ import { MapComponent } from './map/map.component';
     BsDatepickerModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+
   ],
   providers: [HousingService, AlertifyService, AuthService, UserService, ApiauthService, UploadphotosService,
   {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],

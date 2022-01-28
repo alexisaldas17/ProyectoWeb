@@ -10,10 +10,24 @@ import { AddPropiedadComponent } from '../property/add-propiedad/add-propiedad.c
 })
 
 export class MapComponent implements AfterViewInit {
-  
   public map!: L.Map;
+   apiKey = "AAPK70f50c797140442e8126ccb384972f3bd9V02QNQcE2flAOmmvEzWyloqDI-lB3lP2oHdX51lkTAkq1zAkJW1JE_WlqhuMHN";
+  marker:any;
+  public basemapEnum = "ArcGIS:Navigation";
+  constructor() {
+  }
+  ngOnInit(): void {
+    this.initMap()
+  }
+
+
   private initMap(): void {
     map = L.map('map').setView([15.413083, -66.2136067], 3);
+
+   // const searchControl = new ELG.Geosearch();
+//const searchControl = L.esri.Geocoding.geosearch().addTo(map);
+
+
     icono = L.icon({
       iconUrl: '../../assets/casaIcono.png'  ,
       shadowUrl: undefined,
@@ -43,11 +57,8 @@ export class MapComponent implements AfterViewInit {
     map.on('viewreset',onMapReady);
   }
 
-  constructor() {
-  }
-
   ngAfterViewInit(): void {
-    this.initMap();
+   // this.initMap();
   }
 
   cambiarVista(latitud:number = 0, longitud:number = 0){

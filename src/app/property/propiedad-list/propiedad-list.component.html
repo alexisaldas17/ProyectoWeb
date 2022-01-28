@@ -3,29 +3,48 @@
     <form  class="form-inline mt-2">
       <label for="">Filtrar<i class="fas fa-filter"></i></label>
         <div class="col">
-          <select name="ciudad" id="ciudad" class="form-control" (change)="selectCiudadHandler($event)">
+          <select name="filterPost"
+          id="ciudad"
+          class="form-control"
+          (change)="selectCiudadHandler($event)"
+         >
+
             <option value="">--Seleccione Ciudad--</option>
-            <option *ngFor="let ciudad of ciudadesArray" [value]="ciudad.nombre">{{ciudad.nombre}}</option>
+            <option *ngFor="let ciudad of ciudadesArray"
+            [value]="ciudad.nombre">{{ciudad.nombre}}</option>
           </select>
          </div>
 
          <div class="col">
-          <select name="tpropiedad" id="tpropiedad" class="form-control" (change)="selectPropiedadHandler($event)">
+          <select name="filterPType"
+          id="tpropiedad"
+          class="form-control"
+          (change)="selectPropiedadHandler($event)"
+          >
             <option value="">--Seleccione Tipo Propiedad--</option>
             <option *ngFor="let tpropiedad of tpropiedadArray" [value]="tpropiedad.nombre">{{tpropiedad.nombre}}</option>
           </select>
          </div>
 
        <div class="col">
-          <input readonly class="form-control " type="text" placeholder="Seleccione Fecha" bsDatepicker [bsConfig]="{containerClass: 'theme-dark-blue', dateInputFormat: 'YYYY-MM-DD'}" (ngModelChange)="selectFechaHandler($event)">
+          <input readonly class="form-control"
+          name="date"
+          type="text" placeholder="Seleccione Fecha"
+          bsDatepicker [bsConfig]="{containerClass: 'theme-dark-blue', dateInputFormat: 'YYYY-MM-DD'}" 
+          (ngModelChange)="selectFechaHandler($event)">
         </div>
     </form>
 
-    <div *ngFor="let propiedad of propiedades" class="shadow-lg col-sm-4 mt-5">
+    <div *ngFor="let propiedad of propiedades " class="shadow-lg col-sm-4 mt-5">
+
           <app-propiedad-card [propiedad]="propiedad" eyeIcon="true" >
 
       </app-propiedad-card>
     </div>
+    <span *ngIf="propiedades.length==0" class="text-center mt-5">
+      <h3>No hay publicaciones coincidentes</h3>
+    </span>
   </div>
+
 
 </div>

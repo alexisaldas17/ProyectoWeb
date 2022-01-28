@@ -38,7 +38,7 @@
                       <div class="form-group col-12">
                         <p>Tipo de Propiedad </p>
                         <select   [(ngModel)]="propiedad.nombre" class="form-control" formControlName="PType">
-                        <option value="">--Seleccione Propiedad--</option>
+                        <option >--Seleccione Propiedad--</option>
                           <option  *ngFor="let item of tpropiedad" [value]="item.nombre">
                             {{item.nombre}}
 
@@ -147,6 +147,7 @@
                           <app-map #map></app-map>
                         </div>
                       </div>
+                       <!--**************************************************-->
 
                       <div class="form-group col-12">
                         <button type="button" class="btn btn-primary btn-block"

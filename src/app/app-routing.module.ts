@@ -10,6 +10,7 @@ import { UserLoginComponent } from './user/user-login/user-login.component';
 import { UserRegisterComponent } from './user/user-register/user-register.component';
 import { UserPerfilComponent } from './user/user-perfil/user-perfil.component';
 
+
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'add-propiedades', component: AddPropiedadComponent,canActivate: [AuthGuard]},
@@ -25,6 +26,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+   declarations: [
+
+  ]
 })
 export class AppRoutingModule { }

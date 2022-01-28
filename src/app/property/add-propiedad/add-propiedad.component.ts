@@ -170,23 +170,29 @@ export class AddPropiedadComponent implements OnInit {
 
   onSubmit() {
     this.nextClicked = true;
-    this.mappropiedad();
-    this.housingService.addProperty(this.propiedad);
-      if (this.SellRent.value === '2') {
-        this.router.navigate(['/rent-propiedad']).then(() => {
-          window.location.reload();;
+    if(this.imageService.fotosLista.length==0){
+      alert("Debe cargar al menos una Imagen");
+    }else{
+      this.mappropiedad();
+      this.housingService.addProperty(this.propiedad);
+        if (this.SellRent.value === '2') {
+          this.router.navigate(['/rent-propiedad']).then(() => {
+            window.location.reload();;
 
 
-      });
-      } else {
-        this.router.navigate(['/sell-propiedad']).then(() => {
-          window.location.reload();
-      })
+        });
+        } else {
+          this.router.navigate(['/sell-propiedad']).then(() => {
+            window.location.reload();
+        })
     }
-      this.alertify.success('Felicidades, ha sido publicada tu propiedad');
-      this.imageService.fotosLista=[];
-      this.propiedad=new Propiedad();
-     this.addPropiedadForm.reset();
+    this.alertify.success('Felicidades, ha sido publicada tu propiedad');
+    this.imageService.fotosLista=[];
+    this.propiedad=new Propiedad();
+   this.addPropiedadForm.reset();
+
+    }
+
 
   }
 
