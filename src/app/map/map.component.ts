@@ -1,5 +1,7 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import * as L from 'leaflet';
+import { Propiedad } from '../model/propiedad';
+import { AddPropiedadComponent } from '../property/add-propiedad/add-propiedad.component';
 
 @Component({
   selector: 'app-map',
@@ -7,9 +9,7 @@ import * as L from 'leaflet';
   styleUrls: ['./map.component.scss', '../../../node_modules/leaflet/dist/leaflet.css']
 })
 
-export class MapComponent implements OnInit, AfterViewInit {
-
-
+export class MapComponent implements AfterViewInit {
   public map!: L.Map;
    apiKey = "AAPK70f50c797140442e8126ccb384972f3bd9V02QNQcE2flAOmmvEzWyloqDI-lB3lP2oHdX51lkTAkq1zAkJW1JE_WlqhuMHN";
   marker:any;
@@ -61,6 +61,9 @@ export class MapComponent implements OnInit, AfterViewInit {
    // this.initMap();
   }
 
+  cambiarVista(latitud:number = 0, longitud:number = 0){
+    map.setView([latitud, longitud]);
+  }
 }
 
 var map : L.Map;

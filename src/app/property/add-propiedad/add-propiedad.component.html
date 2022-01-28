@@ -126,10 +126,7 @@
 
                       <div class="form-group col-12">
                         <label for="ciudad">Ciudad</label>
-                        <select [(ngModel)]="propiedad.ciudad" name="" id=""
-                        formControlName="City" class="form-control"
-                        (change)="selectCiudadHandler($event)">
-
+                        <select [(ngModel)]="propiedad.ciudad" name="" id="" formControlName="City" class="form-control" (change)="selectCiudadHandler($event)">
                          <option value="">--Seleccione Ciudad--</option>
                           <option *ngFor="let item of ciudades" [value]="item.nombre">
                             {{item.nombre}}
@@ -144,15 +141,11 @@
                         <input type="text" class="form-control" formControlName="Address">
                       </div>
 
-
-
-
-
-
                       <div class="col-12">
                         <label>Ubicación</label>
                         <div leaflet id='map'>
-                          <app-map id="mapa1" ></app-map>
+                          
+                          <app-map #map id="mapa1"></app-map>
                         </div>
                       </div>
                        <!--**************************************************-->

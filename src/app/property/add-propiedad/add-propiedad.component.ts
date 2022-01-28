@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { AnyRecord } from 'dns';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { Observable } from 'rxjs';
+import { MapComponent } from 'src/app/map/map.component';
 import { Fotos } from 'src/app/model/fotos';
 import { Ifotos } from 'src/app/model/ifotos';
 import { Ipropiedadbase } from 'src/app/model/ipropiedadbase';
@@ -18,6 +19,7 @@ import { AlertifyService } from 'src/app/servicios/alertify.service';
 import { ApiauthService } from 'src/app/servicios/apiauth.service';
 import { HousingService } from 'src/app/servicios/housing.service';
 import { UploadphotosService } from 'src/app/servicios/uploadphotos.service';
+import { Ciudad } from 'src/app/model/ciudad';
 @Component({
   selector: 'app-add-propiedad',
   templateUrl: './add-propiedad.component.html',
@@ -27,13 +29,14 @@ export class AddPropiedadComponent implements OnInit {
   // @ViewChild('Form') addPropiedadForm!: NgForm;
   @ViewChild('formTabs') formTabs!: TabsetComponent;
   @ViewChild('tipTabs') tipoTavs!: TabsetComponent;
+  @ViewChild('map') map!: MapComponent;
   //#region <DECLARACION VARIABLES>
 
   showOrHiddden: boolean = true;
   addPropiedadForm!: FormGroup;
   nextClicked!: boolean;
   propiedad: Propiedad = new Propiedad();
-  ciudades: Array<any> = [];
+  ciudades: Array<Ciudad> = [];
   tpropiedad: Array<any> = [];
   publicacionesUsuario: Array<any> = [];
   selectedFile!: Fotos;
@@ -51,7 +54,6 @@ export class AddPropiedadComponent implements OnInit {
     private alertify: AlertifyService,
     public auth: ApiauthService,
     private imageService: UploadphotosService,
-
   ) {}
 
   ngOnInit() {
@@ -67,14 +69,11 @@ export class AddPropiedadComponent implements OnInit {
     });
 
     this.getPublicacionesUsuario();
+
+
     //this.fileInfos = this.imageService.getFiles();
   }
-  ciudadSelected:any;
-  selectCiudadHandler(e:any){
-    this.ciudadSelected = e.target.value;
-    alert(this.ciudadSelected)
-  }
-
+  
   //#region <CARGA DE FOTOS>
   selectFiles(event: any) {
     this.progressInfos = [];
@@ -323,5 +322,15 @@ export class AddPropiedadComponent implements OnInit {
     });
     this.propiedad.fotos = fotos;
     this.propiedad.userId = this.auth.UsuarioData.id;
+  }
+
+ selectCiudadHandler (event: any) {
+    var ciudades = this.ciudades.filter(
+      ciudad => {
+        return ciudad.nombre==event.target.value;
+      }
+      );
+    const ciudad = ciudades[0];
+    this.map.cambiarVista(ciudad.latitud,ciudad.longitud);
   }
 }
