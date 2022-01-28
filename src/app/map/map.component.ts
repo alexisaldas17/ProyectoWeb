@@ -1,5 +1,7 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import * as L from 'leaflet';
+import { Propiedad } from '../model/propiedad';
+import { AddPropiedadComponent } from '../property/add-propiedad/add-propiedad.component';
 
 @Component({
   selector: 'app-map',
@@ -8,6 +10,7 @@ import * as L from 'leaflet';
 })
 
 export class MapComponent implements AfterViewInit {
+  
   public map!: L.Map;
   private initMap(): void {
     map = L.map('map').setView([15.413083, -66.2136067], 3);
@@ -47,6 +50,9 @@ export class MapComponent implements AfterViewInit {
     this.initMap();
   }
 
+  cambiarVista(latitud:number = 0, longitud:number = 0){
+    map.setView([latitud, longitud]);
+  }
 }
 
 var map : L.Map;
