@@ -2,124 +2,112 @@
 
 <div class="container col-8 pt-5">
 
-    <div class="card" *ngIf="propiedad">
-      <div class="card-header text-center">
-        <h3>Detalle Propiedad {{propiedadId}}</h3>
-      </div>
-      <div class="card-body">
+  <div class="card" *ngIf="propiedad">
+    <div class="card-header text-center">
+      <h3>Detalle Propiedad {{propiedadId}}</h3>
+    </div>
+    <div class="card-body">
 
-        <!--*******************CARROUSEL *************************-->
-        <div id="carouselExampleIndicators" class="carousel slide" data-mdb-ride="carousel">
-          <div class="carousel-indicators">
-            <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="0" class="active"
-              aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="1"
-              aria-label="Slide 2"></button>
-            <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="2"
-              aria-label="Slide 3"></button>
+      <!--*******************CARROUSEL *************************-->
+      <div id="carouselExampleIndicators" class="carousel slide" data-mdb-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="1"
+            aria-label="Slide 2"></button>
+          <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="2"
+            aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="d-block w-100" alt="Wild Landscape" />
           </div>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="d-block w-100" alt="Wild Landscape" />
-            </div>
-            <div class="carousel-item">
-              <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp" class="d-block w-100" alt="Camera" />
-            </div>
-            <div class="carousel-item">
-              <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" class="d-block w-100" alt="Exotic Fruits" />
-            </div>
+          <div class="carousel-item">
+            <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp" class="d-block w-100" alt="Camera" />
           </div>
-          <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleIndicators"
-            data-mdb-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleIndicators"
-            data-mdb-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+          <div class="carousel-item">
+            <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" class="d-block w-100" alt="Exotic Fruits" />
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleIndicators"
+          data-mdb-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleIndicators"
+          data-mdb-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+    <!--*************************************************************-->
+
+
+    <div class="card-group pt-1">
+
+      <div class="card col ">
+        <div class="card-header">
+          <h5 class="card-title text-light font-weight-light ">Detalles</h5>
         </div>
 
+        <div class="card-body">
 
+          <h5 class="card-title">Precio</h5>
+          <p class="card-text">{{propiedad.precio|currency}}</p>
+
+          <h5 class="card-title">Area(m2)</h5>
+          <p class="card-text">{{propiedad.areaM2|number}} </p>
+
+          <h5 class="card-title">Descripción</h5>
+          <p class="card-text">{{propiedad.descripcion}}</p>
+
+          <h5 class="card-title">Ciudad</h5>
+          <p class="card-text">{{propiedad.ciudad}}</p>
+
+          <h5 class="card-title">Publicado por:</h5>
+          <p id="nombreUsuario" class="card-text">{{propiedad.userName}}</p>
+
+          <h5 class="card-title">Fecha de publicación</h5>
+          <p class="card-text">{{propiedad.postedOn|date}}</p>
+
+        </div>
       </div>
 
+      <div class="card col">
 
+        <div class="card-header">
+          <h5 class="card-title text-light font-weight-light ">Ubicación</h5>
+        </div>
+        <div class="card-body">
 
+         <!-- <div id="mapa" style="width: 300px; ">
+            <app-map id="mapa2"></app-map>
+          </div>-->
 
-
-
-          <!--*******************CARROUSEL *************************-->
-
-
-          <div class="card-group pt-1">
-          <div class="card col ">
-            <div class="card-header">
-              <h5 class="card-title text-light font-weight-light ">Informacion de Contacto</h5>
-            </div>
-            <div class="card-body"></div>
-          </div>
-
-          <div class="card col ">
-            <div class="card-header">
-              <h5 class="card-title text-light font-weight-light ">Detalles</h5>
-            </div>
-
-            <div class="card-body">
-              <h5 class="card-title">Precio</h5>
-              <p class="card-text">{{propiedad.precio|currency}}</p>
-              <h5 class="card-title">Area(m2)</h5>
-              <p class="card-text">{{propiedad.areaM2|number}} </p>
-
-              <h5 class="card-title">Descripción</h5>
-              <p class="card-text">{{propiedad.descripcion}}</p>
-
-              <h5 class="card-title">Publicado por:</h5>
-              <p id="nombreUsuario" class="card-text">{{propiedad.userName}}</p>
-
-              <h5 class="card-title">Fecha de publicación</h5>
-              <p class="card-text">{{propiedad.postedOn|date}}</p>
-            </div>
-          </div>
-        </div> 
-          <div class="card">
-            <div class=" col-12 pt-5">
-              <div class="card-header">
-                <h5 class="card-title text-light font-weight-light ">Ubicación</h5>
-              </div>
-              <div class="card-body">
-
-                <h5 class="card-title">Ciudad</h5>
-                <p class="card-text">{{propiedad.ciudad}}</p>
-
-                <div id="map">
-                  <app-map-detalle [propiedad]="propiedad"></app-map-detalle>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        </div>
 
       </div>
 
     </div>
 
+  </div>
 
 
 
 
 
 
-<div class="container mt-5">
-  <p>
-    propiedad-detail works! id: {{propiedadId}}
-  </p>
 
-  <button (click)="onSelectNext()" class="btn btn-primary">Seleccionar Siguiente</button>
-  <br>
-  <br>
-  <button routerLink="/propiedad-detail/1" class="btn btn-primary">1</button>
-  <button routerLink="/propiedad-detail/2" class="btn btn-primary">2</button>
-  <button routerLink="/propiedad-detail/3" class="btn btn-primary">3</button>
-  <button routerLink="/propiedad-detail/4" class="btn btn-primary">4</button>
-</div>
+  <div class="container mt-5">
+
+
+    <button (click)="onSelectNext()" class="btn btn-primary">Seleccionar Siguiente</button>
+    <br>
+    <br>
+   <!-- <button routerLink="/propiedad-detail/1" class="btn btn-primary">1</button>
+    <button routerLink="/propiedad-detail/2" class="btn btn-primary">2</button>
+    <button routerLink="/propiedad-detail/3" class="btn btn-primary">3</button>
+    <button routerLink="/propiedad-detail/4" class="btn btn-primary">4</button>-->
+  </div>

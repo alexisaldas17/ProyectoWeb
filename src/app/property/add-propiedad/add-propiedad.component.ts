@@ -59,19 +59,21 @@ export class AddPropiedadComponent implements OnInit {
   ngOnInit() {
 
     this.CreateaddPropiedadForm();
+
     this.housingService.getCiudades().subscribe((data) => {
       this.ciudades = data;
+      console.log(this.ciudades);
     });
     this.housingService.getTipoPropiedades().subscribe((data) => {
       this.tpropiedad = data;
     });
 
     this.getPublicacionesUsuario();
-    
-    
+
+
     //this.fileInfos = this.imageService.getFiles();
   }
-
+  
   //#region <CARGA DE FOTOS>
   selectFiles(event: any) {
     this.progressInfos = [];
@@ -325,7 +327,7 @@ export class AddPropiedadComponent implements OnInit {
     this.propiedad.userId = this.auth.UsuarioData.id;
   }
 
-  selectCiudadHandler (event: any) {
+ selectCiudadHandler (event: any) {
     var ciudades = this.ciudades.filter(
       ciudad => {
         return ciudad.nombre==event.target.value;
