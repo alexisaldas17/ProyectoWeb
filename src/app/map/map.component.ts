@@ -1,8 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
-import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder";
-import * as ELG from "esri-leaflet";
 
 @Component({
   selector: 'app-map',
@@ -11,6 +8,8 @@ import * as ELG from "esri-leaflet";
 })
 
 export class MapComponent implements OnInit, AfterViewInit {
+
+
   public map!: L.Map;
    apiKey = "AAPK70f50c797140442e8126ccb384972f3bd9V02QNQcE2flAOmmvEzWyloqDI-lB3lP2oHdX51lkTAkq1zAkJW1JE_WlqhuMHN";
   marker:any;

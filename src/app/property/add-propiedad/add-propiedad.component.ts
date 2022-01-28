@@ -57,8 +57,10 @@ export class AddPropiedadComponent implements OnInit {
   ngOnInit() {
 
     this.CreateaddPropiedadForm();
+
     this.housingService.getCiudades().subscribe((data) => {
       this.ciudades = data;
+      console.log(this.ciudades);
     });
     this.housingService.getTipoPropiedades().subscribe((data) => {
       this.tpropiedad = data;
@@ -66,6 +68,11 @@ export class AddPropiedadComponent implements OnInit {
 
     this.getPublicacionesUsuario();
     //this.fileInfos = this.imageService.getFiles();
+  }
+  ciudadSelected:any;
+  selectCiudadHandler(e:any){
+    this.ciudadSelected = e.target.value;
+    alert(this.ciudadSelected)
   }
 
   //#region <CARGA DE FOTOS>
