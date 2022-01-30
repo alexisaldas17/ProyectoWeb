@@ -1,5 +1,13 @@
 <div class="map-container">
-    <div class="map-frame">
+    <div class="map-frame" id="map-frame">
       <div id="map"></div>
     </div>
 </div>
+
+<script>
+    var mapa = document.getElementById('map-frame');
+    mapa.removeChild(document.getElementById('map'));
+    var nuevo = document.createElement('div',id="map");
+    mapa.appendChild(nuevo);
+    console.log(nuevo);
+</script>

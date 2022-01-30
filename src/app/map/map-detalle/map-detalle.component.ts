@@ -1,19 +1,23 @@
-import { AfterViewInit, Component, Input} from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy} from '@angular/core';
 import * as L from 'leaflet';
 import { Propiedad } from '../../model/propiedad';
 
 @Component({
   selector: 'app-map-detalle',
   templateUrl: './map-detalle.component.html',
-  styleUrls: ['./map-detalle.component.scss']
+  styleUrls: ['./map-detalle.component.scss', '../../../../node_modules/leaflet/dist/leaflet.css']
 })
-export class MapDetalleComponent implements AfterViewInit {
+export class MapDetalleComponent implements AfterViewInit, OnDestroy {
   @Input() propiedad!:Propiedad;
   constructor() {
+    var verificar = L.DomUtil.get('map');
+    if(verificar){
+      console.log('remover');
+      L.DomUtil.remove(verificar);
+    }
   }
 
   private initMap(): void {
-    console.log(this.propiedad);
     map = new L.Map('map');
     map.setView([this.propiedad.latitud, this.propiedad.longitud], 3);
 
@@ -36,7 +40,14 @@ export class MapDetalleComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
     this.initMap();
+  }
+
+  ngOnDestroy(): void {
+      map.off();
+      map.remove();
+      console.log(map);
   }
 }
 

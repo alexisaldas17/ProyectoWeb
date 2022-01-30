@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy} from '@angular/core';
+import { Component, AfterViewInit, OnDestroy} from '@angular/core';
 import * as L from 'leaflet';
 
 @Component({
@@ -7,12 +7,17 @@ import * as L from 'leaflet';
   styleUrls: ['./map.component.scss', '../../../node_modules/leaflet/dist/leaflet.css']
 })
 
-export class MapComponent implements AfterViewInit{
+export class MapComponent implements AfterViewInit, OnDestroy{
   constructor() {
+    var verificar = L.DomUtil.get('map');
+    if(verificar){
+      console.log('remover');
+      L.DomUtil.remove(verificar);
+    }
   }
-
   private initMap(): void {
     map = new L.Map('map');
+
     map.setView([15.413083, -66.2136067], 3);
 
     icono = L.icon({
@@ -41,17 +46,18 @@ export class MapComponent implements AfterViewInit{
     });
 
     map.on('click', onMapClick);
-    map.on('viewreset',onMapReady);
+    map.on('mouseover',onMapReady);
+
   }
 
   ngAfterViewInit(): void {
     this.initMap();
   }
 
-  ngOnDestroy() {
-    map.clearAllEventListeners;
+  ngOnDestroy(): void {
+    map.off();
     map.remove();
-  };
+  }
 
   cambiarVista(latitud:number = 0, longitud:number = 0){
     map.setView([latitud, longitud]);
