@@ -10,7 +10,7 @@ import { HousingService } from 'src/app/servicios/housing.service';
 })
 export class PropiedadDetailComponent implements OnInit {
   public propiedadId!: number;
-  propiedad: any ;
+  propiedad !: Propiedad ;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private housingService: HousingService) {}

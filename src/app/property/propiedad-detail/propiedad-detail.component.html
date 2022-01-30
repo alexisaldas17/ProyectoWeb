@@ -47,7 +47,7 @@
 
     <div class="card-group pt-1">
 
-      <div class="card col ">
+      <div class="card col-md-5">
         <div class="card-header">
           <h5 class="card-title text-light font-weight-light ">Detalles</h5>
         </div>
@@ -75,21 +75,19 @@
         </div>
       </div>
 
-      <div class="card col">
+      <div class="card col-md-7">
 
         <div class="card-header">
           <h5 class="card-title text-light font-weight-light ">Ubicación</h5>
         </div>
-        <div class="card-body">
 
-         <!-- <div id="mapa" style="width: 300px; ">
-            <app-map id="mapa2"></app-map>
-          </div>-->
-
-        </div>
+          <div class="card-body">
+            <div id="map">
+              <app-map-detalle [propiedad]="propiedad" style="width: 100%;"></app-map-detalle>
+            </div>
+          </div>
 
       </div>
-
 
     </div>
 

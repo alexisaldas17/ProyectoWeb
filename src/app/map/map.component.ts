@@ -1,7 +1,5 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy} from '@angular/core';
 import * as L from 'leaflet';
-import { Propiedad } from '../model/propiedad';
-import { AddPropiedadComponent } from '../property/add-propiedad/add-propiedad.component';
 
 @Component({
   selector: 'app-map',
@@ -9,24 +7,18 @@ import { AddPropiedadComponent } from '../property/add-propiedad/add-propiedad.c
   styleUrls: ['./map.component.scss', '../../../node_modules/leaflet/dist/leaflet.css']
 })
 
-export class MapComponent implements AfterViewInit {
-  public map!: L.Map;
-   apiKey = "AAPK70f50c797140442e8126ccb384972f3bd9V02QNQcE2flAOmmvEzWyloqDI-lB3lP2oHdX51lkTAkq1zAkJW1JE_WlqhuMHN";
-  marker:any;
-  public basemapEnum = "ArcGIS:Navigation";
+export class MapComponent implements AfterViewInit, OnDestroy{
   constructor() {
+    var verificar = L.DomUtil.get('map');
+    if(verificar){
+      console.log('remover');
+      L.DomUtil.remove(verificar);
+    }
   }
-  ngOnInit(): void {
-    this.initMap()
-  }
-
-
   private initMap(): void {
-    map = L.map('map').setView([15.413083, -66.2136067], 3);
+    map = new L.Map('map');
 
-   // const searchControl = new ELG.Geosearch();
-//const searchControl = L.esri.Geocoding.geosearch().addTo(map);
-
+    map.setView([15.413083, -66.2136067], 3);
 
     icono = L.icon({
       iconUrl: '../../assets/casaIcono.png'  ,
@@ -54,15 +46,25 @@ export class MapComponent implements AfterViewInit {
     });
 
     map.on('click', onMapClick);
-    map.on('viewreset',onMapReady);
+    map.on('mouseover',onMapReady);
+
   }
 
   ngAfterViewInit(): void {
-   // this.initMap();
+    this.initMap();
+  }
+
+  ngOnDestroy(): void {
+    map.off();
+    map.remove();
   }
 
   cambiarVista(latitud:number = 0, longitud:number = 0){
     map.setView([latitud, longitud]);
+  }
+
+  devolverUbicación(){
+    return [latitud,longitud];
   }
 }
 
@@ -90,3 +92,4 @@ function onMapReady(): void {
     map.invalidateSize();
   });
 }
+
