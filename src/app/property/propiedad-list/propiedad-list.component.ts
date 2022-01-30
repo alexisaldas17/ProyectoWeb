@@ -100,10 +100,8 @@ export class PropiedadListComponent implements OnInit {
       );
     }
 
-
-    /*
     if(this.sFecha!=""){
-      this.propiedades = this.propiedades.filter(propiedad => propiedad.PType==this.sFecha);
-    }*/
+      this.propiedades = this.propiedades.filter(propiedad => propiedad.postedOn==this.sFecha);
+    }
   }
 }

@@ -12,14 +12,13 @@ export class MapDetalleComponent implements AfterViewInit, OnDestroy {
   constructor() {
     var verificar = L.DomUtil.get('map');
     if(verificar){
-      console.log('remover');
       L.DomUtil.remove(verificar);
     }
   }
 
   private initMap(): void {
     map = new L.Map('map');
-    map.setView([this.propiedad.latitud, this.propiedad.longitud], 3);
+    map.setView([this.propiedad.latitud, this.propiedad.longitud], 10);
 
     icono = L.icon({
       iconUrl: '../../assets/casaIcono.png'  ,
@@ -36,18 +35,16 @@ export class MapDetalleComponent implements AfterViewInit, OnDestroy {
 
     crearMarcador(latitud, longitud);
 
-    map.on('viewreset',onMapReady);
+    map.on('mouseover',onMapReady);
   }
 
   ngAfterViewInit(): void {
-
     this.initMap();
   }
 
   ngOnDestroy(): void {
       map.off();
       map.remove();
-      console.log(map);
   }
 }
 

@@ -17,6 +17,7 @@ export class Propiedad implements IpropiedadCard{
   fotos!: Ifotos[];
   años!: number;
   userId!: number | undefined;
+  userName!:string;
   postedOn!: string;
   postedBy!: number;
   latitud!:number;
