@@ -19,7 +19,7 @@ import { AlertifyService } from 'src/app/servicios/alertify.service';
 import { ApiauthService } from 'src/app/servicios/apiauth.service';
 import { HousingService } from 'src/app/servicios/housing.service';
 import { UploadphotosService } from 'src/app/servicios/uploadphotos.service';
-import { Ciudad } from 'src/app/model/ciudad';
+import { Ciudad } from 'src/app/model/Ciudad';
 @Component({
   selector: 'app-add-propiedad',
   templateUrl: './add-propiedad.component.html',
@@ -73,7 +73,7 @@ export class AddPropiedadComponent implements OnInit {
 
     //this.fileInfos = this.imageService.getFiles();
   }
-  
+
   //#region <CARGA DE FOTOS>
   selectFiles(event: any) {
     this.progressInfos = [];

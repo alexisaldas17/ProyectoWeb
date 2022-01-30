@@ -23,9 +23,10 @@ export class PropiedadDetailComponent implements OnInit {
     this.getPropiedadById(this.propiedadId);
   }
   onSelectNext() {
-    this.propiedadId += 1;
-    this.router.navigate(['propiedad-detail', this.propiedadId]);
-    this.getPropiedadById(this.propiedadId);
+    //this.propiedadId += 1;
+    //this.router.navigate(['propiedad-detail', this.propiedadId]);
+    //this.getPropiedadById(this.propiedadId);
+    //this.router.navigate(['propiedad-detail', this.propiedadId]);
   }
   getPropiedadById(id:number){
  this.housingService.getPropiedadById(id).subscribe((propiedad:any)=>{
