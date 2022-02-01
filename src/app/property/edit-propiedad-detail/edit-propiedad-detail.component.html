@@ -6,42 +6,52 @@
           <h3>Editar Propiedad</h3>
         </div>
       </div>
-      <form [formGroup]="addPropiedadForm">
+      <form [formGroup]="editPropiedadForm">
         <tabset class="member-tabset" #tipoTabs>
-          <tab heading="Informacion Básica" id="tabBasicInfo" formGroupName="InformacionBase">
+          <tab heading="Informacion Básica" id="tabBasicInfo" formGroupName="BasicInfo">
             <div class="container pt-4">
-              <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                  <div class="card text-center">
-                    <div class="card-body">
-                      <div class="form-group">
-                        <input type="text" class="form-control" readonly>
+
+              <div class="col-lg-6 offset-lg-3">
+                <div class="card text-center">
+                  <div class="card-body">
+
+                    <div class="form-group col-12">
+                      <div btnRadioGroup formControlName="SellRent" required >
+
+                        <label for="" class="btn btn-outline-primary mr-2" btnRadio="1" tabindex="0" role="button"
+                          name="SellRent">Venta
+                        </label>
+                        <label for="" class="btn btn-outline-primary" btnRadio="2" tabindex="0" role="button"
+                          name="SellRent">Arriendo
+                        </label>
                       </div>
-                      <div class="form-group">
-                        <label for="">Tipo de Propiedad</label>
-                        <select [(ngModel)]="propiedad.ciudad" name="" id="" formControlName="City" class="form-control" (change)="selectCiudadHandler($event)">
-                         <option value="propiedad.ciudad"></option>
-                          <option *ngFor="let item of ciudades" [value]="item.nombre">
-                            {{item.nombre}}
-  
-                          </option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="">Nombre</label>
-                        <input type="text" class="form-control">
-                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label for="">Tipo de Propiedad</label>
+                      <select formControlName="PType" class="form-control" formControlName="PType">
+                        <option selected>{{propiedad.pType}}</option>
+                        <option *ngFor="let item of tipoPropiedades" [value]="item.id">
+                          {{item.nombre}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="">Contacto</label>
+                      <input type="text" class="form-control" [value]="propiedad.contacto" formControlName="Name">
                     </div>
                   </div>
                 </div>
               </div>
+
             </div>
-  
-  
+
+
           </tab>
           <!--******************TAB PRECIO Y AREA**************-->
-          <tab heading="Precio y Área" id="Precio y Área">
-  
+          <tab heading="Precio y Área" id="Precio y Área" formGroupName="PriceInfo">
+
             <div class="container pt-4">
               <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -49,21 +59,22 @@
                     <div class="card-body">
                       <div class="form-group">
                         <label for="">Precio</label>
-                        <input type="number" class="form-control">
+                        <input type="number" class="form-control" [value]="propiedad.precio" formControlName="Price">
                       </div>
                       <div class="form-group">
                         <label for="">Area(m2)</label>
-                        <input type="number" class="form-control">
+                        <input type="number" class="form-control" [value]="propiedad.areaM2"
+                          formControlName="BuiltArea">
                       </div>
-  
+
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </tab>
-          <tab heading="Dirección" id="Dirección">
-  
+          <tab heading="Dirección" id="Dirección" formGroupName="AddressInfo">
+
             <div class="container pt-4">
               <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -72,35 +83,67 @@
                       <div class="form-group">
                         <app-map></app-map>
                       </div>
-  
-  
+
+
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-  
-  
-  
           </tab>
-          <tab heading="Otros Detalles" id="Otros Detalles">
+
+          <!--************************OTROS DETALLES************************-->
+          <tab heading="Otros Detalles" id="Otros Detalles" formGroupName="OtherInfo">
+
+            <div class="form-group col-12">
+              <label>Años/Propiedad</label>
+              <input type="number" class="form-control" formControlName="Años" [value]="">
+            </div>
+
+            <div class="form-group col-12">
+              <label>Descripción</label>
+              <textarea type="text" class="form-control" rows="6"
+                formControlName="Description"
+                [value]="propiedad.descripcion"></textarea>
+            </div>
+
           </tab>
+
+          <!--*****************************FOTOS*****************************-->
           <tab heading="Fotos" id="Fotos">
+            <div class="container">
+              <button class="btn btn success align-content-end">
+                Agregar Fotos
+              </button>
+              <div class="table">
+                <thead>
+                  <th>ID</th>
+                  <th>IMAGEN</th>
+                </thead>
+                <tr *ngFor="let foto of propiedad.fotos">
+                  <td>{{foto.id}}</td>
+
+                  <td> <img [src]="foto.imagenUrl" style="width: 150px;"></td>
+                  <td>{{foto.isPrimary}}</td>
+                  <button class="btn btn-danger btn-lg">Eliminar</button>
+                </tr>
+              </div>
+            </div>
           </tab>
         </tabset>
-  
+
       </form>
     </div>
     <div class="col-3">
-          <div class="card-header">
-            <h3>Vista Previa</h3>
-          </div>
-          <div>
-            <div class="shadow-lg p-3 bg-white">
-              <app-propiedad-card [propiedad]="propiedad">
-              </app-propiedad-card>
-            </div>
-          </div>
+      <div class="card-header">
+        <h3>Vista Previa</h3>
+      </div>
+      <div>
+        <div class="shadow-lg p-3 bg-white">
+          <app-propiedad-card [propiedad]="propiedad">
+          </app-propiedad-card>
+        </div>
+      </div>
     </div>
   </div>
 </div>
