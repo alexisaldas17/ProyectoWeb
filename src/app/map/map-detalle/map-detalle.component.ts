@@ -33,7 +33,7 @@ export class MapDetalleComponent implements AfterViewInit, OnDestroy {
 
     tiles.addTo(map);
 
-    crearMarcador(latitud, longitud);
+    crearMarcador(this.propiedad.latitud, this.propiedad.longitud);
 
     map.on('mouseover',onMapReady);
   }

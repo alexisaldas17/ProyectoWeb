@@ -172,9 +172,13 @@ export class AddPropiedadComponent implements OnInit {
 
   onSubmit() {
     this.nextClicked = true;
-    if(this.imageService.fotosLista.length==0){
+    var valor = this.imageService.fotosLista.filter(i=> i.isPrimary==true);
+    if(this.imageService.fotosLista.length==0)
       alert("Debe cargar al menos una Imagen");
-    }else{
+    else
+    if(valor.length==0)
+    alert("Debe seleccionar imagen Principal");
+    else{
       this.mappropiedad();
       console.log(this.propiedad);
       this.housingService.addProperty(this.propiedad);

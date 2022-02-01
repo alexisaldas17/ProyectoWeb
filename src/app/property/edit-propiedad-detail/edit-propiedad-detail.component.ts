@@ -17,9 +17,10 @@ import { HousingService } from 'src/app/servicios/housing.service';
 })
 export class EditPropiedadDetailComponent implements OnInit {
 
-  propiedad !: Propiedad ;
+  propiedad !: Propiedad;
   ciudades : Array<Ciudad> = [] ;
-  addPropiedadForm!: FormGroup;
+  tipoPropiedades : Array<Ciudad> = [] ;
+  editPropiedadForm!: FormGroup;
 
   constructor(
     public housingService: HousingService,
@@ -40,19 +41,22 @@ export class EditPropiedadDetailComponent implements OnInit {
     this.housingService.getCiudades().subscribe((data) => {
       this.ciudades = data;
     });
+    this.housingService.getTipoPropiedades().subscribe((data) => {
+      this.tipoPropiedades = data;
+    });
   }
 
   // #region <FormGroups>
   get InformacionBase() {
-    return this.addPropiedadForm.controls.InformacionBase as FormGroup;
+    return this.editPropiedadForm.controls.InformacionBase as FormGroup;
   }
   // #endregion
 
   getPropiedadById(id:number){
     this.housingService.getPropiedadById(id).subscribe((propiedad:any)=>{
     this.propiedad = propiedad.data;
-    console.log(propiedad);
-    });
+    alert(JSON.stringify(this.propiedad))
+     });
   }
 
   selectCiudadHandler (event: any) {
@@ -66,12 +70,84 @@ export class EditPropiedadDetailComponent implements OnInit {
   }
 
   CreateaddPropiedadForm() {
-    this.addPropiedadForm = this.fb.group({
-      InformacionBase: this.fb.group({
-        City: [null, Validators.required],
+    this.editPropiedadForm = this.fb.group({
+      BasicInfo: this.fb.group({
+        SellRent: ['1', Validators.required],
+        PType: [null, Validators.required],
+        Name: [null, Validators.required],
       }),
-      }
-    );
+
+      PriceInfo: this.fb.group({
+        Price: [null, Validators.required],
+        BuiltArea: [null, Validators.required],
+      }),
+
+      AddressInfo: this.fb.group({
+        City: [null, Validators.required],
+        Address: [null, Validators.required],
+      }),
+
+      OtherInfo: this.fb.group({
+        Años: [null, Validators.required],
+        Description: [null],
+      }),
+    });
   }
+
+    //#region <Getter Methods>
+  // #region <FormGroups>
+  get BasicInfo() {
+    return this.editPropiedadForm.controls.BasicInfo as FormGroup;
+  }
+
+  get PriceInfo() {
+    return this.editPropiedadForm.controls.PriceInfo as FormGroup;
+  }
+
+  get AddressInfo() {
+    return this.editPropiedadForm.controls.AddressInfo as FormGroup;
+  }
+
+  get OtherInfo() {
+    return this.editPropiedadForm.controls.OtherInfo as FormGroup;
+  }
+  // #endregion
+
+  //#region <Form Controls>
+  get SellRent() {
+    return this.BasicInfo.controls.SellRent as FormControl;
+  }
+  get PType() {
+    return this.BasicInfo.controls.PType as FormControl;
+  }
+  get Name() {
+    return this.BasicInfo.controls.Name as FormControl;
+  }
+
+  get Price() {
+    return this.PriceInfo.controls.Price as FormControl;
+  }
+
+  get BuiltArea() {
+    return this.PriceInfo.controls.BuiltArea as FormControl;
+  }
+
+  get Address() {
+    return this.AddressInfo.controls.Address as FormControl;
+  }
+
+  get City() {
+    return this.AddressInfo.controls.City as FormControl;
+  }
+  get Años() {
+    return this.OtherInfo.controls.Años as FormControl;
+  }
+
+  get Description() {
+    return this.OtherInfo.controls.Description as FormControl;
+  }
+
+  //#endregion
+  //#endregion
 }
 

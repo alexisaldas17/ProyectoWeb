@@ -37,6 +37,7 @@ import { PropiedadDetailComponent } from './property/propiedad-detail/propiedad-
 import { UserPerfilComponent } from './user/user-perfil/user-perfil.component';
 import { MapComponent } from './map/map.component';
 import { MapDetalleComponent } from './map/map-detalle/map-detalle.component';
+import { CarouselComponent } from './shared/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { MapDetalleComponent } from './map/map-detalle/map-detalle.component';
       PropiedadDetailComponent,
       MapComponent,
       MapDetalleComponent,
+      CarouselComponent
 
 
    ],

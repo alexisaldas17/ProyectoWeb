@@ -14,7 +14,7 @@ import { UserPerfilComponent } from './user/user-perfil/user-perfil.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'add-propiedades', component: AddPropiedadComponent,canActivate: [AuthGuard]},
-  {path: 'propiedad-detail/:id', component: PropiedadDetailComponent, canActivate: [AuthGuard]},
+  {path: 'propiedad-detail/:id', component: PropiedadDetailComponent},
   {path: 'rent-propiedad', component: PropiedadListComponent},
   {path: 'sell-propiedad', component: PropiedadListComponent},
   {path: 'edit-propiedad/:id', component: EditPropiedadDetailComponent, canActivate: [AuthGuard]},
