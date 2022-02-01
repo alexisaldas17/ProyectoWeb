@@ -47,7 +47,7 @@ export class MapComponent implements AfterViewInit, OnDestroy{
 
     map.on('click', onMapClick);
     map.on('mouseover',onMapReady);
-
+    map.on('viewreset',onMapReady);
   }
 
   ngAfterViewInit(): void {

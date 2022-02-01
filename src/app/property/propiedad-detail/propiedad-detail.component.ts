@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MapDetalleComponent } from 'src/app/map/map-detalle/map-detalle.component';
 import { Propiedad } from 'src/app/model/propiedad';
 import { HousingService } from 'src/app/servicios/housing.service';
 
@@ -9,6 +10,7 @@ import { HousingService } from 'src/app/servicios/housing.service';
   styleUrls: ['./propiedad-detail.component.scss'],
 })
 export class PropiedadDetailComponent implements OnInit {
+  @ViewChild('map') map!: MapDetalleComponent;
   public propiedadId!: number;
   propiedad !: Propiedad ;
   constructor(private route: ActivatedRoute,
@@ -25,12 +27,13 @@ export class PropiedadDetailComponent implements OnInit {
   onSelectNext() {
     this.propiedadId += 1;
     this.router.navigate(['propiedad-detail', this.propiedadId]);
-    this.getPropiedadById(this.propiedadId);
+    this.getPropiedadById(this.propiedadId)
+    .add((x:any)=>this.map.cambioVista(this.propiedad));
   }
   getPropiedadById(id:number){
- this.housingService.getPropiedadById(id).subscribe((propiedad:any)=>{
-   this.propiedad = propiedad.data;
-   console.log(propiedad);
- });
+    return this.housingService.getPropiedadById(id).subscribe((propiedad:any)=>{
+      this.propiedad = propiedad.data;
+      console.log(propiedad);
+    });
   }
 }

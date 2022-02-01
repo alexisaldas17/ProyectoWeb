@@ -18,8 +18,7 @@ export class MapDetalleComponent implements AfterViewInit, OnDestroy {
 
   private initMap(): void {
     map = new L.Map('map');
-    map.setView([this.propiedad.latitud, this.propiedad.longitud], 10);
-
+    map.setView([this.propiedad.latitud, this.propiedad.longitud], 16);
     icono = L.icon({
       iconUrl: '../../assets/casaIcono.png'  ,
       shadowUrl: undefined,
@@ -27,15 +26,18 @@ export class MapDetalleComponent implements AfterViewInit, OnDestroy {
       iconAnchor:   [19, 25]
   });
 
+  marcadorActual = L.marker([0, 0], {icon: icono, draggable: false });
+
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
     tiles.addTo(map);
 
-    crearMarcador(latitud, longitud);
+    crearMarcador(this.propiedad.latitud, this.propiedad.longitud);
 
     map.on('mouseover',onMapReady);
+    map.on('viewreset',onMapReady);
   }
 
   ngAfterViewInit(): void {
@@ -46,16 +48,22 @@ export class MapDetalleComponent implements AfterViewInit, OnDestroy {
       map.off();
       map.remove();
   }
+  
+  cambioVista(propiedad:Propiedad){
+    this.propiedad = propiedad;
+    map.setView([propiedad.latitud,propiedad.longitud], 16);
+    crearMarcador(propiedad.latitud,propiedad.longitud);
+  }
 }
 
 var map : L.Map;
 var icono : L.Icon;
-
-var latitud : number = 0;
-var longitud : number = 0;
+var marcadorActual:L.Marker;
 
 function crearMarcador(latitud : number, longitud :number){
-  L.marker([latitud, longitud], {icon: icono, draggable: false }).addTo(map);
+  console.log(latitud,longitud);
+  map.removeLayer(marcadorActual);
+  marcadorActual=L.marker([latitud, longitud], {icon: icono, draggable: false }).addTo(map);
 }
 
 function onMapReady(): void {
