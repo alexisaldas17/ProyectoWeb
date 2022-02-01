@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -6,6 +6,7 @@ import {
   FormControl,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { FormLabelProps } from 'react-bootstrap';
 import { Ciudad } from 'src/app/model/Ciudad';
 import { Propiedad } from 'src/app/model/propiedad';
 import { HousingService } from 'src/app/servicios/housing.service';
@@ -17,11 +18,13 @@ import { HousingService } from 'src/app/servicios/housing.service';
 })
 export class EditPropiedadDetailComponent implements OnInit {
 
-  propiedad !: Propiedad;
+  propiedad : Propiedad;
   ciudades : Array<Ciudad> = [] ;
   tipoPropiedades : Array<Ciudad> = [] ;
   editPropiedadForm!: FormGroup;
-
+  
+  radioVenta:any;
+  
   constructor(
     public housingService: HousingService,
     private route: ActivatedRoute,
@@ -29,7 +32,6 @@ export class EditPropiedadDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.CreateaddPropiedadForm();
 
     var propiedadId = Number(this.route.snapshot.params['id']);
     console.log(propiedadId);
@@ -55,8 +57,8 @@ export class EditPropiedadDetailComponent implements OnInit {
   getPropiedadById(id:number){
     this.housingService.getPropiedadById(id).subscribe((propiedad:any)=>{
     this.propiedad = propiedad.data;
-    alert(JSON.stringify(this.propiedad))
-     });
+    this.CreateaddPropiedadForm();
+    });
   }
 
   selectCiudadHandler (event: any) {
@@ -70,26 +72,27 @@ export class EditPropiedadDetailComponent implements OnInit {
   }
 
   CreateaddPropiedadForm() {
+    console.log(this.propiedad);
     this.editPropiedadForm = this.fb.group({
       BasicInfo: this.fb.group({
-        SellRent: ['1', Validators.required],
-        PType: [null, Validators.required],
-        Name: [null, Validators.required],
+        SellRent: [this.propiedad.sellRent.toString(), Validators.required],
+        PType: [this.propiedad.pType, Validators.required],
+        Name: [this.propiedad.contacto, Validators.required],
       }),
 
       PriceInfo: this.fb.group({
-        Price: [null, Validators.required],
-        BuiltArea: [null, Validators.required],
+        Price: [this.propiedad.precio, Validators.required],
+        BuiltArea: [this.propiedad.areaM2, Validators.required],
       }),
 
       AddressInfo: this.fb.group({
-        City: [null, Validators.required],
-        Address: [null, Validators.required],
+        City: [this.propiedad.ciudad, Validators.required],
+        Address: [this.propiedad.direccion, Validators.required],
       }),
 
       OtherInfo: this.fb.group({
-        Años: [null, Validators.required],
-        Description: [null],
+        Años: [this.propiedad.años, Validators.required],
+        Description: [this.propiedad.descripcion],
       }),
     });
   }
