@@ -25,10 +25,10 @@ export class PropiedadDetailComponent implements OnInit {
     this.getPropiedadById(this.propiedadId);
   }
   onSelectNext() {
-    //this.propiedadId += 1;
-    //this.router.navigate(['propiedad-detail', this.propiedadId]);
-    //this.getPropiedadById(this.propiedadId)
-    //.add((x:any)=>this.map.cambioVista(this.propiedad));
+    this.propiedadId += 1;
+    this.router.navigate(['propiedad-detail', this.propiedadId]);
+    this.getPropiedadById(this.propiedadId)
+    .add((x:any)=>this.map.cambioVista(this.propiedad));
   }
   getPropiedadById(id:number){
     return this.housingService.getPropiedadById(id).subscribe((propiedad:any)=>{
