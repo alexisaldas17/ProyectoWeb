@@ -23,6 +23,8 @@ export class Propiedad implements IpropiedadCard{
   postedBy!: number;
   latitud!:number;
   longitud!:number;
+  ptypeId: any;
+  cityId: any;
   /**
    *
    */

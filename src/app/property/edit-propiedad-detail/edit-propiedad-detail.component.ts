@@ -6,12 +6,14 @@ import {
   FormGroup,
   FormControl,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormLabelProps } from 'react-bootstrap';
 import { Ciudad } from 'src/app/model/Ciudad';
 import { Fileupload } from 'src/app/model/fileupload';
 import { Fotos } from 'src/app/model/fotos';
+import { Ifotos } from 'src/app/model/ifotos';
 import { Propiedad } from 'src/app/model/propiedad';
+import { Provincia } from 'src/app/model/provincia';
 import { HousingService } from 'src/app/servicios/housing.service';
 import { UploadphotosService } from 'src/app/servicios/uploadphotos.service';
 
@@ -27,17 +29,20 @@ export class EditPropiedadDetailComponent implements OnInit {
   tipoPropiedades : Array<Ciudad> = [] ;
   editPropiedadForm!: FormGroup;
   fotosListaServicio:any;
-
+  public propiedadId;
+  provincias: Array<Provincia> = [];
   radioVenta:any;
 
   constructor(
     public housingService: HousingService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    public uploadPhotosService: UploadphotosService
+    public uploadPhotosService: UploadphotosService,
+    private router: Router
   ) { }
-    public propiedadId;
+
   ngOnInit() {
+
 
      this.propiedadId = Number(this.route.snapshot.params['id']);
      this.route.params.subscribe((params: any) => {
@@ -53,14 +58,14 @@ export class EditPropiedadDetailComponent implements OnInit {
       this.tipoPropiedades = data;
     });
 
+    this.housingService.getProvincias().subscribe((data) => {
+      this.provincias = data;
+    });
+
+
 
   }
 
-  // #region <FormGroups>
-  get InformacionBase() {
-    return this.editPropiedadForm.controls.InformacionBase as FormGroup;
-  }
-  // #endregion
 
   getPropiedadById(id:number){
     this.housingService.getPropiedadById(id).subscribe((propiedad:any)=>{
@@ -68,11 +73,10 @@ export class EditPropiedadDetailComponent implements OnInit {
     let propFotoPrincipal = this.propiedad.fotos.find(i=> i.isPrimary == true );
       this.propiedad.imagenUrl = propFotoPrincipal.imagenUrl;
     this.CreateaddPropiedadForm();
+    console.log(this.propiedad)
 
    //this.uploadPhotosService.fotosLista =  this.propiedad.fotos;
    //console.log("fotos lista"+this.uploadPhotosService.fotosLista)
-
-
 
     });
   }
@@ -171,6 +175,17 @@ export class EditPropiedadDetailComponent implements OnInit {
 
   onSubmit(){
 
+    this.mappropiedad();
+    this.housingService.updatePropiedadById(this.propiedad);
+    alert("Propiedad Actualizada con Éxito");
+    if(this.propiedad.sellRent==1)
+    this.router.navigate(['/sell-propiedad']);
+    if(this.propiedadId.sellRent==2)
+    this.router.navigate(['/rent-propiedad']);
+    this.uploadPhotosService.fotosLista = [];
+
+
+
   }
 
   deleteFoto(idFoto: number){
@@ -178,8 +193,7 @@ export class EditPropiedadDetailComponent implements OnInit {
     if (confirm(text) == true) {
       this.housingService.deleleFotoById(idFoto).subscribe(
         (r: any) => {
-          if(r.exito===1)
-          alert(r.mesaje.toString());
+
         },
         (error) => console.log(error.error.mensaje)
       );
@@ -192,6 +206,39 @@ export class EditPropiedadDetailComponent implements OnInit {
 
   deleteFotoFirebase(fileUpload: any){
     this.uploadPhotosService.deleteFile(fileUpload);
+  }
+
+  ciudadesPorProvincia: Array<Ciudad>=[];
+
+ /* selectProvinciaHandler(event: any) {
+    this.ciudadesPorProvincia = this.ciudades.filter(
+      ciudad => {
+        return ciudad.idProvincia==event.target.value;
+      }
+      );
+
+  }*/
+  mappropiedad(): void {
+    //console.log(this.addPropiedadForm.value)
+    this.propiedad.sellRent = this.SellRent.value;
+    this.propiedad.contacto = this.Name.value;
+   // this.propiedad.ptypeId = this.PType.value;
+    this.propiedad.nombre = this.PType.value;
+   // this.propiedad.cityId = this.City.value;
+    this.propiedad.precio = this.Price.value;
+    this.propiedad.areaM2 = this.BuiltArea.value;
+    this.propiedad.direccion = this.Address.value;
+   // this.propiedad.anios = this.Años.value;
+    this.propiedad.descripcion = this.Description.value;
+    //const ubicacion = this.map.devolverUbicación();
+    //this.propiedad.latitud= ubicacion[0];
+    //this.propiedad.longitud= ubicacion[1];
+    const fotos: Ifotos[] = [];
+    this.uploadPhotosService.fotosLista.forEach((foto) => {
+      fotos.push({ isPrimary: foto.isPrimary, imagenUrl: foto.url });
+    });
+    this.propiedad.fotos = fotos;
+    //this.propiedad.userId = this.auth.UsuarioData.id;
   }
 }
 

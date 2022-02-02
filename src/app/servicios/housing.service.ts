@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Ipropiedadbase } from '../model/ipropiedadbase';
 import { Propiedad } from '../model/propiedad';
 import { Console } from 'console';
+import { error } from '@angular/compiler/src/util';
 
 const httpOptions={
   headers: new HttpHeaders({
@@ -151,6 +152,24 @@ return this.http.delete('http://wsproyectoweb.azurewebsites.net/api/Propiedad/de
 }
 deleleFotoById(idFoto: number){
  return this.http.delete('http://wsproyectoweb.azurewebsites.net/api/Propiedad/deleteFoto/'+idFoto, httpOptions);
+}
+
+updatePropiedadById(propiedad: Propiedad){
+  return this.http.put('http://wsproyectoweb.azurewebsites.net/api/Propiedad/update/', propiedad, httpOptions)
+  .subscribe((response:any)=>{
+    if(response.exito===1){
+      alert('Propiedad Actualizada!');
+    }else
+      alert("No se ha podido actualizar la Propiedad!")
+
+
+    }/*, error=>{
+        alert("Mensaje de error: "+ JSON.stringify(error))
+        console.log(error)
+    }*/
+
+  );
+
 }
 
 }

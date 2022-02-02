@@ -30,12 +30,13 @@
 
                     <div class="form-group">
                       <label for="">Tipo de Propiedad</label>
-                      <select class="form-control" formControlName="PType">
-                        <option selected>{{propiedad.pType}}</option>
+                      <input type="text" class="form-control" [value]="propiedad.pType" readonly>
+                    <!--  <select class="form-control" formControlName="PType" >
+                        <option selected >{{propiedad.pType}}</option>
                         <option *ngFor="let item of tipoPropiedades" [value]="item.id">
                           {{item.nombre}}
                         </option>
-                      </select>
+                      </select>-->
                     </div>
                     <div class="form-group">
                       <label for="">Contacto</label>
@@ -73,6 +74,8 @@
               </div>
             </div>
           </tab>
+
+          <!--*************************DIRECCION-***********************-->
           <tab heading="Dirección" id="Dirección" formGroupName="AddressInfo">
 
             <div class="container pt-4">
@@ -82,19 +85,25 @@
                     <div class="card-body">
 
 
-                      <div class="form-group">
+                      <div class="form-group ">
                         <label for="">Ciudad</label>
-                        <select class="form-control" formControlName="City">
-                          <option selected>{{propiedad.ciudad}}</option>
+                        <input type="text" readonly class="form-control" [value]="propiedad.ciudad">
+                        <!--<select class="form-control" formControlName="City">
+                          <option selected [value]="propiedad.cityId">{{propiedad.ciudad}}</option>
                           <option *ngFor="let item of ciudades" [value]="item.id">
                             {{item.nombre}}
                           </option>
-                        </select>
+                        </select>-->
+                      </div>
+
+                      <div class="form-group">
+                        <input type="text" class="form-control" [value]="propiedad.direccion" formControlName="Address">
+
                       </div>
                       <!--*************************MAPA**************************-->
-                      <div class="form-group">
-                        <app-map></app-map>
-                      </div>
+
+
+                      <!--********************************************************-->
 
 
                     </div>
@@ -111,7 +120,7 @@
               <label>Años/Propiedad</label>
               <input type="number" class="form-control" formControlName="Años" [value]="propiedad.anios">
             </div>
-            --> 
+            -->
             <div class="form-group col-12">
               <label>Descripción</label>
               <textarea type="text" class="form-control" rows="6" formControlName="Description"
@@ -123,7 +132,7 @@
           <!--*****************************FOTOS*****************************-->
           <tab heading="Fotos" id="Fotos">
             <div class="container">
-              <label class="image-upload-container btn btn-bwm mt-5">
+              <label class="image-upload-container btn btn-bwm mt-5" id="fotosContainer" >
                 <app-upload-form></app-upload-form>
 
               </label>
@@ -136,7 +145,7 @@
                     <tr *ngFor="let foto of propiedad.fotos">
 
                     <td> <img [src]="foto.imagenUrl" style="width: 150px;"></td>
-                    <button class="btn btn-danger btn-lg mt-2" (click)="deleteFoto(foto.id)">Eliminar</button>
+                    <button [disabled]="foto.isPrimary" class="btn btn-danger btn-lg mt-2" (click)="deleteFoto(foto.id)">Eliminar</button>
 
                   </tr>
                 </div>
