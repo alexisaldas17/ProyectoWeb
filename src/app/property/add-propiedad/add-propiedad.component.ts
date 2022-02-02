@@ -20,6 +20,7 @@ import { ApiauthService } from 'src/app/servicios/apiauth.service';
 import { HousingService } from 'src/app/servicios/housing.service';
 import { UploadphotosService } from 'src/app/servicios/uploadphotos.service';
 import { Ciudad } from 'src/app/model/Ciudad';
+import { Provincia } from 'src/app/model/provincia';
 @Component({
   selector: 'app-add-propiedad',
   templateUrl: './add-propiedad.component.html',
@@ -37,6 +38,7 @@ export class AddPropiedadComponent implements OnInit {
   nextClicked!: boolean;
   propiedad: Propiedad = new Propiedad();
   ciudades: Array<Ciudad> = [];
+  provincias: Array<Provincia> = [];
   tpropiedad: Array<any> = [];
   publicacionesUsuario: Array<any> = [];
   selectedFile!: Fotos;
@@ -66,6 +68,10 @@ export class AddPropiedadComponent implements OnInit {
     });
     this.housingService.getTipoPropiedades().subscribe((data) => {
       this.tpropiedad = data;
+    });
+
+    this.housingService.getProvincias().subscribe((data) => {
+      this.provincias = data;
     });
 
     this.getPublicacionesUsuario();
@@ -248,7 +254,7 @@ export class AddPropiedadComponent implements OnInit {
       }),
 
       OtherInfo: this.fb.group({
-        Años: [null, Validators.required],
+        //Años: [null, Validators.required],
         Description: [null],
       }),
     });
@@ -299,9 +305,9 @@ export class AddPropiedadComponent implements OnInit {
   get City() {
     return this.AddressInfo.controls.City as FormControl;
   }
-  get Años() {
+  /*get Años() {
     return this.OtherInfo.controls.Años as FormControl;
-  }
+  }*/
 
   get Description() {
     return this.OtherInfo.controls.Description as FormControl;
@@ -312,13 +318,14 @@ export class AddPropiedadComponent implements OnInit {
   mappropiedad(): void {
     //console.log(this.addPropiedadForm.value)
     this.propiedad.sellRent = this.SellRent.value;
+    this.propiedad.contacto = this.Name.value;
     this.propiedad.pType = this.PType.value;
     this.propiedad.nombre = this.PType.value;
     this.propiedad.ciudad = this.City.value;
     this.propiedad.precio = this.Price.value;
     this.propiedad.areaM2 = this.BuiltArea.value;
     this.propiedad.direccion = this.Address.value;
-    this.propiedad.años = this.Años.value;
+   // this.propiedad.anios = this.Años.value;
     this.propiedad.descripcion = this.Description.value;
     const ubicacion = this.map.devolverUbicación();
     this.propiedad.latitud= ubicacion[0];
@@ -339,5 +346,15 @@ export class AddPropiedadComponent implements OnInit {
       );
     const ciudad = ciudades[0];
     this.map.cambiarVista(ciudad.latitud,ciudad.longitud);
+  }
+  ciudadesPorProvincia: Array<Ciudad>=[];
+
+  selectProvinciaHandler(event: any) {
+    this.ciudadesPorProvincia = this.ciudades.filter(
+      ciudad => {
+        return ciudad.idProvincia==event.target.value;
+      }
+      );
+
   }
 }

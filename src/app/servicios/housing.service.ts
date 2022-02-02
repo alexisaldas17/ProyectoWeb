@@ -56,7 +56,18 @@ getCiudades(){
     })
   );
 }
+getProvincias(){
+  return this.http.get('http://wsproyectoweb.azurewebsites.net/api/Provincias').pipe(
+    map((provincia:any)=>{
+      const provinciasArray: Array<any>=[];
+      for(let city of provincia.data){
 
+        provinciasArray.push(city);
+      }
+      return provinciasArray;
+    })
+  );
+}
 getTipoPropiedades(){
   return this.http.get('http://wsproyectoweb.azurewebsites.net/api/Propiedad/tipo').pipe(
     map((tprop:any)=>{
@@ -137,6 +148,9 @@ getPropiedadById(id: number):Observable<any>{
 
 deletePropiedad(id:number){
 return this.http.delete('http://wsproyectoweb.azurewebsites.net/api/Propiedad/delete/'+id, httpOptions);
+}
+deleleFotoById(idFoto: number){
+ return this.http.delete('http://wsproyectoweb.azurewebsites.net/api/Propiedad/deleteFoto/'+idFoto, httpOptions);
 }
 
 }

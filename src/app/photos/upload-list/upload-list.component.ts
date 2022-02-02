@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UploadphotosService } from '../../servicios/uploadphotos.service';
 import { finalize, tap, map,switchMap } from 'rxjs/operators';
 
@@ -11,6 +11,7 @@ import { AddPropiedadComponent } from 'src/app/property/add-propiedad/add-propie
   styleUrls: ['./upload-list.component.scss']
 })
 export class UploadListComponent implements OnInit {
+  @Input() fotosLista: any;
   fileUploads!: Fileupload[] ;
   constructor(public uploadService: UploadphotosService, private addPropiedad: AddPropiedadComponent) { }
 

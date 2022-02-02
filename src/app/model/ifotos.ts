@@ -1,7 +1,7 @@
 export interface Ifotos {
-  id?: number;
-  isPrimary?: boolean;
-  imagenUrl:string;
+  id?: any;
+  isPrimary?: any;
+  imagenUrl:any;
   title?: {
     first: string,
     second: string

@@ -79,7 +79,7 @@
                         <div class="input-group mb-3">
                           <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
-                            <span class="input-group-text">0,00</span>
+                         
                           </div>
                           <input type="number" class="form-control" formControlName="Price" pattern="^\d*(\.\d{0,2})?$"
                           [(ngModel)]="propiedad.precio">
@@ -125,10 +125,21 @@
                     <tab heading="Direccion" formGroupName="AddressInfo">
 
                       <div class="form-group col-12">
+                        <label for="provinvia">Provincia</label>
+                        <select  class="form-control" (change)="selectProvinciaHandler($event)">
+                         <option value="">--Seleccione Provincia--</option>
+                          <option *ngFor="let item of provincias" [value]="item.id">
+                            {{item.nombre}}
+
+                          </option>
+                        </select>
+                      </div>
+
+                      <div class="form-group col-12">
                         <label for="ciudad">Ciudad</label>
-                        <select [(ngModel)]="propiedad.ciudad" name="" id="" formControlName="City" class="form-control" (change)="selectCiudadHandler($event)">
+                        <select [(ngModel)]="propiedad.ciudad" formControlName="City" class="form-control" (change)="selectCiudadHandler($event)">
                          <option value="">--Seleccione Ciudad--</option>
-                          <option *ngFor="let item of ciudades" [value]="item.nombre">
+                          <option *ngFor="let item of ciudadesPorProvincia" [value]="item.nombre">
                             {{item.nombre}}
 
                           </option>
@@ -144,7 +155,7 @@
                       <div class="col-12">
                         <label>Ubicación</label>
                         <div leaflet id='map'>
-                          
+
                           <app-map #map></app-map>
                         </div>
                       </div>
@@ -162,12 +173,12 @@
                     <!--**************************OTROS DETALLES**********************-->
                     <tab heading="Otros Detalles" formGroupName="OtherInfo">
 
-
+                      <!--
                       <div class="form-group col-12">
                         <label>Años/Propiedad</label>
                         <input type="number" class="form-control" formControlName="Años" required>
                       </div>
-
+                      -->
                       <div class="form-group col-12">
                         <label>Descripción</label>
                         <textarea [(ngModel)]="propiedad.descripcion" type="text" class="form-control" rows="6" formControlName="Description"

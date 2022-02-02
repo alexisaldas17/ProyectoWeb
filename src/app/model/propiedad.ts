@@ -16,7 +16,7 @@ export class Propiedad implements IpropiedadCard{
   pType!: string;
   direccion!: string;
   fotos!: Ifotos[];
-  años!: number;
+  anios!: number;
   userId!: number | undefined;
   userName!:string;
   postedOn!: string;

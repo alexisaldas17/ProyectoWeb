@@ -1,3 +1,4 @@
+import { ArrayType } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
@@ -8,8 +9,11 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { FormLabelProps } from 'react-bootstrap';
 import { Ciudad } from 'src/app/model/Ciudad';
+import { Fileupload } from 'src/app/model/fileupload';
+import { Fotos } from 'src/app/model/fotos';
 import { Propiedad } from 'src/app/model/propiedad';
 import { HousingService } from 'src/app/servicios/housing.service';
+import { UploadphotosService } from 'src/app/servicios/uploadphotos.service';
 
 @Component({
   selector: 'app-edit-propiedad-detail',
@@ -22,30 +26,34 @@ export class EditPropiedadDetailComponent implements OnInit {
   ciudades : Array<Ciudad> = [] ;
   tipoPropiedades : Array<Ciudad> = [] ;
   editPropiedadForm!: FormGroup;
-  
+  fotosListaServicio:any;
+
   radioVenta:any;
-  
+
   constructor(
     public housingService: HousingService,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public uploadPhotosService: UploadphotosService
   ) { }
-
+    public propiedadId;
   ngOnInit() {
 
-    var propiedadId = Number(this.route.snapshot.params['id']);
-    console.log(propiedadId);
-    this.route.params.subscribe((params: any) => {
-      propiedadId = +params['id'];
+     this.propiedadId = Number(this.route.snapshot.params['id']);
+     this.route.params.subscribe((params: any) => {
+      this.propiedadId = +params['id'];
     });
-    this.getPropiedadById(propiedadId);
+    this.getPropiedadById(this.propiedadId);
 
     this.housingService.getCiudades().subscribe((data) => {
       this.ciudades = data;
+
     });
     this.housingService.getTipoPropiedades().subscribe((data) => {
       this.tipoPropiedades = data;
     });
+
+
   }
 
   // #region <FormGroups>
@@ -57,7 +65,15 @@ export class EditPropiedadDetailComponent implements OnInit {
   getPropiedadById(id:number){
     this.housingService.getPropiedadById(id).subscribe((propiedad:any)=>{
     this.propiedad = propiedad.data;
+    let propFotoPrincipal = this.propiedad.fotos.find(i=> i.isPrimary == true );
+      this.propiedad.imagenUrl = propFotoPrincipal.imagenUrl;
     this.CreateaddPropiedadForm();
+
+   //this.uploadPhotosService.fotosLista =  this.propiedad.fotos;
+   //console.log("fotos lista"+this.uploadPhotosService.fotosLista)
+
+
+
     });
   }
 
@@ -72,7 +88,7 @@ export class EditPropiedadDetailComponent implements OnInit {
   }
 
   CreateaddPropiedadForm() {
-    console.log(this.propiedad);
+
     this.editPropiedadForm = this.fb.group({
       BasicInfo: this.fb.group({
         SellRent: [this.propiedad.sellRent.toString(), Validators.required],
@@ -91,7 +107,7 @@ export class EditPropiedadDetailComponent implements OnInit {
       }),
 
       OtherInfo: this.fb.group({
-        Años: [this.propiedad.años, Validators.required],
+        Años: [this.propiedad.anios, Validators.required],
         Description: [this.propiedad.descripcion],
       }),
     });
@@ -152,5 +168,30 @@ export class EditPropiedadDetailComponent implements OnInit {
 
   //#endregion
   //#endregion
+
+  onSubmit(){
+
+  }
+
+  deleteFoto(idFoto: number){
+    let text = 'Esta seguro que desea eliminar Foto seleccionada?';
+    if (confirm(text) == true) {
+      this.housingService.deleleFotoById(idFoto).subscribe(
+        (r: any) => {
+          if(r.exito===1)
+          alert(r.mesaje.toString());
+        },
+        (error) => console.log(error.error.mensaje)
+      );
+      alert("Foto eliminada con Éxito!")
+      this.getPropiedadById(this.propiedadId);
+    }
+
+
+  }
+
+  deleteFotoFirebase(fileUpload: any){
+    this.uploadPhotosService.deleteFile(fileUpload);
+  }
 }
 

@@ -16,13 +16,13 @@
                   <div class="card-body">
 
                     <div class="form-group col-12">
-                      <div btnRadioGroup formControlName="SellRent" required >
+                      <div btnRadioGroup formControlName="SellRent" required>
 
                         <label for="" class="btn btn-outline-primary mr-2" btnRadio="1" tabindex="0" role="button"
-                          name="SellRent" >Venta
+                          name="SellRent">Venta
                         </label>
                         <label for="" class="btn btn-outline-primary" btnRadio="2" tabindex="0" role="button"
-                          name="SellRent" >Arriendo
+                          name="SellRent">Arriendo
                         </label>
                       </div>
                     </div>
@@ -30,7 +30,7 @@
 
                     <div class="form-group">
                       <label for="">Tipo de Propiedad</label>
-                      <select formControlName="PType" class="form-control" formControlName="PType">
+                      <select class="form-control" formControlName="PType">
                         <option selected>{{propiedad.pType}}</option>
                         <option *ngFor="let item of tipoPropiedades" [value]="item.id">
                           {{item.nombre}}
@@ -80,6 +80,18 @@
                 <div class="col-lg-6 offset-lg-3">
                   <div class="card text-center">
                     <div class="card-body">
+
+
+                      <div class="form-group">
+                        <label for="">Ciudad</label>
+                        <select class="form-control" formControlName="City">
+                          <option selected>{{propiedad.ciudad}}</option>
+                          <option *ngFor="let item of ciudades" [value]="item.id">
+                            {{item.nombre}}
+                          </option>
+                        </select>
+                      </div>
+                      <!--*************************MAPA**************************-->
                       <div class="form-group">
                         <app-map></app-map>
                       </div>
@@ -95,15 +107,14 @@
           <!--************************OTROS DETALLES************************-->
           <tab heading="Otros Detalles" id="Otros Detalles" formGroupName="OtherInfo">
 
-            <div class="form-group col-12">
+          <!-- <div class="form-group col-12">
               <label>Años/Propiedad</label>
-              <input type="number" class="form-control" formControlName="Años" [value]="">
+              <input type="number" class="form-control" formControlName="Años" [value]="propiedad.anios">
             </div>
-
+            --> 
             <div class="form-group col-12">
               <label>Descripción</label>
-              <textarea type="text" class="form-control" rows="6"
-                formControlName="Description"
+              <textarea type="text" class="form-control" rows="6" formControlName="Description"
                 [value]="propiedad.descripcion"></textarea>
             </div>
 
@@ -112,24 +123,50 @@
           <!--*****************************FOTOS*****************************-->
           <tab heading="Fotos" id="Fotos">
             <div class="container">
-              <button class="btn btn success align-content-end">
-                Agregar Fotos
-              </button>
+              <label class="image-upload-container btn btn-bwm mt-5">
+                <app-upload-form></app-upload-form>
+
+              </label>
+
+
               <div class="table">
                 <thead>
-                  <th>ID</th>
-                  <th>IMAGEN</th>
-                </thead>
-                <tr *ngFor="let foto of propiedad.fotos">
-                  <td>{{foto.id}}</td>
 
-                  <td> <img [src]="foto.imagenUrl" style="width: 150px;"></td>
-                  <td>{{foto.isPrimary}}</td>
-                  <button class="btn btn-danger btn-lg">Eliminar</button>
-                </tr>
+                </thead>
+                    <tr *ngFor="let foto of propiedad.fotos">
+
+                    <td> <img [src]="foto.imagenUrl" style="width: 150px;"></td>
+                    <button class="btn btn-danger btn-lg mt-2" (click)="deleteFoto(foto.id)">Eliminar</button>
+
+                  </tr>
+                </div>
+                <div class="card-title">
+                  <h4 class="text-center">Agregadas Recientes</h4>
+                </div>
+                <div class="card-group">
+
+                  <div class="card" *ngFor="let foto of uploadPhotosService.fotosLista">
+                    <img class="card-img-top" [src]="foto.url"  style="width: 150px;">
+                    <div class="card-body">
+                      <button class="btn btn-danger btn-lg mt-2" (click)="deleteFotoFirebase(foto)">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+              <div class="form-group col-12">
+                <button [disabled]="editPropiedadForm.invalid" type="submit" (click)="onSubmit()"
+                  class="btn btn-success mr-2">Guardar</button>
+                <button type="reset" class="btn btn-danger mr-2">Cancelar</button>
               </div>
+
             </div>
+
           </tab>
+
+
         </tabset>
 
       </form>
