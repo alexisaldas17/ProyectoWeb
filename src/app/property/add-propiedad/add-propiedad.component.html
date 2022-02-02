@@ -1,234 +1,256 @@
-<div class=" mt-5">
-  <div class="row mb-5 ">
-    <div class="col-8 shadow-lg p-0 bg-white">
 
+  <div class="container">
+<div class="row">
+  <div class="col-lg-8 bg-white">
 
-      <div class="card-body">
-        <form [formGroup]="addPropiedadForm">
+    <div class="card-body">
+      <form [formGroup]="addPropiedadForm">
 
-          <div class="tab-panel">
-            <tabset class="member-tabset" #tipoTabs>
-              <tab heading="Crear" id="tabCrear">
+        <div class="tab-panel">
+          <tabset class="member-tabset" #tipoTabs>
+            <tab heading="Crear" id="tabCrear">
 
-                <div class="card-header">
-                  <h3>Añadir Propiedad</h3>
+              <div class="card-header">
+                <h3>Añadir Propiedad</h3>
+              </div>
+
+              <div class="tab-panel ">
+                <tabset class="member-tabset" #formTabs>
+
+                  <!--*******************INFORMACION BASICA*****************-->
+
+                  <tab heading="Información Básica" id="tab1" formGroupName="BasicInfo">
+                    <div class="form-group col-12">
+                      <div  btnRadioGroup formControlName="SellRent" required>
+
+                        <label for="" class="btn btn-outline-primary mr-2" btnRadio="1" tabindex="0" role="button"
+                          name="SellRent">Venta
+                        </label>
+                        <label for="" class="btn btn-outline-primary" btnRadio="2" tabindex="0" role="button"
+                          name="SellRent">Arriendo
+                        </label>
+                      </div>
+                      <div *ngIf="SellRent.invalid && nextClicked" class="error-block">
+                        Obligatorio: Seleccione una opción.
+                      </div>
+                    </div>
+
+                    <div class="form-group col-12">
+                      <p>Tipo de Propiedad </p>
+                      <select   [(ngModel)]="propiedad.nombre" class="form-control" formControlName="PType">
+                      <option >--Seleccione Propiedad--</option>
+                        <option  *ngFor="let item of tpropiedad" [value]="item.nombre">
+                          {{item.nombre}}
+
+                        </option>
+                      </select>
+
+                    </div>
+
+                    <div class="form-group col-12">
+                      <label for="telefono">Teléfono de Contacto</label>
+
+                       <input type="tel" id="phone" class="form-control" formControlName="Name" placeholder="Ingrese Contacto" pattern="[0-9]{10}" required maxlength="10" minlength="10">
+                      <span *ngIf="Name.invalid && Name.touched" class="error-block">
+                        Número de teléfono inválido
+                        <span *ngIf="Name.hasError('maxlength') || Name.hasError('maxlength')" >maximo 10 caracteres</span>
+                      </span>
+
+                    </div>
+                    <div class="form-group col-12">
+
+                      <button type="button" (click)="selectTab(1,BasicInfo.valid)" class="btn btn-primary mr-2">
+                        Siguiente
+                      </button>
+
+                    </div>
+
+                  </tab>
+
+                  <!--*********************PRECIO Y AREA**************************-->
+
+                  <tab heading="Precio y Área" formGroupName="PriceInfo">
+
+                    <div class="form-group col-12">
+
+                      <label *ngIf="SellRent.value==1">Precio Venta(USD)</label>
+                      <label *ngIf="SellRent.value==2">Precio Arriendo (USD)</label>
+
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">$</span>
+
+                        </div>
+                        <input type="number" class="form-control" formControlName="Price" pattern="^\d*(\.\d{0,2})?$"
+                        [(ngModel)]="propiedad.precio">
+                      </div>
+                    </div>
+
+                    <div *ngIf="Price.invalid  && Price.touched" class="error-block">
+                      Obligatorio: Ingrese precio.
+                      <span *ngIf="SellRent.value==1; else ShowRent">precio</span>
+                      <ng-template #ShowRent>arriendo</ng-template>
+                    </div>
+
+                    <!--  <div class="form-group col-12">
+
+              <label>Seguridad (USD)</label>
+                  <input type="text" class="form-control" formControlName="Security">
                 </div>
 
-                <div class="tab-panel ">
-                  <tabset class="member-tabset" #formTabs>
-
-                    <!--*******************INFORMACION BASICA*****************-->
-
-                    <tab heading="Información Básica" id="tab1" formGroupName="BasicInfo">
-                      <div class="form-group col-12">
-                        <div  btnRadioGroup formControlName="SellRent" required>
-
-                          <label for="" class="btn btn-outline-primary mr-2" btnRadio="1" tabindex="0" role="button"
-                            name="SellRent">Venta
-                          </label>
-                          <label for="" class="btn btn-outline-primary" btnRadio="2" tabindex="0" role="button"
-                            name="SellRent">Arriendo
-                          </label>
-                        </div>
-                        <div *ngIf="SellRent.invalid && nextClicked" class="error-block">
-                          Obligatorio: Seleccione una opción.
-                        </div>
-                      </div>
-
-                      <div class="form-group col-12">
-                        <p>Tipo de Propiedad </p>
-                        <select   [(ngModel)]="propiedad.nombre" class="form-control" formControlName="PType">
-                        <option >--Seleccione Propiedad--</option>
-                          <option  *ngFor="let item of tpropiedad" [value]="item.nombre">
-                            {{item.nombre}}
-
-                          </option>
-                        </select>
-
-                      </div>
-
-                      <div class="form-group col-12">
-                        <label for="telefono">Teléfono de Contacto</label>
-
-                         <input type="tel" id="phone" class="form-control" formControlName="Name" placeholder="Ingrese Contacto" pattern="[0-9]{10}" required maxlength="10" minlength="10">
-                        <span *ngIf="Name.invalid && Name.touched" class="error-block">
-                          Número de teléfono inválido
-                          <span *ngIf="Name.hasError('maxlength') || Name.hasError('maxlength')" >maximo 10 caracteres</span>
-                        </span>
-
-                      </div>
-                      <div class="form-group col-12">
-
-                        <button type="button" (click)="selectTab(1,BasicInfo.valid)" class="btn btn-primary mr-2">
-                          Siguiente
-                        </button>
-
-                      </div>
-
-                    </tab>
-
-                    <!--*********************PRECIO Y AREA**************************-->
-
-                    <tab heading="Precio y Área" formGroupName="PriceInfo">
-
-                      <div class="form-group col-12">
-
-                        <label *ngIf="SellRent.value==1">Precio Venta(USD)</label>
-                        <label *ngIf="SellRent.value==2">Precio Arriendo (USD)</label>
-
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
-                         
-                          </div>
-                          <input type="number" class="form-control" formControlName="Price" pattern="^\d*(\.\d{0,2})?$"
-                          [(ngModel)]="propiedad.precio">
-                        </div>
-                      </div>
-
-                      <div *ngIf="Price.invalid  && Price.touched" class="error-block">
-                        Obligatorio: Ingrese precio.
-                        <span *ngIf="SellRent.value==1; else ShowRent">precio</span>
-                        <ng-template #ShowRent>arriendo</ng-template>
-                      </div>
-
-                      <!--  <div class="form-group col-12">
-
-                <label>Seguridad (USD)</label>
-                    <input type="text" class="form-control" formControlName="Security">
-                  </div>
-
-                  <div class="form-group col-12">
-                    <label>Mantenimiento (USD)</label>
-                    <input type="text" class="form-control" formControlName="Maintenance">
-                  </div>
-              -->
-
-                      <div class="form-group col-12">
-                        <label>Area (m2)</label>
-                        <input type="number" class="form-control" [(ngModel)]="propiedad.areaM2"
-                          formControlName="BuiltArea">
-                      </div>
-
-                      <div class="form-group col-12">
-                        <button type="button" class="btn btn-primary btn-block"
-                          (click)="selectTab(2, true)">Siguiente</button>
-
-                        <button type="button" class="btn btn-secondary btn-block"
-                          (click)="selectTab(0, true)">Atrás</button>
-                      </div>
-
-                    </tab>
-
-
-                    <!--**************ADDRESS-INFO*****************-->
-                    <tab heading="Direccion" formGroupName="AddressInfo">
-
-                      <div class="form-group col-12">
-                        <label for="provinvia">Provincia</label>
-                        <select  class="form-control" (change)="selectProvinciaHandler($event)">
-                         <option value="">--Seleccione Provincia--</option>
-                          <option *ngFor="let item of provincias" [value]="item.id">
-                            {{item.nombre}}
-
-                          </option>
-                        </select>
-                      </div>
-
-                      <div class="form-group col-12">
-                        <label for="ciudad">Ciudad</label>
-                        <select [(ngModel)]="propiedad.ciudad" formControlName="City" class="form-control" (change)="selectCiudadHandler($event)">
-                         <option value="">--Seleccione Ciudad--</option>
-                          <option *ngFor="let item of ciudadesPorProvincia" [value]="item.nombre">
-                            {{item.nombre}}
-
-                          </option>
-                        </select>
-
-                      </div>
-
-                      <div class="form-group col-12">
-                        <label>Direccion</label>
-                        <input type="text" class="form-control" formControlName="Address">
-                      </div>
-
-                      <div class="col-12">
-                        <label>Ubicación</label>
-                        <div leaflet id='map'>
-
-                          <app-map #map></app-map>
-                        </div>
-                      </div>
-                       <!--**************************************************-->
-
-                      <div class="form-group col-12">
-                        <button type="button" class="btn btn-primary btn-block"
-                          (click)="selectTab(3, true)">Siguiente</button>
-
-                        <button type="button" class="btn btn-secondary btn-block"
-                          (click)="selectTab(1, true)">Atrás</button>
-                      </div>
-
-                    </tab>
-                    <!--**************************OTROS DETALLES**********************-->
-                    <tab heading="Otros Detalles" formGroupName="OtherInfo">
-
-                      <!--
-                      <div class="form-group col-12">
-                        <label>Años/Propiedad</label>
-                        <input type="number" class="form-control" formControlName="Años" required>
-                      </div>
-                      -->
-                      <div class="form-group col-12">
-                        <label>Descripción</label>
-                        <textarea [(ngModel)]="propiedad.descripcion" type="text" class="form-control" rows="6" formControlName="Description"
-                          required></textarea>
-                      </div>
-
-                      <div class="form-group col-12">
-                        <button type="button" class="btn btn-primary btn-block"
-                          (click)="selectTab(4, true)">Siguiente</button>
-
-                        <button type="button" class="btn btn-secondary btn-block"
-                          (click)="selectTab(2, true)">Atrás</button>
-                      </div>
-
-
-                    </tab>
-                    <!--**************************CARGA DE IMASGEN**********************-->
-                    <tab heading="Cargar Fotos" >
-
-
-                      <div class="form-group col-12 ">
-                        <div class="card">
-
-                          <label class="image-upload-container btn btn-bwm mt-5">
-                            <app-upload-form ></app-upload-form>
-                          </label>
-
-
-
-                          <app-upload-list></app-upload-list>
-                          <!--*************************************************************-->
-                        </div>
-
-                      </div>
-
-                      <div class="form-group col-12">
-                        <button type="button" (click)="selectTab(3, true)" class="btn btn-secondary mr-2">Atrás</button>
-
-                        <button [disabled]="addPropiedadForm.invalid" type="submit" (click)="onSubmit()" class="btn btn-success mr-2">Guardar</button>
-                        <button type="reset" class="btn btn-danger mr-2">Cancelar</button>
-                      </div>
-                    </tab>
-                  </tabset>
+                <div class="form-group col-12">
+                  <label>Mantenimiento (USD)</label>
+                  <input type="text" class="form-control" formControlName="Maintenance">
                 </div>
-              </tab>
+            -->
 
-              <!--***************TAB EDITAR ***************-->
-              <tab #editar heading="Editar">
+                    <div class="form-group col-12">
+                      <label>Area (m2)</label>
+                      <input type="number" class="form-control" [(ngModel)]="propiedad.areaM2"
+                        formControlName="BuiltArea">
+                    </div>
+
+                    <div class="form-group col-12">
+                      <button type="button" class="btn btn-primary btn-block"
+                        (click)="selectTab(2, true)">Siguiente</button>
+
+                      <button type="button" class="btn btn-secondary btn-block"
+                        (click)="selectTab(0, true)">Atrás</button>
+                    </div>
+
+                  </tab>
+
+
+                  <!--**************ADDRESS-INFO*****************-->
+                  <tab heading="Direccion" formGroupName="AddressInfo">
+
+                    <div class="form-group col-12">
+                      <label for="provinvia">Provincia</label>
+                      <select  class="form-control" (change)="selectProvinciaHandler($event)">
+                       <option value="">--Seleccione Provincia--</option>
+                        <option *ngFor="let item of provincias" [value]="item.id">
+                          {{item.nombre}}
+
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="form-group col-12">
+                      <label for="ciudad">Ciudad</label>
+                      <select [(ngModel)]="propiedad.ciudad" formControlName="City" class="form-control" (change)="selectCiudadHandler($event)">
+                       <option value="">--Seleccione Ciudad--</option>
+                        <option *ngFor="let item of ciudadesPorProvincia" [value]="item.nombre">
+                          {{item.nombre}}
+
+                        </option>
+                      </select>
+
+                    </div>
+
+                    <div class="form-group col-12">
+                      <label>Direccion</label>
+                      <input type="text" class="form-control" formControlName="Address">
+                    </div>
+
+                    <div class="col-12">
+                      <label>Ubicación</label>
+                      <div leaflet id='map'>
+
+                        <app-map #map></app-map>
+                      </div>
+                    </div>
+                     <!--**************************************************-->
+
+                    <div class="form-group col-12">
+                      <button type="button" class="btn btn-primary btn-block"
+                        (click)="selectTab(3, true)">Siguiente</button>
+
+                      <button type="button" class="btn btn-secondary btn-block"
+                        (click)="selectTab(1, true)">Atrás</button>
+                    </div>
+
+                  </tab>
+                  <!--**************************OTROS DETALLES**********************-->
+                  <tab heading="Otros Detalles" formGroupName="OtherInfo">
+
+                    <!--
+                    <div class="form-group col-12">
+                      <label>Años/Propiedad</label>
+                      <input type="number" class="form-control" formControlName="Años" required>
+                    </div>
+                    -->
+                    <div class="form-group col-12">
+                      <label>Descripción</label>
+                      <textarea [(ngModel)]="propiedad.descripcion" type="text" class="form-control" rows="6" formControlName="Description"
+                        required></textarea>
+                    </div>
+
+                    <div class="form-group col-12">
+                      <button type="button" class="btn btn-primary btn-block"
+                        (click)="selectTab(4, true)">Siguiente</button>
+
+                      <button type="button" class="btn btn-secondary btn-block"
+                        (click)="selectTab(2, true)">Atrás</button>
+                    </div>
+
+
+                  </tab>
+                  <!--**************************CARGA DE IMASGEN**********************-->
+                  <tab heading="Cargar Fotos" >
+
+
+                    <div class="form-group col-12 ">
+                      <div class="card">
+
+                        <label class="image-upload-container btn btn-bwm mt-5">
+                          <app-upload-form ></app-upload-form>
+                        </label>
+
+
+
+                        <app-upload-list></app-upload-list>
+                        <!--*************************************************************-->
+                      </div>
+
+                    </div>
+
+                    <div class="form-group col-12">
+                      <button type="button" (click)="selectTab(3, true)" class="btn btn-secondary mr-2">Atrás</button>
+
+                      <button [disabled]="addPropiedadForm.invalid" type="submit" (click)="onSubmit()" class="btn btn-success mr-2">Guardar</button>
+                      <button type="reset" class="btn btn-danger mr-2">Cancelar</button>
+                    </div>
+                  </tab>
+                </tabset>
+              </div>
+            </tab>
+
+            <!--***************TAB EDITAR ***************-->
+            <tab #editar heading="Editar">
+              <div class="card-header">
+                <h3>Editar Propiedad</h3>
+              </div>
+              <div class="row ">
+                <span  *ngIf="publicacionesUsuario.length==0"  class="mt-5 ml-lg-5">
+                  <div class="h3 ">
+                    <small class="text-muted">No tiene ninguna propiedad publicada!</small>
+                  </div>
+                </span>
+
+                <div *ngFor="let propiedad of publicacionesUsuario" class="shadow-lg col-sm-4 mt-5">
+
+                  <app-propiedad-card editIcon="true" [propiedad]="propiedad">
+
+                  </app-propiedad-card>
+
+                </div>
+              </div>
+            </tab>
+
+              <!--***************TAB ELIMINAR PROPIEDAD ***************-->
+              <tab #editar heading="Eliminar">
                 <div class="card-header">
-                  <h3>Editar Propiedad</h3>
+                  <h3>Eliminar Propiedad</h3>
                 </div>
                 <div class="row ">
                   <span  *ngIf="publicacionesUsuario.length==0"  class="mt-5 ml-lg-5">
@@ -239,7 +261,7 @@
 
                   <div *ngFor="let propiedad of publicacionesUsuario" class="shadow-lg col-sm-4 mt-5">
 
-                    <app-propiedad-card editIcon="true" [propiedad]="propiedad">
+                    <app-propiedad-card deleteIcon="true" [propiedad]="propiedad">
 
                     </app-propiedad-card>
 
@@ -247,49 +269,37 @@
                 </div>
               </tab>
 
-                <!--***************TAB ELIMINAR PROPIEDAD ***************-->
-                <tab #editar heading="Eliminar">
-                  <div class="card-header">
-                    <h3>Eliminar Propiedad</h3>
-                  </div>
-                  <div class="row ">
-                    <span  *ngIf="publicacionesUsuario.length==0"  class="mt-5 ml-lg-5">
-                      <div class="h3 ">
-                        <small class="text-muted">No tiene ninguna propiedad publicada!</small>
-                      </div>
-                    </span>
 
-                    <div *ngFor="let propiedad of publicacionesUsuario" class="shadow-lg col-sm-4 mt-5">
-
-                      <app-propiedad-card deleteIcon="true" [propiedad]="propiedad">
-
-                      </app-propiedad-card>
-
-                    </div>
-                  </div>
-                </tab>
-
-
-            </tabset>
-          </div>
-        </form>
-      </div>
-    </div>
-
-<!--************VISTA PREVIA**************-->
-    <div class="col-3 mt-5">
-      <div class="card-header">
-        <h3>Vista Previa</h3>
-      </div>
-      <div>
-        <div class="shadow-lg p-3 bg-white">
-          <app-propiedad-card [propiedad]="propiedad">
-          </app-propiedad-card>
+          </tabset>
         </div>
-      </div>
+      </form>
     </div>
-<!--****************************************-->
+  </div>
+<!--************VISTA PREVIA**************-->
+<div class="col-lg-4 mt-5" >
+  <div class="card-header">
+    <h3>Vista Previa</h3>
+  </div>
+  <div>
+    <div class="shadow-lg p-3 bg-white">
+      <app-propiedad-card [propiedad]="propiedad">
+      </app-propiedad-card>
+    </div>
   </div>
 </div>
+<!--****************************************-->
+</div>
+
+
+
+
+
+
+
+
+
+
+  </div>
+
 
 
