@@ -9,6 +9,7 @@ import { AuthGuard } from './security/authguard';
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { UserRegisterComponent } from './user/user-register/user-register.component';
 import { UserPerfilComponent } from './user/user-perfil/user-perfil.component';
+import { EditarPerfilComponent } from './user/editar-perfil/editar-perfil.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,8 @@ const routes: Routes = [
   {path: 'sell-propiedad', component: PropiedadListComponent},
   {path: 'edit-propiedad/:id', component: EditPropiedadDetailComponent, canActivate: [AuthGuard]},
   {path: 'perfil/:id', component: UserPerfilComponent, canActivate: [AuthGuard]},
+  {path: 'editar-perfil/:id', component: EditarPerfilComponent, canActivate: [AuthGuard]},
+
   {path:'login', component: UserLoginComponent},
   {path:'register', component: UserRegisterComponent},
   {path: '**', component: PropiedadListComponent}

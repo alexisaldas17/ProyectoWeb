@@ -55,8 +55,8 @@
           Bienvenid@ {{apiService.UsuarioData.nombre}} <span class="caret"></span>
         </button>
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-          <li role="menuitem"><a class="dropdown-item" href="#"><i class="fas fa-user mr-3" routerLink="/perfil/1"></i>Perfil</a></li>
-          <li role="menuitem"><a class="dropdown-item" href="#"><i class="fas fa-user-edit mr-3"></i>Editar Datos</a>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/perfil/{{usuario.id}}"><i class="fas fa-user mr-3" ></i>Perfil</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/editar-perfil/{{usuario.id}}"><i class="fas fa-user-edit mr-3"></i>Editar Datos</a>
           </li>
           <li class="divider dropdown-divider"></li>
           <li role="menuitem"><a (click)="onLogout()" class="dropdown-item" href="#"><i

@@ -38,6 +38,7 @@ import { UserPerfilComponent } from './user/user-perfil/user-perfil.component';
 import { MapComponent } from './map/map.component';
 import { MapDetalleComponent } from './map/map-detalle/map-detalle.component';
 import { CarouselComponent } from './shared/carousel/carousel.component';
+import { EditarPerfilComponent } from './user/editar-perfil/editar-perfil.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { CarouselComponent } from './shared/carousel/carousel.component';
       PropiedadDetailComponent,
       MapComponent,
       MapDetalleComponent,
-      CarouselComponent
+      CarouselComponent,
+      EditarPerfilComponent
 
 
    ],

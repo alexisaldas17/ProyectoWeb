@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/model/user';
+import { ApiauthService } from 'src/app/servicios/apiauth.service';
 
 @Component({
   selector: 'app-user-perfil',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-perfil.component.scss']
 })
 export class UserPerfilComponent implements OnInit {
-
-  constructor() { }
+ usuario: User;
+ passwd: string;
+  constructor(public authService: ApiauthService) {
+    this.usuario = this.authService.UsuarioData;
+    this.passwd = this.authService.UsuarioData.contraseña;
+   }
 
   ngOnInit() {
+
   }
+
 
 }

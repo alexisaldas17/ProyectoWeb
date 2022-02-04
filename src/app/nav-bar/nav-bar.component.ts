@@ -28,6 +28,7 @@ export class NavBarComponent implements OnInit {
   ngOnInit() {
     //this.changeAuth();
 
+
   }
 
   /*private changeAuth(): void {

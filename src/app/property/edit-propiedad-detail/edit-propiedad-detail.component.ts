@@ -180,7 +180,7 @@ export class EditPropiedadDetailComponent implements OnInit {
     alert("Propiedad Actualizada con Éxito");
     if(this.propiedad.sellRent==1)
     this.router.navigate(['/sell-propiedad']);
-    if(this.propiedadId.sellRent==2)
+    if(this.propiedad.sellRent==2)
     this.router.navigate(['/rent-propiedad']);
     this.uploadPhotosService.fotosLista = [];
 

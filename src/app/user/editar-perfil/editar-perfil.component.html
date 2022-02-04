@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-lg-10 mx-auto">
+<div class="card">
+  <div class="card-title bg-success text-center">
+    <h3 class="text-light">Datos Personales</h3>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <form [formGroup]="editPerfilForm">
+
+        <div formGroupName="BasicInfo">
+          <div class="col-lg-5">
+            <div class="form-group ">
+              <label class="font-weight-bold">NOMBRE USUARIO: &nbsp;
+                </label>
+                <input type="text" class="form-control" [value]="usuario.nombre" formControlName="Nombre" required>
+            </div>
+            <div class="form-group ">
+              <label class="font-weight-bold">CONTRASEÑA: &nbsp;
+               </label>
+               <input type="text" class="form-control" [value]="passwd" formControlName="Password" required>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group ">
+              <label class="font-weight-bold">CORREO ELECTRONICO: &nbsp;
+            </label>
+            <input type="email" class="form-control" [value]="usuario.email" formControlName="Email" required>
+            </div>
+          </div>
+          <div class=" row mx-auto">
+            <button [disabled]="editPerfilForm.invalid" class="btn btn-info" (click)="onSumbit()">Actualizar</button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+
+
+
+  </div>
+</div>
+
+
+    </div>
+  </div>
+
+</div>

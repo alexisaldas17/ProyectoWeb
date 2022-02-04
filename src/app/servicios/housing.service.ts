@@ -7,6 +7,7 @@ import { Ipropiedadbase } from '../model/ipropiedadbase';
 import { Propiedad } from '../model/propiedad';
 import { Console } from 'console';
 import { error } from '@angular/compiler/src/util';
+import { User } from '../model/user';
 
 const httpOptions={
   headers: new HttpHeaders({
@@ -96,6 +97,16 @@ getPublicacionesUsuario(userId: any){
   );
 }
 
+editUsuario(usuario: User){
+  return this.http.put('http://wsproyectoweb.azurewebsites.net/api/User/update', usuario, httpOptions)
+  .subscribe((data:any)=>{
+    if(data.exito===1){
+      alert("Datos Actualizados Correctamente")
+    }
+  }, error=>{
+    alert("Error: "+error)
+  });
+}
 /*getAllPropiedades(SellRent:number = 0):Observable<Ipropiedadbase> {
   let lista:Observable<any> = this.http.get('http://wsproyectoweb.azurewebsites.net/api/PropiedadCard/publicaciones');
   lista = this.jsonLista(lista);
