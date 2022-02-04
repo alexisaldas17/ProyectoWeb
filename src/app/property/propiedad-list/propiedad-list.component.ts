@@ -1,5 +1,5 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { type } from 'os';
 import { Ipropiedadbase } from 'src/app/model/ipropiedadbase';
@@ -12,7 +12,6 @@ import { HousingService } from 'src/app/servicios/housing.service';
   styleUrls: ['./propiedad-list.component.scss'],
 })
 export class PropiedadListComponent implements OnInit {
-
   propiedades!: Propiedad[];
   propiedadesBase!: Propiedad[];
   SellRent = 1;
@@ -71,37 +70,36 @@ export class PropiedadListComponent implements OnInit {
   selectPropiedadHandler(event: any) {
     //update the ui
     this.sPropiedad = event.target.value;
-    console.log(this.sPropiedad);
     this.filtrar();
   }
-
+  /*
   selectFechaHandler(event: any) {
     //update the ui
     this.sFecha = event.target.value;
     console.log(this.sFecha);
     this.filtrar();
   }
+  */
 
   filtrar() {
     this.propiedades = this.propiedadesBase;
-    if (this.sCiudad === 'undefined' || this.sCiudad == null){
-
-    }else{
+    if (this.sCiudad != undefined && this.sCiudad != ""){
       this.propiedades = this.propiedades.filter((propiedad) => {
         return propiedad.ciudad == this.sCiudad;
       });
     }
 
-    if(this.sPropiedad === 'undefined' || this.sPropiedad == null){
-
-    }else{
+    if(this.sPropiedad != undefined && this.sPropiedad != "" && this.sPropiedad != "Todos"){
       this.propiedades = this.propiedades.filter(
         (propiedad) => propiedad.nombre == this.sPropiedad
       );
-    }
 
+    }else{
+    }
+    /*
     if(this.sFecha!=""){
       this.propiedades = this.propiedades.filter(propiedad => propiedad.postedOn==this.sFecha);
     }
+    */
   }
 }
