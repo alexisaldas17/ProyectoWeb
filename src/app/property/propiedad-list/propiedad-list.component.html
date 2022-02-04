@@ -15,7 +15,7 @@
           </select>
          </div>
 
-         <div class="col">
+         <div class="col-lg-7">
           <select name="filterPType"
           id="tpropiedad"
           class="form-control"
@@ -33,6 +33,7 @@
           bsDatepicker [bsConfig]="{containerClass: 'theme-dark-blue', dateInputFormat: 'YYYY-MM-DD'}"
           (ngModelChange)="selectFechaHandler($event)">
         </div>-->
+        
     </form>
 
     <div *ngFor="let propiedad of propiedades " class="shadow-lg col-sm-4 mt-5">

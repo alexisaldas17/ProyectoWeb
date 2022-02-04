@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row " *ngIf="propiedad">
+  <div class="row " *ngIf="propiedad && valido">
     <div class="col-lg-8 bg-white mt-5">
       <div class="card-header">
         <div class="card-title text-center text-light">
@@ -80,7 +80,7 @@
 
             <div class="container pt-4">
               <div class="row">
-                <div class="col-lg-6 offset-lg-3">
+                <div class="col-lg-8 offset-lg-2">
                   <div class="card text-center">
                     <div class="card-body">
 
@@ -95,13 +95,16 @@
                           </option>
                         </select>-->
                       </div>
-
                       <div class="form-group">
                         <input type="text" class="form-control" [value]="propiedad.direccion" formControlName="Address">
 
                       </div>
+
                       <!--*************************MAPA**************************-->
 
+                      <div id="map">
+                        <app-map-detalle [propiedad]="propiedad" style="width: 100%;" #map></app-map-detalle>
+                      </div>
 
                       <!--********************************************************-->
 
@@ -190,6 +193,14 @@
           </app-propiedad-card>
         </div>
       </div>
+    </div>
+  </div>
+  
+  <div *ngIf="!valido">
+      <div class="card-header">
+        <div class="card-title text-center text-light">
+          <h3>Esta propiedad no pertenece a este usuario</h3>
+        </div>
     </div>
   </div>
 </div>
