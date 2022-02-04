@@ -8,12 +8,14 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormLabelProps } from 'react-bootstrap';
+import { MapDetalleComponent } from 'src/app/map/map-detalle/map-detalle.component';
 import { Ciudad } from 'src/app/model/Ciudad';
 import { Fileupload } from 'src/app/model/fileupload';
 import { Fotos } from 'src/app/model/fotos';
 import { Ifotos } from 'src/app/model/ifotos';
 import { Propiedad } from 'src/app/model/propiedad';
 import { Provincia } from 'src/app/model/provincia';
+import { ApiauthService } from 'src/app/servicios/apiauth.service';
 import { HousingService } from 'src/app/servicios/housing.service';
 import { UploadphotosService } from 'src/app/servicios/uploadphotos.service';
 
@@ -23,7 +25,7 @@ import { UploadphotosService } from 'src/app/servicios/uploadphotos.service';
   styleUrls: ['./edit-propiedad-detail.component.scss']
 })
 export class EditPropiedadDetailComponent implements OnInit {
-
+  @ViewChild('map') map!: MapDetalleComponent;
   propiedad : Propiedad;
   ciudades : Array<Ciudad> = [] ;
   tipoPropiedades : Array<Ciudad> = [] ;
@@ -32,13 +34,15 @@ export class EditPropiedadDetailComponent implements OnInit {
   public propiedadId;
   provincias: Array<Provincia> = [];
   radioVenta:any;
+  valido:Boolean;
 
   constructor(
     public housingService: HousingService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     public uploadPhotosService: UploadphotosService,
-    private router: Router
+    private router: Router,
+    public apiService: ApiauthService,
   ) { }
 
   ngOnInit() {
@@ -61,23 +65,19 @@ export class EditPropiedadDetailComponent implements OnInit {
     this.housingService.getProvincias().subscribe((data) => {
       this.provincias = data;
     });
-
-
-
   }
 
 
   getPropiedadById(id:number){
-    this.housingService.getPropiedadById(id).subscribe((propiedad:any)=>{
+    return this.housingService.getPropiedadById(id).subscribe((propiedad:any)=>{
     this.propiedad = propiedad.data;
     let propFotoPrincipal = this.propiedad.fotos.find(i=> i.isPrimary == true );
-      this.propiedad.imagenUrl = propFotoPrincipal.imagenUrl;
+    this.propiedad.imagenUrl = propFotoPrincipal.imagenUrl;
     this.CreateaddPropiedadForm();
-    console.log(this.propiedad)
-
-   //this.uploadPhotosService.fotosLista =  this.propiedad.fotos;
-   //console.log("fotos lista"+this.uploadPhotosService.fotosLista)
-
+    console.log(this.propiedad);
+    //this.uploadPhotosService.fotosLista =  this.propiedad.fotos;
+    //console.log("fotos lista"+this.uploadPhotosService.fotosLista)
+    this.verificarId();
     });
   }
 
@@ -239,6 +239,16 @@ export class EditPropiedadDetailComponent implements OnInit {
     });
     this.propiedad.fotos = fotos;
     //this.propiedad.userId = this.auth.UsuarioData.id;
+  }
+
+  verificarId(){
+    if(this.propiedad.userId==this.apiService.UsuarioData.id){
+      this.valido=true
+      console.log("verdad");
+    }else{
+      this.valido=false
+      console.log("falso");
+    }
   }
 }
 

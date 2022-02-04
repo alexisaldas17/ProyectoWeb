@@ -54,6 +54,11 @@ export class MapDetalleComponent implements AfterViewInit, OnDestroy {
     map.setView([propiedad.latitud,propiedad.longitud], 16);
     crearMarcador(propiedad.latitud,propiedad.longitud);
   }
+
+  mapaListo():void{
+    console.log("Cargo el mapa");
+    onMapReady();
+  }
 }
 
 var map : L.Map;
